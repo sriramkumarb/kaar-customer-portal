@@ -1,0 +1,16 @@
+.container{
+    width: 100vw;
+    min-height: 100vh;
+}
+
+.header{
+    display: flex;
+    justify-content: center;
+    margin: 5vh;
+    padding: auto;
+}
+.headerLogo{
+    font-family: "Lucida Console", "Courier New", monospace;
+    font-size: 2rem;
+    color: goldenrod;
+}
