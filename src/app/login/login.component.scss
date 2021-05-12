@@ -1,0 +1,40 @@
+form {
+    width: 100%;
+}
+
+mat-form-field{
+    width: 100%;
+}
+
+.formcontainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: "Lucida Console", "Courier New", monospace;
+    margin: 5vh;
+}
+
+.formbody{
+    display: flex;
+    width: 290px;
+    min-height: 200px;
+    background-color: white;
+    box-shadow:0 5px 10px 0px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    padding: 25px;
+}
+
+div > span {
+    font-size: 0.75rem;
+    color: firebrick;
+}
+
+
+
+
+  .header{
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 40px;      
+  }
