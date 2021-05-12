@@ -1,30 +1,25 @@
 <div class="formcontainer">
     <div class="formbody">
-        <form style="width:100%;">
+        <form [formGroup]="myForm">
             <div class="header">Register</div>
             <div>
-                <mat-form-field style="width:100%;">
-                    <input type="text" matInput placeholder="Email" id="email">
+                <mat-form-field>
+                    <input type="text" formControlName="email" matInput placeholder="Email" id="email">
                 </mat-form-field>
-                <span>Entered email is invalid</span>
+                <span *ngIf="isValid('email')">Entered email is invalid</span>
             </div>
             <div>
-                <mat-form-field style="width:100%;">
-                    <input type="text" matInput placeholder="Username" id="user">
+                <mat-form-field>
+                    <input type="password" formControlName="password" matInput placeholder="Password" id="pass">
                 </mat-form-field>
-                <span>Username is required</span>
+                <span *ngIf="isValid('password')">Password is a mandatory field and should be more than 5</span>
             </div>
             <div>
-                <mat-form-field style="width:100%;">
-                    <input type="password" matInput placeholder="Password" id="pass">
+                <mat-form-field>
+                    <input type="password" formControlName="cnfpass" matInput placeholder="Re-enter Password"
+                        id="cnfpass">
                 </mat-form-field>
-                <span>Password is a mandatory field</span>
-            </div>
-            <div>
-                <mat-form-field style="width:100%;">
-                    <input type="password" matInput placeholder="Re-enter Password" id="cnfpass">
-                </mat-form-field>
-                <span>Password and confirm password should match</span>
+                <span *ngIf="isValid('cnfpass')"> Password and confirm password should match</span>
             </div>
             <div style="margin-top:20px; text-align: center;">
                 <button class="form-btn" mat-stroked-button>Register</button>
