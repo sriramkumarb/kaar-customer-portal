@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CustomerRoutingModule } from './customer/customer-routing.module';
-
+import { LandingPageComponent } from './landing-page/landing-page.component';
 
 const routes: Routes = [
   {
@@ -9,6 +8,10 @@ const routes: Routes = [
     redirectTo: 'cus-portal',
     pathMatch: 'full'
   },
+  {
+    path: 'landing-page',
+    component: LandingPageComponent,
+  }
 ];
 
 @NgModule({

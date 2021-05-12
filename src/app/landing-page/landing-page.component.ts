@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-landing-page',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LandingPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router,
+    private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
+  }
+
+  movetocustomer() {
+    this.router.navigate(['../cus-portal'], { relativeTo: this.activatedRoute });
   }
 
 }
