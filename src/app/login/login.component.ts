@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AbstractControl, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-login',
@@ -7,10 +8,21 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
+  loginForm: FormGroup;
+
   constructor(private router: Router,
-    private activatedRoute: ActivatedRoute) { }
+    private activatedRoute: ActivatedRoute) {
+    this.loginForm = new FormGroup({
+      email: new FormControl(null, Validators.email),
+      password: new FormControl(null, Validators.required)
+    });
+  }
 
   ngOnInit(): void {
+  }
+
+  isValid(controlName: any) {
+    return this.loginForm.get(controlName)?.invalid && this.loginForm.get(controlName)?.touched;
   }
 
   movetoregister() {
