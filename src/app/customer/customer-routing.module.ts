@@ -2,15 +2,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { MainPageComponent } from './main-page/main-page.component';
+import { LayoutComponent } from './dashboard/layout/layout.component';
+import { SidebarComponent } from './dashboard/sidebar/sidebar.component';
 
 const customerRoutes: Routes = [
-    {
-        path: '',
-        redirectTo: 'cus-portal',
-        pathMatch: 'full'
-    },
     {
         path: 'cus-portal',
         component: MainPageComponent,
@@ -18,7 +14,7 @@ const customerRoutes: Routes = [
             {
                 path: '',
                 redirectTo: 'login',
-                pathMatch: 'full'
+                pathMatch: 'full',
             },
             {
                 path: 'register',
@@ -31,13 +27,14 @@ const customerRoutes: Routes = [
         ]
     },
     {
-        path: 'dash',
-        component: DashboardComponent,
+        path: 'cus-portal/dashboard',
+        loadChildren: () => import('./dashboard/dashboard-routing.module').then(m => m.DashboardRoutingModule)
+
     }
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(customerRoutes)],
+    imports: [RouterModule.forRoot(customerRoutes)],
     exports: [RouterModule]
 })
 export class CustomerRoutingModule { }
