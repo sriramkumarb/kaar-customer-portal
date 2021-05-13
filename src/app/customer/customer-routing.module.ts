@@ -3,8 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { MainPageComponent } from './main-page/main-page.component';
-import { LayoutComponent } from './dashboard/layout/layout.component';
-import { SidebarComponent } from './dashboard/sidebar/sidebar.component';
 
 const customerRoutes: Routes = [
     {
