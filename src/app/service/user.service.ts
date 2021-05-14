@@ -13,4 +13,9 @@ export class UserService {
   submitRegister(data: any) {
     return this.http.post(this.API_URL + '/register', { data })
   }
+
+  login(data: any) {
+    return this.http.post(this.API_URL + '/login', { data })
+  }
+
 }

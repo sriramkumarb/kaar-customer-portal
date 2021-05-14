@@ -6,7 +6,7 @@
                 <mat-form-field>
                     <input type="text" formControlName="email" matInput placeholder="Email">
                 </mat-form-field>
-                <span *ngIf="isValid('email')">Entered email is invalid</span>
+                <span *ngIf="isValid('email')">Username cannot be blank</span>
             </div>
             <div>
                 <mat-form-field>
@@ -15,7 +15,10 @@
                 <span *ngIf="isValid('password')">Password cannot be blank</span>
             </div>
             <div style="margin-top:40px; text-align: center;">
-                <button class="form-btn" mat-stroked-button>Sign In</button>
+                <button class="form-btn" mat-stroked-button (click)="login()">Sign In</button>
+            </div>
+            <div style="text-align: center; margin-top: 20px;">
+                <p>{{ errorMessage }}</p>
             </div>
         </form>
     </div>
