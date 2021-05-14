@@ -6,6 +6,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { CustomerModule } from './customer/customer.module'
 import { LandingPageComponent } from './landing-page/landing-page.component';
+import { UserService } from './service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -17,8 +19,11 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     CustomerModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    UserService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-
+import { UserService } from '../../service'
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -13,7 +13,8 @@ export class RegisterComponent implements OnInit {
   successMessage: String = '';
 
   constructor(private router: Router,
-    private activatedRoute: ActivatedRoute) {
+    private activatedRoute: ActivatedRoute,
+    private userService: UserService) {
     this.myForm = new FormGroup({
       email: new FormControl(null, Validators.email),
       username: new FormControl(null, Validators.required),
@@ -52,6 +53,13 @@ export class RegisterComponent implements OnInit {
     }
 
     return null;
+  }
+
+  register() {
+    this.userService.submitRegister(this.myForm.value).subscribe(
+      data => this.successMessage = 'Registration Success',
+      error => this.successMessage = 'Some error'
+    )
   }
 
   movetologin() {

@@ -13,6 +13,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { DashboardModule } from './dashboard/dashboard.module';
 import { BrowserModule } from '@angular/platform-browser';
+import { UserService } from '../service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,8 @@ import { BrowserModule } from '@angular/platform-browser';
   ],
   imports: [
     CommonModule,
+    BrowserModule,
+    HttpClientModule,
     CustomerRoutingModule,
     MatInputModule,
     MatSnackBarModule,
@@ -29,8 +33,10 @@ import { BrowserModule } from '@angular/platform-browser';
     FormsModule,
     ReactiveFormsModule,
     DashboardModule,
-    BrowserModule,
-    CustomerRoutingModule
+    CustomerRoutingModule,
   ],
+  providers: [
+    UserService
+  ]
 })
 export class CustomerModule { }

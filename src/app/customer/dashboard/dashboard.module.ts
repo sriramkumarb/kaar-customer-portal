@@ -21,6 +21,8 @@ import { InvoiceComponent } from './invoice/invoice.component';
 import { PaymentComponent } from './payment/payment.component';
 import { CreditComponent } from './credit/credit.component';
 import { OverallSaleComponent } from './overall-sale/overall-sale.component';
+import { UserService } from 'src/app/service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,11 @@ import { OverallSaleComponent } from './overall-sale/overall-sale.component';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    MatCardModule
+    MatCardModule,
+    HttpClientModule
+  ],
+  providers: [
+    UserService
   ]
 })
 export class DashboardModule { }
