@@ -23,6 +23,8 @@ import { CreditComponent } from './credit/credit.component';
 import { OverallSaleComponent } from './overall-sale/overall-sale.component';
 import { UserService } from 'src/app/service';
 import { HttpClientModule } from '@angular/common/http';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,9 @@ import { HttpClientModule } from '@angular/common/http';
     MatIconModule,
     MatListModule,
     MatCardModule,
-    HttpClientModule
+    HttpClientModule,
+    Ng2SmartTableModule,
+    FormsModule
   ],
   providers: [
     UserService
