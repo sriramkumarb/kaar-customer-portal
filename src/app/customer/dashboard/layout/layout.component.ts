@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-layout',
@@ -25,9 +26,14 @@ export class LayoutComponent implements OnInit {
     }
   }
 
-  constructor() { }
+  constructor(private router: Router,
+    private activatedRoute: ActivatedRoute,) { }
 
   ngOnInit(): void {
+  }
+
+  customerDetails() {
+    this.router.navigate(['./customer-details'], { relativeTo: this.activatedRoute });
   }
 
 }

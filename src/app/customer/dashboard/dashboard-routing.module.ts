@@ -1,6 +1,7 @@
 import { NgModule, SimpleChange } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CreditComponent } from './credit/credit.component';
+import { CustomerDetailsComponent } from './customer-details/customer-details.component';
 import { DeliveryListComponent } from './delivery-list/delivery-list.component';
 import { FinanceSheetComponent } from './finance-sheet/finance-sheet.component';
 import { HomeComponent } from './home/home.component';
@@ -50,6 +51,10 @@ const dashboardRoutes: Routes = [
             {
                 path: 'overall-sale',
                 component: OverallSaleComponent
+            },
+            {
+                path: 'customer-details',
+                component: CustomerDetailsComponent
             }
         ]
     }
