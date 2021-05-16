@@ -25,6 +25,7 @@ import { UserService } from 'src/app/service';
 import { HttpClientModule } from '@angular/common/http';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { FormsModule } from '@angular/forms';
+import { CustomerDetailsComponent } from './customer-details/customer-details.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { FormsModule } from '@angular/forms';
     PaymentComponent,
     CreditComponent,
     OverallSaleComponent,
+    CustomerDetailsComponent,
 
   ],
   imports: [

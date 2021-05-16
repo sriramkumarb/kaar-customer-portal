@@ -12,7 +12,7 @@ import { PaymentComponent } from './payment/payment.component';
 import { SaleOrderComponent } from './sale-order/sale-order.component';
 const dashboardRoutes: Routes = [
     {
-        path: 'cus-portal/dashboard',
+        path: 'cus-portal/dashboard/:email',
         component: LayoutComponent,
         children: [
             {

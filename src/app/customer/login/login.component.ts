@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private userService: UserService) {
     this.loginForm = new FormGroup({
-      email: new FormControl(null, Validators.email),
+      email: new FormControl(null, Validators.required),
       password: new FormControl(null, Validators.required)
     });
   }
@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
         data => {
           console.log(data);
           localStorage.setItem('token', data.toString());
-          this.router.navigate(['/cus-portal/dashboard/home']);
+          this.router.navigate(['/cus-portal/dashboard/' + this.loginForm.value.email + '/home'], { relativeTo: this.activatedRoute });
         },
         error => {
           this.errorMessage = "Username and Password is Incorrect!"
