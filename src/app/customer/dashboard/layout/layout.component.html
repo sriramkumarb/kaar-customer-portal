@@ -23,7 +23,7 @@
                     <mat-card-subtitle>Intern</mat-card-subtitle>
                 </mat-card-header>
             </mat-card>
-            <mat-list-item [routerLink]="['home']">
+            <mat-list-item [routerLink]="['./']">
                 <button class="menu-item" mat-flat-button>
                     <mat-icon>dashboard</mat-icon>
                     Dashboard
@@ -90,12 +90,6 @@
     </mat-sidenav>
 
     <mat-sidenav-content [ngStyle]="{ 'margin-left.px': contentMargin }">
-        <!-- <mat-selection-list class="dash-list">
-            <h3>TO DO</h3>
-            <mat-list-option *ngFor="let todo of task">
-                {{todo}}
-            </mat-list-option>
-        </mat-selection-list> -->
         <router-outlet></router-outlet>
     </mat-sidenav-content>
 </mat-sidenav-container>

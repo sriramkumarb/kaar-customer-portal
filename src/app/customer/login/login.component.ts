@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
         data => {
           console.log(data);
           localStorage.setItem('token', data.toString());
-          this.router.navigate(['/cus-portal/dashboard/' + this.loginForm.value.email + '/home'], { relativeTo: this.activatedRoute });
+          this.router.navigate(['/cus-portal/' + this.loginForm.value.email + '/dashboard'], { relativeTo: this.activatedRoute });
         },
         error => {
           this.errorMessage = "Username and Password is Incorrect!"

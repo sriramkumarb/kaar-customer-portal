@@ -13,11 +13,11 @@ import { PaymentComponent } from './payment/payment.component';
 import { SaleOrderComponent } from './sale-order/sale-order.component';
 const dashboardRoutes: Routes = [
     {
-        path: 'cus-portal/dashboard/:email',
+        path: '',
         component: LayoutComponent,
         children: [
             {
-                path: 'home',
+                path: '',
                 component: HomeComponent
             },
             {
