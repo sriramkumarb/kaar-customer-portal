@@ -18,4 +18,12 @@ export class UserService {
     return this.http.post(this.API_URL + '/login', { data })
   }
 
+  getCustomerDetails(data: any) {
+    return this.http.post(this.API_URL + '/userDetails', { data })
+  }
+
+  editCustomerDetails(data: any) {
+    return this.http.post(this.API_URL + '/editUserDetails', { data })
+  }
+
 }

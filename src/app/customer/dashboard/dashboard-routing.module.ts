@@ -5,6 +5,7 @@ import { CustomerDetailsComponent } from './customer-details/customer-details.co
 import { DeliveryListComponent } from './delivery-list/delivery-list.component';
 import { FinanceSheetComponent } from './finance-sheet/finance-sheet.component';
 import { HomeComponent } from './home/home.component';
+import { InquiryDataDetailComponent } from './inquiry-data-detail/inquiry-data-detail.component';
 import { InquiryDataComponent } from './inquiry-data/inquiry-data.component';
 import { InvoiceComponent } from './invoice/invoice.component';
 import { LayoutComponent } from './layout/layout.component'
@@ -23,6 +24,10 @@ const dashboardRoutes: Routes = [
             {
                 path: 'inquiry-data',
                 component: InquiryDataComponent
+            },
+            {
+                path: 'inquiry-data/detail',
+                component: InquiryDataDetailComponent
             },
             {
                 path: 'sale-order',

@@ -24,8 +24,9 @@ import { OverallSaleComponent } from './overall-sale/overall-sale.component';
 import { UserService } from 'src/app/service';
 import { HttpClientModule } from '@angular/common/http';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CustomerDetailsComponent } from './customer-details/customer-details.component';
+import { InquiryDataDetailComponent } from './inquiry-data-detail/inquiry-data-detail.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { CustomerDetailsComponent } from './customer-details/customer-details.co
     CreditComponent,
     OverallSaleComponent,
     CustomerDetailsComponent,
+    InquiryDataDetailComponent,
 
   ],
   imports: [
@@ -56,7 +58,8 @@ import { CustomerDetailsComponent } from './customer-details/customer-details.co
     MatCardModule,
     HttpClientModule,
     Ng2SmartTableModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     UserService

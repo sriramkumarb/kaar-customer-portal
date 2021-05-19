@@ -1,5 +1,6 @@
 <div class="card m-3">
     <div class="p-4">
+
         <div class="avatar m-4 mt-2">
             <div class="row me-2">
                 <img src="assets/images/avatar.png" alt="profile-pic">
@@ -7,89 +8,122 @@
             <div class="row">
                 <h2><b>Customer Details</b></h2>
             </div>
+            <div class="row m-4">
+                <img class="edit-logo" src="assets/images/nb-edit.svg" (click)="enableEdit()">
+            </div>
         </div>
-        <form>
+
+        <!-- <form #form="ngForm">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input type="text" ngDefaultControl name="name" class="form-control" [(ngModel)]="customerDetails.NAME">
+            </div>
+            <button type="submit" class="btn btn-primary" (click)="onClickSubmit(form)">Submit</button>
+        </form>
+        <div>
+            <pre>
+                <code>
+                    {{ form.value | json }}
+                </code>
+            </pre>
+        </div> -->
+
+        <form #userdetails="ngForm">
             <div class="row mb-3 d-flex justify-content-center">
                 <label for="name" class="col-sm-2 col-form-label">Customer First Name : </label>
                 <div class="col-sm-10 col-md-4">
-                    <input type="text" class="form-control" id="name">
+                    <input type="text" ngDefaultControl class="form-control" name="name"
+                        [(ngModel)]="customerDetails.NAME" [disabled]=' disable'>
                 </div>
             </div>
             <div class="row mb-3 d-flex justify-content-center">
                 <label for="name_2" class="col-sm-2 col-form-label">Customer Last Name : </label>
                 <div class="col-sm-10 col-md-4">
-                    <input type="text" class="form-control" id="name_2">
+                    <input type="text" ngDefaultControl class="form-control" name="name_2"
+                        [(ngModel)]='customerDetails.NAME_2' [disabled]='disable'>
                 </div>
             </div>
             <div class="row mb-3 d-flex justify-content-center">
                 <label for="customer_id" class="col-sm-2 col-form-label">Customer Number : </label>
                 <div class="col-sm-10 col-md-4">
-                    <input type="text" class="form-control" id="customer_id">
+                    <input type="text" ngDefaultControl class="form-control" name="customer_id"
+                        [(ngModel)]='customerDetails.CUSTOMER_ID' [disabled]='disable'>
                 </div>
             </div>
             <div class="row mb-3 d-flex justify-content-center">
                 <label for="search_term" class="col-sm-2 col-form-label">Search Term : </label>
                 <div class="col-sm-10 col-md-4">
-                    <input type="text" class="form-control" id="search_term">
+                    <input type="text" ngDefaultControl class="form-control" name="search_term"
+                        [(ngModel)]='customerDetails.SEARCH_TERM' [disabled]='disable'>
                 </div>
             </div>
             <div class="row mb-3 d-flex justify-content-center">
                 <label for="one_time_acc" class="col-sm-2 col-form-label">One Time Account : </label>
                 <div class="col-sm-10 col-md-4">
-                    <input type="text" class="form-control" id="one_time_acc">
+                    <input type="text" ngDefaultControl class="form-control" name="one_time_acc"
+                        [(ngModel)]='customerDetails.ONE_TIME_ACC' [disabled]='disable'>
                 </div>
             </div>
             <div class="row mb-3 d-flex justify-content-center">
                 <label for="telephone" class="col-sm-2 col-form-label">Telephone Number : </label>
                 <div class="col-sm-10 col-md-4">
-                    <input type="text" class="form-control" id="telephone">
+                    <input type="text" ngDefaultControl class="form-control" name="telephone"
+                        [(ngModel)]='customerDetails.TELEPHONE' [disabled]='disable'>
                 </div>
             </div>
             <div class="row mb-3 d-flex justify-content-center">
                 <label for="fax_number" class="col-sm-2 col-form-label">Fax Number : </label>
                 <div class="col-sm-10 col-md-4">
-                    <input type="text" class="form-control" id="fax_number">
+                    <input type="text" ngDefaultControl class="form-control" name="fax_number"
+                        [(ngModel)]='customerDetails.FAX_NUMBER' [disabled]='disable'>
                 </div>
             </div>
             <div class="row mb-3 d-flex justify-content-center">
                 <label for="street" class="col-sm-2 col-form-label">House Number & Street : </label>
                 <div class="col-sm-10 col-md-4">
-                    <input type="text" class="form-control" id="street">
+                    <input type="text" ngDefaultControl class="form-control" name="street"
+                        [(ngModel)]='customerDetails.STREET' [disabled]='disable'>
                 </div>
             </div>
             <div class="row mb-3 d-flex justify-content-center">
                 <label for="address" class="col-sm-2 col-form-label">Address : </label>
                 <div class="col-sm-10 col-md-4">
-                    <input type="text" class="form-control" id="address">
+                    <input type="text" ngDefaultControl class="form-control" name="address"
+                        [(ngModel)]='customerDetails.ADDRESS' [disabled]='disable'>
                 </div>
             </div>
             <div class="row mb-3 d-flex justify-content-center">
                 <label for="city" class="col-sm-2 col-form-label">City : </label>
                 <div class="col-sm-10 col-md-4">
-                    <input type="text" class="form-control" id="city">
+                    <input type="text" ngDefaultControl class="form-control" name="city"
+                        [(ngModel)]='customerDetails.CITY' [disabled]='disable'>
                 </div>
             </div>
             <div class="row mb-3 d-flex justify-content-center">
                 <label for="state" class="col-sm-2 col-form-label">State : </label>
                 <div class="col-sm-10 col-md-4">
-                    <input type="text" class="form-control" id="state">
+                    <input type="text" ngDefaultControl class="form-control" name="state"
+                        [(ngModel)]='customerDetails.STATE' [disabled]='disable'>
                 </div>
             </div>
             <div class="row mb-3 d-flex justify-content-center">
                 <label for="country" class="col-sm-2 col-form-label">Country : </label>
                 <div class="col-sm-10 col-md-4">
-                    <input type="text" class="form-control" id="country">
+                    <input type="text" ngDefaultControl class="form-control" name="country"
+                        [(ngModel)]='customerDetails.COUNTRY' [disabled]='disable'>
                 </div>
             </div>
             <div class="row mb-3 d-flex justify-content-center">
                 <label for="postal_code" class="col-sm-2 col-form-label">Postal Code : </label>
                 <div class="col-sm-10 col-md-4">
-                    <input type="text" class="form-control" id="postal_code">
+                    <input type="text" ngDefaultControl class="form-control" name="postal_code"
+                        [(ngModel)]='customerDetails.POSTAL_CODE' [disabled]='disable'>
                 </div>
             </div>
-            <!-- button -->
             <div class="d-flex justify-content-center m-4">
-                <button type="submit" class="btn btn-outline-success">Update</button>
+                <button type="submit" class="btn btn-outline-success" (click)="updateCustomerDetails(userdetails.value)"
+                    [disabled]='disable'>Update</button>
+                <p class="ms-5 text-center">{{ res_status }}</p>
             </div>
         </form>
     </div>
