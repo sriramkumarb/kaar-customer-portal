@@ -104,7 +104,7 @@ export class InquiryDataComponent implements OnInit {
   }
 
   onUserSelected(event: any) {
-    console.log(event);
+    this.router.navigate(['./detail', event.data.VBELN], { relativeTo: this.activatedRoute })
 
   }
 

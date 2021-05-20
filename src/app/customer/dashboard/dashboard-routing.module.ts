@@ -26,7 +26,7 @@ const dashboardRoutes: Routes = [
                 component: InquiryDataComponent
             },
             {
-                path: 'inquiry-data/detail',
+                path: 'inquiry-data/detail/:vbeln',
                 component: InquiryDataDetailComponent
             },
             {
