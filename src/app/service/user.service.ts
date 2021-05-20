@@ -30,4 +30,8 @@ export class UserService {
     return this.http.post(this.API_URL + '/getinqlist', { data })
   }
 
+  getinquirydetails(data: any) {
+    return this.http.post(this.API_URL + '/getinqdetails', { data })
+  }
+
 }

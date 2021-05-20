@@ -176,7 +176,6 @@ router.post('/editUserDetails', function (req, res, next) {
 })
 
 router.post('/getinqlist', function (req, res, next) {
-    console.log(req.body.data)
     let user = req.body.data
 
     var options = {
@@ -217,6 +216,45 @@ router.post('/getinqlist', function (req, res, next) {
                 return res.status(501).json({ message: 'Some Error Occured !' });
             }
 
+        })
+    });
+
+})
+
+router.post('/getinqdetails', function (req, res, next) {
+    let sd_no = req.body.data;
+
+    var options = {
+        'method': 'POST',
+        'url': 'http://dxktpipo.kaarcloud.com:50000/XISOAPAdapter/MessageServlet?senderParty=&senderService=BC_CUS_INQDET_SRK&receiverParty=&receiverService=&interface=SI_CUS_INQDET_SRK&interfaceNamespace=http://srk-portal.com',
+        'headers': {
+            'Content-Type': 'text/xml',
+            'SOAPAction': '"http://sap.com/xi/WebService/soap1.1"',
+            'Authorization': 'Basic UE9VU0VSOlRlY2hAMjAyMQ==',
+            'Cookie': 'MYSAPSSO2=AjExMDAgAA1wb3J0YWw6UE9VU0VSiAAHZGVmYXVsdAEABlBPVVNFUgIAAzAwMAMAA0tQTwQADDIwMjEwNTIwMTU0NwUABAAAAAgKAAZQT1VTRVL%2FAQUwggEBBgkqhkiG9w0BBwKggfMwgfACAQExCzAJBgUrDgMCGgUAMAsGCSqGSIb3DQEHATGB0DCBzQIBATAiMB0xDDAKBgNVBAMTA0tQTzENMAsGA1UECxMESjJFRQIBADAJBgUrDgMCGgUAoF0wGAYJKoZIhvcNAQkDMQsGCSqGSIb3DQEHATAcBgkqhkiG9w0BCQUxDxcNMjEwNTIwMTU0NzI2WjAjBgkqhkiG9w0BCQQxFgQUZ6HoyiBS6WxpZ0LxiSsw7FvCL8owCQYHKoZIzjgEAwQvMC0CFFuHbichAvXzg69y0vauQj1z6lxfAhUA33Mq5Z06cIOWXPKO8108YGkyi6M%3D; JSESSIONID=9vGUPrb6-ihrrNRSTCzCPwq0ynWKeQF-Y2kA_SAPJgD2iO-ZRXHL8FiuGhd2IZ6t; JSESSIONMARKID=j-RzmwqZgeBDpsjsxsovx_ftURvWIxhbc9Yn5jaQA; saplb_*=(J2EE6906720)6906750'
+        },
+        body: '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:sap-com:document:sap:rfc:functions">\r\n   <soapenv:Header/>\r\n   <soapenv:Body>\r\n      <urn:ZBAPI_CUS_INQDET_SRK>\r\n         <SALES_DOC_NO>' + sd_no + '</SALES_DOC_NO>\r\n  </urn:ZBAPI_CUS_INQDET_SRK>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>'
+
+    };
+    request(options, function (error, response) {
+        if (error) throw new Error(error);
+        // console.log(response.body);
+
+        var xml = response.body;
+        parseString(xml, (err, resp) => {
+            item = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_INQDET_SRK.Response'][0].ITEMS[0].item[0]
+            Object.keys(item).forEach((key) => {
+                if (item[key] instanceof Array) {
+                    item[key] = item[key][0]
+                }
+            })
+            let item_len = Object.keys(item).length;
+
+            if (item_len > 0) {
+                res.status(200).send(item)
+            } else {
+                return res.status(501).json({ message: 'Some Error Occured !' });
+            }
         })
     });
 
