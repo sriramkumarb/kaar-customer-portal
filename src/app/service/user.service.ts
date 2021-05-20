@@ -26,4 +26,8 @@ export class UserService {
     return this.http.post(this.API_URL + '/editUserDetails', { data })
   }
 
+  getinquirylist(data: any) {
+    return this.http.post(this.API_URL + '/getinqlist', { data })
+  }
+
 }

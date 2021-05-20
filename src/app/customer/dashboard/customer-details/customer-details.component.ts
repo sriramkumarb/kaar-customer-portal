@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from '../../../service';
-import { FormGroup, FormControl } from '@angular/forms';
+
 @Component({
   selector: 'app-customer-details',
   templateUrl: './customer-details.component.html',
@@ -14,7 +14,6 @@ export class CustomerDetailsComponent implements OnInit {
   customerDetails: any = '';
   disable = true;
   name = ''
-  customerUpdatedDetails: FormGroup;
   res_status: any = '';
 
   constructor(private router: Router,
@@ -25,22 +24,6 @@ export class CustomerDetailsComponent implements OnInit {
     this.user = this.url._routerState.url
     this.user = this.user.slice(12)
     this.user = this.user.split('/')[0];
-
-    this.customerUpdatedDetails = new FormGroup({
-      name: new FormControl(''),
-      name_2: new FormControl(''),
-      customer_id: new FormControl(''),
-      search_term: new FormControl(''),
-      one_time_acc: new FormControl(''),
-      telephone: new FormControl(''),
-      fax_number: new FormControl(''),
-      street: new FormControl(''),
-      address: new FormControl(''),
-      city: new FormControl(''),
-      state: new FormControl(''),
-      country: new FormControl(''),
-      postal_code: new FormControl(''),
-    })
 
   }
 

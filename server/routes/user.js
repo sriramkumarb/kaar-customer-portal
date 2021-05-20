@@ -175,4 +175,51 @@ router.post('/editUserDetails', function (req, res, next) {
 
 })
 
+router.post('/getinqlist', function (req, res, next) {
+    console.log(req.body.data)
+    let user = req.body.data
+
+    var options = {
+        'method': 'POST',
+        'url': 'http://dxktpipo.kaarcloud.com:50000/XISOAPAdapter/MessageServlet?senderParty=&senderService=BC_CUS_INQLIST_SRK&receiverParty=&receiverService=&interface=SI_CUS_INQLIST_SRK&interfaceNamespace=http://srk-portal.com',
+        'headers': {
+            'Content-Type': 'text/xml',
+            'SOAPAction': '"http://sap.com/xi/WebService/soap1.1"',
+            'Authorization': 'Basic UE9VU0VSOlRlY2hAMjAyMQ==',
+            'Cookie': 'MYSAPSSO2=AjExMDAgAA1wb3J0YWw6UE9VU0VSiAAHZGVmYXVsdAEABlBPVVNFUgIAAzAwMAMAA0tQTwQADDIwMjEwNTIwMDU1NAUABAAAAAgKAAZQT1VTRVL%2FAQUwggEBBgkqhkiG9w0BBwKggfMwgfACAQExCzAJBgUrDgMCGgUAMAsGCSqGSIb3DQEHATGB0DCBzQIBATAiMB0xDDAKBgNVBAMTA0tQTzENMAsGA1UECxMESjJFRQIBADAJBgUrDgMCGgUAoF0wGAYJKoZIhvcNAQkDMQsGCSqGSIb3DQEHATAcBgkqhkiG9w0BCQUxDxcNMjEwNTIwMDU1NDUyWjAjBgkqhkiG9w0BCQQxFgQUJLsbJJFlsZJqNMr8ti!bMYsCIy4wCQYHKoZIzjgEAwQvMC0CFHk5tYhX%2FboQ9W%2FmsHYljzUI!7STAhUAu4qMJVQ62Kwpe!gJL58Qh2py0vg%3D; JSESSIONID=tlBaIiMeMhwUxCCBF2tgzU4nSVeIeQF-Y2kA_SAPskre2sZK5qjbXWsfs9XGmQFR; JSESSIONMARKID=uv6VAATcDbS1VB-Nmp6c_ci-5VG4plcCz3Pn5jaQA; saplb_*=(J2EE6906720)6906750'
+        },
+        body: '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:sap-com:document:sap:rfc:functions">\r\n   <soapenv:Header/>\r\n   <soapenv:Body>\r\n      <urn:ZBAPI_CUS_INQLIST_SRK>\r\n         <!--You may enter the following 2 items in any order-->\r\n         <CUSTOMER_ID>' + user + '</CUSTOMER_ID>\r\n         <!--Optional:-->\r\n         <IT_VBAK>\r\n            <!--Zero or more repetitions:-->\r\n            <item>\r\n               <!--Optional:-->\r\n               <VBELN>?</VBELN>\r\n               <!--Optional:-->\r\n               <VBTYP>?</VBTYP>\r\n               <!--Optional:-->\r\n               <KUNNR>?</KUNNR>\r\n            </item>\r\n         </IT_VBAK>\r\n      </urn:ZBAPI_CUS_INQLIST_SRK>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>'
+
+    };
+    request(options, function (error, response) {
+        if (error) throw new Error(error);
+        // console.log(response.body);
+
+        var xml = response.body;
+        parseString(xml, (err, resp) => {
+
+            res_data = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_INQLIST_SRK.Response'][0].IT_VBAK[0].item
+            resultStatus = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_INQLIST_SRK.Response'][0].RETURN[0].TYPE[0]
+
+
+            for (i = 0; i < res_data.length; i++) {
+                Object.keys(res_data[i]).forEach((key) => {
+                    if (res_data[i][key] instanceof Array) {
+                        res_data[i][key] = res_data[i][key][0]
+                    }
+                })
+            }
+
+
+            if (resultStatus === 'S') {
+                res.status(200).json(res_data)
+            } else {
+                return res.status(501).json({ message: 'Some Error Occured !' });
+            }
+
+        })
+    });
+
+})
+
 module.exports = router
