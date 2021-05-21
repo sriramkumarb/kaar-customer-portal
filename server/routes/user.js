@@ -40,34 +40,8 @@ router.post('/register', function (req, res, next) {
 
 router.post('/login', function (req, res, next) {
 
-    // let promise = User.findOne({ email: req.body.data.email }).exec();
-
-    // promise.then(function (doc) {
-    //     if (doc) {
-    //         if (doc.password === req.body.data.password) {
-    //             // generate token
-    //             let token = jwt.sign({ username: doc.username }, 'secret', { expiresIn: '3h' });
-
-    //             return res.status(200).json(token);
-
-    //         } else {
-    //             return res.status(501).json({ message: ' Invalid Credentials' });
-    //         }
-    //     }
-    //     else {
-    //         return res.status(501).json({ message: 'User email is not registered.' })
-    //     }
-    // });
-
-    // promise.catch(function (err) {
-    //     return res.status(501).json({ message: 'Some internal error' });
-    // })
-
     let user = req.body.data.email.toUpperCase();
     let pass = req.body.data.password
-
-    // console.log(user)
-    // console.log(pass)
 
     var options = {
         'method': 'POST',
@@ -247,18 +221,19 @@ router.post('/getinqdetails', function (req, res, next) {
 
         var xml = response.body;
         parseString(xml, (err, resp) => {
-            item = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_INQDET_SRK.Response'][0].ITEMS[0].item[0]
-            Object.keys(item).forEach((key) => {
-                if (item[key] instanceof Array) {
-                    item[key] = item[key][0]
-                }
-            })
-            let item_len = Object.keys(item).length;
-
-            if (item_len > 0) {
+            len = (resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_INQDET_SRK.Response'][0].ITEMS[0]).length
+            if (len == undefined && typeof len !== 'number') {
+                item = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_INQDET_SRK.Response'][0].ITEMS[0].item[0]
+                Object.keys(item).forEach((key) => {
+                    if (item[key] instanceof Array) {
+                        item[key] = item[key][0]
+                    }
+                })
                 res.status(200).send(item)
-            } else {
+            }
+            else {
                 return res.status(501).json({ message: 'Some Error Occured !' });
+
             }
         })
     });
@@ -266,7 +241,6 @@ router.post('/getinqdetails', function (req, res, next) {
 })
 
 router.post('/getsolist', function (req, res, next) {
-    console.log(req.body.data)
     let user = req.body.data
 
     var options = {
@@ -311,7 +285,6 @@ router.post('/getsolist', function (req, res, next) {
 })
 
 router.post('/getsodetails', function (req, res, next) {
-    console.log(req.body.data)
     let sd_no = req.body.data;
 
     var options = {
@@ -332,20 +305,21 @@ router.post('/getsodetails', function (req, res, next) {
 
         var xml = response.body;
         parseString(xml, (err, resp) => {
-            item = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_SODET_SRK.Response'][0]
-            console.log(item)
-            // Object.keys(item).forEach((key) => {
-            //     if (item[key] instanceof Array) {
-            //         item[key] = item[key][0]
-            //     }
-            // })
-            // let item_len = Object.keys(item).length;
+            len = (resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_SODET_SRK.Response'][0].ITEMS[0]).length
+            if (len == undefined && typeof len !== 'number') {
+                item = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_SODET_SRK.Response'][0].ITEMS[0].item[0]
+                Object.keys(item).forEach((key) => {
+                    if (item[key] instanceof Array) {
+                        item[key] = item[key][0]
+                    }
+                })
+                res.status(200).send(item)
+            }
+            else {
+                return res.status(501).json({ message: 'Some Error Occured !' });
 
-            // if (item_len > 0) {
-            //     res.status(200).send(item)
-            // } else {
-            //     return res.status(501).json({ message: 'Some Error Occured !' });
-            // }
+            }
+
         })
 
     });
