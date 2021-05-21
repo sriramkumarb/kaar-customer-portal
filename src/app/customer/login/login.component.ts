@@ -50,9 +50,7 @@ export class LoginComponent implements OnInit {
 
       this.userService.login(this.loginForm.value).subscribe(
         data => {
-          console.log(data);
           localStorage.setItem('user', JSON.stringify(data));
-          console.log('call navigation')
           this.router.navigate(['/cus-portal/dashboard'], { relativeTo: this.activatedRoute });
           location.reload()
         },

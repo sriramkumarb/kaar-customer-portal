@@ -36,7 +36,6 @@ export class LayoutComponent implements OnInit {
     this.userservice.logout()
     this.router.navigate(['/cus-portal/login'])
     location.reload()
-    console.log('done')
   }
 
 }
