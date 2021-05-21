@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-
+import { UserService } from '../../../service/index'
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
@@ -22,13 +22,21 @@ export class LayoutComponent implements OnInit {
   }
 
   constructor(private router: Router,
-    private activatedRoute: ActivatedRoute,) { }
+    private activatedRoute: ActivatedRoute,
+    private userservice: UserService) { }
 
   ngOnInit(): void {
   }
 
   customerDetails() {
     this.router.navigate(['./customer-details'], { relativeTo: this.activatedRoute });
+  }
+
+  logout() {
+    this.userservice.logout()
+    this.router.navigate(['/cus-portal/login'])
+    location.reload()
+    console.log('done')
   }
 
 }

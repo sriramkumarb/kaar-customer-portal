@@ -19,12 +19,7 @@ export class SaleOrderComponent implements OnInit {
   constructor(private router: Router,
     private activatedRoute: ActivatedRoute,
     private userService: UserService) {
-
-    this.url = this.activatedRoute.snapshot;
-    this.user = this.url._routerState.url
-    this.user = this.user.slice(12)
-    this.user = this.user.split('/')[0];
-    console.log(this.user)
+    this.user = JSON.parse(localStorage.user).username
 
     this.source = new LocalDataSource(this.saleorder_data);
 

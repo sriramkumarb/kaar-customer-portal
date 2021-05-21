@@ -14,6 +14,9 @@ export class LoginComponent implements OnInit {
   constructor(private router: Router,
     private activatedRoute: ActivatedRoute,
     private userService: UserService) {
+    console.log(this.userService.currentUserValue);
+
+
     this.loginForm = new FormGroup({
       email: new FormControl(null, Validators.required),
       password: new FormControl(null, Validators.required)
@@ -21,8 +24,18 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
   }
 
+
+  ngAfterViewInit(): void {
+    // redirect to home if already logged in
+    if (this.userService.currentUserValue) {
+      console.log(this.userService.currentUserValue);
+
+      this.router.navigate(['/cus-portal/dashboard']);
+    }
+  }
   isValid(controlName: any) {
     return this.loginForm.get(controlName)?.invalid && this.loginForm.get(controlName)?.touched;
   }
@@ -38,8 +51,10 @@ export class LoginComponent implements OnInit {
       this.userService.login(this.loginForm.value).subscribe(
         data => {
           console.log(data);
-          localStorage.setItem('token', data.toString());
-          this.router.navigate(['/cus-portal/' + this.loginForm.value.email + '/dashboard'], { relativeTo: this.activatedRoute });
+          localStorage.setItem('user', JSON.stringify(data));
+          console.log('call navigation')
+          this.router.navigate(['/cus-portal/dashboard'], { relativeTo: this.activatedRoute });
+          location.reload()
         },
         error => {
           this.errorMessage = "Username and Password is Incorrect!"
@@ -48,3 +63,7 @@ export class LoginComponent implements OnInit {
     }
   }
 }
+function ngAfterViewInit() {
+  throw new Error('Function not implemented.');
+}
+

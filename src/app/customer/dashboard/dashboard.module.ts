@@ -27,6 +27,7 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CustomerDetailsComponent } from './customer-details/customer-details.component';
 import { InquiryDataDetailComponent } from './inquiry-data-detail/inquiry-data-detail.component';
+import { SaleOrderDetailComponent } from './sale-order-detail/sale-order-detail.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { InquiryDataDetailComponent } from './inquiry-data-detail/inquiry-data-d
     OverallSaleComponent,
     CustomerDetailsComponent,
     InquiryDataDetailComponent,
+    SaleOrderDetailComponent,
 
   ],
   imports: [

@@ -92,7 +92,12 @@ router.post('/login', function (req, res, next) {
                 // generate token
                 let token = jwt.sign({ username: user }, 'secret', { expiresIn: '3h' });
 
-                return res.status(200).json(token);
+                let user_token = {
+                    username: user,
+                    token: token
+                }
+
+                return res.status(200).json(user_token);
             }
             else {
                 return res.status(501).json({ message: ' Invalid Credentials' });
@@ -299,6 +304,48 @@ router.post('/getsolist', function (req, res, next) {
             } else {
                 return res.status(501).json({ message: 'Some Error Occured !' });
             }
+        })
+
+    });
+
+})
+
+router.post('/getsodetails', function (req, res, next) {
+    console.log(req.body.data)
+    let sd_no = req.body.data;
+
+    var options = {
+        'method': 'POST',
+        'url': 'http://dxktpipo.kaarcloud.com:50000/XISOAPAdapter/MessageServlet?senderParty=&senderService=BC_CUS_SODET_SRK&receiverParty=&receiverService=&interface=SI_CUS_SODET_SRK&interfaceNamespace=http://srk-portal.com',
+        'headers': {
+            'Content-Type': 'text/xml',
+            'SOAPAction': '"http://sap.com/xi/WebService/soap1.1"',
+            'Authorization': 'Basic UE9VU0VSOlRlY2hAMjAyMQ==',
+            'Cookie': 'MYSAPSSO2=AjExMDAgAA1wb3J0YWw6UE9VU0VSiAAHZGVmYXVsdAEABlBPVVNFUgIAAzAwMAMAA0tQTwQADDIwMjEwNTIxMTAxOAUABAAAAAgKAAZQT1VTRVL%2FAQYwggECBgkqhkiG9w0BBwKggfQwgfECAQExCzAJBgUrDgMCGgUAMAsGCSqGSIb3DQEHATGB0TCBzgIBATAiMB0xDDAKBgNVBAMTA0tQTzENMAsGA1UECxMESjJFRQIBADAJBgUrDgMCGgUAoF0wGAYJKoZIhvcNAQkDMQsGCSqGSIb3DQEHATAcBgkqhkiG9w0BCQUxDxcNMjEwNTIxMTAxODE4WjAjBgkqhkiG9w0BCQQxFgQUffAIC8zOF7wZZ8%2FKxYqdHC3rvtEwCQYHKoZIzjgEAwQwMC4CFQC1MrLgnZIOVNdHD9sdXMfByiyGSAIVAOvvyCE%2FFypZ0R6hdrH%2FQBHGJi7G; JSESSIONID=7Wzg5XBza8j-lF4QNcRIoYDU3X6OeQF-Y2kA_SAP-ZkvAdAule25zMtS-oY98Diw; JSESSIONMARKID=Z8coZQS04Wp77Vejc7RIQUYjL2WTOP7Dm1m35jaQA; saplb_*=(J2EE6906720)6906750'
+        },
+        body: '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:sap-com:document:sap:rfc:functions">\r\n   <soapenv:Header/>\r\n   <soapenv:Body>\r\n      <urn:ZBAPI_CUS_SODET_SRK>\r\n         <SALES_DOC_NO>' + sd_no + '</SALES_DOC_NO>\r\n      </urn:ZBAPI_CUS_SODET_SRK>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>'
+
+    };
+    request(options, function (error, response) {
+        if (error) throw new Error(error);
+        // console.log(response.body);
+
+        var xml = response.body;
+        parseString(xml, (err, resp) => {
+            item = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_SODET_SRK.Response'][0]
+            console.log(item)
+            // Object.keys(item).forEach((key) => {
+            //     if (item[key] instanceof Array) {
+            //         item[key] = item[key][0]
+            //     }
+            // })
+            // let item_len = Object.keys(item).length;
+
+            // if (item_len > 0) {
+            //     res.status(200).send(item)
+            // } else {
+            //     return res.status(501).json({ message: 'Some Error Occured !' });
+            // }
         })
 
     });

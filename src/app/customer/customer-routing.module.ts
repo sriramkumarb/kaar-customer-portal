@@ -25,7 +25,7 @@ const customerRoutes: Routes = [
         ]
     },
     {
-        path: 'cus-portal/:email/dashboard',
+        path: 'cus-portal/dashboard',
         loadChildren: () => import('./dashboard/dashboard-routing.module').then(m => m.DashboardRoutingModule)
 
     }

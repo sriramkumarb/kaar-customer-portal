@@ -20,10 +20,7 @@ export class CustomerDetailsComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private userService: UserService) {
 
-    this.url = this.activatedRoute.snapshot;
-    this.user = this.url._routerState.url
-    this.user = this.user.slice(12)
-    this.user = this.user.split('/')[0];
+    this.user = JSON.parse(localStorage.user).username
 
   }
 

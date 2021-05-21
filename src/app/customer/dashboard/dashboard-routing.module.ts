@@ -11,11 +11,14 @@ import { InvoiceComponent } from './invoice/invoice.component';
 import { LayoutComponent } from './layout/layout.component'
 import { OverallSaleComponent } from './overall-sale/overall-sale.component';
 import { PaymentComponent } from './payment/payment.component';
+import { SaleOrderDetailComponent } from './sale-order-detail/sale-order-detail.component';
 import { SaleOrderComponent } from './sale-order/sale-order.component';
+import { AuthGuard } from '../../service/auth.guard'
 const dashboardRoutes: Routes = [
     {
         path: '',
         component: LayoutComponent,
+        canActivateChild: [AuthGuard],
         children: [
             {
                 path: '',
@@ -32,6 +35,10 @@ const dashboardRoutes: Routes = [
             {
                 path: 'sale-order',
                 component: SaleOrderComponent
+            },
+            {
+                path: 'sale-order/detail/:vbeln',
+                component: SaleOrderDetailComponent
             },
             {
                 path: 'delivery-list',
