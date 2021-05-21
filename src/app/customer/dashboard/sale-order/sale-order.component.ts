@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { LocalDataSource } from 'ng2-smart-table';
+import { Router, ActivatedRoute } from '@angular/router';
+import { UserService } from '../../../service';
 
 @Component({
   selector: 'app-sale-order',
@@ -7,9 +10,82 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SaleOrderComponent implements OnInit {
 
-  constructor() { }
+  url: any = '';
+  user: string = '';
+  saleorder_data: any = []
+  source: LocalDataSource;
+
+
+  constructor(private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private userService: UserService) {
+
+    this.url = this.activatedRoute.snapshot;
+    this.user = this.url._routerState.url
+    this.user = this.user.slice(12)
+    this.user = this.user.split('/')[0];
+    console.log(this.user)
+
+    this.source = new LocalDataSource(this.saleorder_data);
+
+    this.userService.getsaleorderlist(this.user).subscribe((res: any) => {
+      this.saleorder_data = res
+      this.source = new LocalDataSource(this.saleorder_data);
+    })
+
+  }
+
+  settings = {
+    columns: {
+      KUNNR: {
+        title: 'Customer Number',
+        filter: false,
+      },
+      VBTYP: {
+        title: 'Sales Document Type',
+        filter: false,
+      },
+      VBELN: {
+        title: 'Sales Document Number',
+        filter: false,
+      },
+    },
+    attr: {
+      class: 'table table-bordered'
+    },
+    actions: false,
+    pager: {
+      perPage: 100,
+    },
+    hideSubHeader: true,
+    mode: 'inline',
+  };
 
   ngOnInit(): void {
   }
+
+  onSearch(query: string = '') {
+    this.source.setFilter([
+      // fields we want to inclue in the search
+      {
+        field: 'KUNNR',
+        search: query,
+      },
+      {
+        field: 'VBTYP',
+        search: query,
+      },
+      {
+        field: 'VBELN',
+        search: query,
+      },
+    ], false);
+  }
+
+  onUserSelected(event: any) {
+    this.router.navigate(['./detail', event.data.VBELN], { relativeTo: this.activatedRoute })
+
+  }
+
 
 }

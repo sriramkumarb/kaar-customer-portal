@@ -34,4 +34,8 @@ export class UserService {
     return this.http.post(this.API_URL + '/getinqdetails', { data })
   }
 
+  getsaleorderlist(data: any) {
+    return this.http.post(this.API_URL + '/getsolist', { data })
+  }
+
 }
