@@ -60,4 +60,8 @@ export class UserService {
     return this.http.post(this.API_URL + '/getsodetails', { data })
   }
 
+  getdeliverylist(data: any) {
+    return this.http.post(this.API_URL + '/getdellist', { data })
+  }
+
 }

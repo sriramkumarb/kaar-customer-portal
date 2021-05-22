@@ -176,22 +176,26 @@ router.post('/getinqlist', function (req, res, next) {
         var xml = response.body;
         parseString(xml, (err, resp) => {
 
-            res_data = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_INQLIST_SRK.Response'][0].IT_VBAK[0].item
-            resultStatus = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_INQLIST_SRK.Response'][0].RETURN[0].TYPE[0]
+            len = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_INQLIST_SRK.Response'][0].IT_VBAK[0].length
+            if (len == undefined && typeof len !== 'number') {
+
+                res_data = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_INQLIST_SRK.Response'][0].IT_VBAK[0].item
+                resultStatus = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_INQLIST_SRK.Response'][0].RETURN[0].TYPE[0]
+
+                for (i = 0; i < res_data.length; i++) {
+                    Object.keys(res_data[i]).forEach((key) => {
+                        if (res_data[i][key] instanceof Array) {
+                            res_data[i][key] = res_data[i][key][0]
+                        }
+                    })
+                }
 
 
-            for (i = 0; i < res_data.length; i++) {
-                Object.keys(res_data[i]).forEach((key) => {
-                    if (res_data[i][key] instanceof Array) {
-                        res_data[i][key] = res_data[i][key][0]
-                    }
-                })
+                if (resultStatus === 'S') {
+                    res.status(200).json(res_data)
+                }
             }
-
-
-            if (resultStatus === 'S') {
-                res.status(200).json(res_data)
-            } else {
+            else {
                 return res.status(501).json({ message: 'Some Error Occured !' });
             }
 
@@ -261,21 +265,27 @@ router.post('/getsolist', function (req, res, next) {
 
         var xml = response.body;
         parseString(xml, (err, resp) => {
-            res_data = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_SOLIST_SRK.Response'][0].IT_VBAK[0].item
-            resultStatus = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_SOLIST_SRK.Response'][0].RETURN[0].TYPE[0]
 
-            for (i = 0; i < res_data.length; i++) {
-                Object.keys(res_data[i]).forEach((key) => {
-                    if (res_data[i][key] instanceof Array) {
-                        res_data[i][key] = res_data[i][key][0]
-                    }
-                })
+            len = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_SOLIST_SRK.Response'][0].IT_VBAK[0].length
+            if (len == undefined && typeof len !== 'number') {
+
+                res_data = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_SOLIST_SRK.Response'][0].IT_VBAK[0].item
+                resultStatus = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_SOLIST_SRK.Response'][0].RETURN[0].TYPE[0]
+
+                for (i = 0; i < res_data.length; i++) {
+                    Object.keys(res_data[i]).forEach((key) => {
+                        if (res_data[i][key] instanceof Array) {
+                            res_data[i][key] = res_data[i][key][0]
+                        }
+                    })
+                }
+
+
+                if (resultStatus === 'S') {
+                    res.status(200).json(res_data)
+                }
             }
-
-
-            if (resultStatus === 'S') {
-                res.status(200).json(res_data)
-            } else {
+            else {
                 return res.status(501).json({ message: 'Some Error Occured !' });
             }
         })
@@ -322,6 +332,56 @@ router.post('/getsodetails', function (req, res, next) {
 
         })
 
+    });
+
+})
+
+router.post('/getdellist', function (req, res, next) {
+    // console.log(req.body.data)
+    let user = req.body.data
+    var options = {
+        'method': 'POST',
+        'url': 'http://dxktpipo.kaarcloud.com:50000/XISOAPAdapter/MessageServlet?senderParty=&senderService=BC_CUS_DELLIST_SRK&receiverParty=&receiverService=&interface=SI_CUS_DELLIST_SRK&interfaceNamespace=http://srk-portal.com',
+        'headers': {
+            'Content-Type': 'text/xml',
+            'SOAPAction': '"http://sap.com/xi/WebService/soap1.1"',
+            'Authorization': 'Basic UE9VU0VSOlRlY2hAMjAyMQ==',
+            'Cookie': 'MYSAPSSO2=AjExMDAgAA1wb3J0YWw6UE9VU0VSiAAHZGVmYXVsdAEABlBPVVNFUgIAAzAwMAMAA0tQTwQADDIwMjEwNTIyMDc1MAUABAAAAAgKAAZQT1VTRVL%2FAQUwggEBBgkqhkiG9w0BBwKggfMwgfACAQExCzAJBgUrDgMCGgUAMAsGCSqGSIb3DQEHATGB0DCBzQIBATAiMB0xDDAKBgNVBAMTA0tQTzENMAsGA1UECxMESjJFRQIBADAJBgUrDgMCGgUAoF0wGAYJKoZIhvcNAQkDMQsGCSqGSIb3DQEHATAcBgkqhkiG9w0BCQUxDxcNMjEwNTIyMDc1MDA3WjAjBgkqhkiG9w0BCQQxFgQUH6u1n30rG%2F2JcelOWFSes6kaUyMwCQYHKoZIzjgEAwQvMC0CFDZxYiCmvv9J9Expn24QHV2Yteh7AhUAnyWLDe4Zxum8HMZlR3L4wpsTa0o%3D; JSESSIONID=3R70crP7YDOybde6yPjSQ1FIhw2TeQF-Y2kA_SAP6VJuuNPQfiF9X64qZpa7Gzmj; JSESSIONMARKID=A8D9eA2M10yx1wsKJTk3Tg0sG35HC-XAj16H5jaQA; saplb_*=(J2EE6906720)6906750'
+        },
+        body: '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:sap-com:document:sap:rfc:functions">\r\n   <soapenv:Header/>\r\n   <soapenv:Body>\r\n      <urn:ZBAPI_CUS_DELLIST_SRK>\r\n         <!--You may enter the following 2 items in any order-->\r\n         <CUSTOMER_ID>' + user + '</CUSTOMER_ID>\r\n</urn:ZBAPI_CUS_DELLIST_SRK>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>'
+
+    };
+    request(options, function (error, response) {
+        if (error) throw new Error(error);
+        // console.log(response.body);
+
+        var xml = response.body;
+        parseString(xml, (err, resp) => {
+
+            len = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_DELLIST_SRK.Response'][0].IT_VBAK[0].length
+            if (len == undefined && typeof len !== 'number') {
+                res_data = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_DELLIST_SRK.Response'][0].IT_VBAK[0].item
+                resultStatus = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_DELLIST_SRK.Response'][0].RETURN[0].TYPE[0]
+
+                for (i = 0; i < res_data.length; i++) {
+                    Object.keys(res_data[i]).forEach((key) => {
+                        if (res_data[i][key] instanceof Array) {
+                            res_data[i][key] = res_data[i][key][0]
+                        }
+                    })
+                }
+
+
+                if (resultStatus === 'S') {
+                    res.status(200).json(res_data)
+                }
+            }
+            else {
+                return res.status(501).json({ message: 'Some Error Occured !' });
+
+            }
+
+        })
     });
 
 })
