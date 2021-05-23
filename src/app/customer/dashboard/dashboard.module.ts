@@ -28,6 +28,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CustomerDetailsComponent } from './customer-details/customer-details.component';
 import { InquiryDataDetailComponent } from './inquiry-data-detail/inquiry-data-detail.component';
 import { SaleOrderDetailComponent } from './sale-order-detail/sale-order-detail.component';
+import { MatSelectModule } from '@angular/material/select';
+
 
 @NgModule({
   declarations: [
@@ -61,7 +63,8 @@ import { SaleOrderDetailComponent } from './sale-order-detail/sale-order-detail.
     HttpClientModule,
     Ng2SmartTableModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSelectModule
   ],
   providers: [
     UserService

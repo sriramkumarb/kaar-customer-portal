@@ -64,4 +64,12 @@ export class UserService {
     return this.http.post(this.API_URL + '/getdellist', { data })
   }
 
+  getcreditmemo(data: any) {
+    return this.http.post(this.API_URL + '/getcredit', { data })
+  }
+
+  getdebitmemo(data: any) {
+    return this.http.post(this.API_URL + '/getdebit', { data })
+  }
+
 }
