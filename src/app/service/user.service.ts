@@ -72,4 +72,8 @@ export class UserService {
     return this.http.post(this.API_URL + '/getdebit', { data })
   }
 
+  getpaymentaging(data: any) {
+    return this.http.post(this.API_URL + '/getpa', { data })
+  }
+
 }

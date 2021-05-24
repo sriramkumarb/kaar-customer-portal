@@ -545,4 +545,57 @@ router.post('/getdebit', function (req, res, next) {
 
 })
 
+router.post('/getpa', function (req, res, next) {
+    let user = req.body.data
+    console.log(user)
+
+    var options = {
+        'method': 'POST',
+        'url': 'http://dxktpipo.kaarcloud.com:50000/XISOAPAdapter/MessageServlet?senderParty=&senderService=BC_CUS_PA_SRK&receiverParty=&receiverService=&interface=SI_CUS_PA_SRK&interfaceNamespace=http://srk-portal.com',
+        'headers': {
+            'Content-Type': 'text/xml',
+            'SOAPAction': '"http://sap.com/xi/WebService/soap1.1"',
+            'Authorization': 'Basic UE9VU0VSOlRlY2hAMjAyMQ==',
+            'Cookie': 'MYSAPSSO2=AjExMDAgAA1wb3J0YWw6UE9VU0VSiAAHZGVmYXVsdAEABlBPVVNFUgIAAzAwMAMAA0tQTwQADDIwMjEwNTI0MTY1NgUABAAAAAgKAAZQT1VTRVL%2FAQQwggEABgkqhkiG9w0BBwKggfIwge8CAQExCzAJBgUrDgMCGgUAMAsGCSqGSIb3DQEHATGBzzCBzAIBATAiMB0xDDAKBgNVBAMTA0tQTzENMAsGA1UECxMESjJFRQIBADAJBgUrDgMCGgUAoF0wGAYJKoZIhvcNAQkDMQsGCSqGSIb3DQEHATAcBgkqhkiG9w0BCQUxDxcNMjEwNTI0MTY1NjAzWjAjBgkqhkiG9w0BCQQxFgQUUnFm78HTFr00q!QNCAFw%2FANmsxowCQYHKoZIzjgEAwQuMCwCFG99uuYNiWAChowHPu%2FQ55ZpjhPwAhQLTE5xN1fKMwxDnwc!Cm!yIzIafA%3D%3D; JSESSIONID=fQj52T3oRLOEOgu306QSwTHODE6feQF-Y2kA_SAPMhVgbzPgz0btcu4jNzNzSn8r; JSESSIONMARKID=XJIh-QsNVlpaqZ-KdKY6YRQQ39kfR0f5gynH5jaQA; saplb_*=(J2EE6906720)6906750'
+        },
+        body: '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:sap-com:document:sap:rfc:functions">\r\n   <soapenv:Header/>\r\n   <soapenv:Body>\r\n      <urn:ZBAPI_CUS_PA_SRK>\r\n         <CUSTOMER_ID>AABBAAA</CUSTOMER_ID>\r\n      </urn:ZBAPI_CUS_PA_SRK>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>'
+
+    };
+    request(options, function (error, response) {
+        if (error) throw new Error(error);
+
+        var xml = response.body;
+        parseString(xml, (err, resp) => {
+
+            try {
+
+                len = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_PA_SRK.Response'][0].IT_RES[0].length;
+                if (len == undefined && typeof len !== 'number') {
+                    res_data = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_PA_SRK.Response'][0].IT_RES[0].item;
+                    resultStatus = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_PA_SRK.Response'][0].RETURN[0].TYPE[0]
+
+                    for (i = 0; i < res_data.length; i++) {
+                        Object.keys(res_data[i]).forEach((key) => {
+                            if (res_data[i][key] instanceof Array) {
+                                res_data[i][key] = res_data[i][key][0]
+                            }
+                        })
+                    }
+
+                    if (resultStatus === 'S') {
+                        res.status(200).json(res_data)
+                    }
+                }
+                else {
+                    return res.status(501).json({ message: 'Some Error Occured !' });
+                }
+            } catch (error) {
+                return res.status(500).json({ message: 'Length of SAP result cannot be identified' })
+
+            }
+        })
+    });
+
+})
+
 module.exports = router
