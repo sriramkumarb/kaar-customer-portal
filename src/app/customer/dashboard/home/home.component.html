@@ -1,46 +1,57 @@
-<div class="card m-4 p-4">
-    <div class="d-flex justify-content-center">
-        <h2><b>Customer DashBoard</b></h2>
+<section id="get-started" class="padd-section text-center">
+
+    <div class="container" data-aos="fade-up">
+        <div class="section-title text-center">
+
+            <h2>Customer Dashboard</h2>
+            <p class="separator">Customer Dashboard and it's Features!</p>
+
+        </div>
     </div>
-    <form>
-        <div class="row m-4 d-flex justify-content-center">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h3 class="card-title"><b>Inquiry Data</b></h3>
-                        <p class="card-text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni sapiente
-                            laboriosam facilis, eligendi sed non impedit dolor asperiores qui odio consectetur, expedita
-                            suscipit dolorum libero excepturi fugiat optio ratione. Sint!</p>
-                        <a [routerLink]="['inquiry-data']" class="btn btn-outline-success d-flex">
-                            <mat-icon class="me-2">east</mat-icon>Inquiry Data
-                        </a>
-                    </div>
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="100">
+                <div class="feature-block">
+
+                    <mat-icon>article</mat-icon>
+                    <h4>Inquiry Data</h4>
+                    <p>This Section Contains all the inquiries records between the Customer and the Company!</p>
+                    <a [routerLink]="['inquiry-data']">
+                        <mat-icon>east</mat-icon>
+                    </a>
+
                 </div>
             </div>
-        </div>
-        <div class="row m-4 d-flex justify-content-center">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h3 class="card-title">Special title treatment</h3>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.
-                        </p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
+
+            <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="200">
+                <div class="feature-block">
+
+                    <mat-icon>receipt</mat-icon>
+                    <h4>Sale Order Data</h4>
+                    <p>This Section Contains all the sale order records between the Customer and the Company!</p>
+                    <a [routerLink]="['sale-order']">
+                        <mat-icon>east</mat-icon>
+                    </a>
+
                 </div>
             </div>
-        </div>
-        <div class="row m-4 d-flex justify-content-center">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <h3 class="card-title">Special title treatment</h3>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.
-                        </p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
+
+            <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="300">
+                <div class="feature-block">
+
+                    <mat-icon>local_shipping</mat-icon>
+                    <h4>List of Delivery</h4>
+                    <p>This Section Contains all the delivery records between the Customer and the Company!</p>
+                    <a [routerLink]="['delivery-list']">
+                        <mat-icon>east</mat-icon>
+                    </a>
+
                 </div>
             </div>
+
         </div>
-    </form>
-</div>
+    </div>
+
+</section>
