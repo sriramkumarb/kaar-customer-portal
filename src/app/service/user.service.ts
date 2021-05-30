@@ -76,4 +76,8 @@ export class UserService {
     return this.http.post(this.API_URL + '/getpa', { data })
   }
 
+  uploadmasterdata(data: any) {
+    return this.http.post(this.API_URL + '/uploadmasterdata', { data })
+  }
+
 }

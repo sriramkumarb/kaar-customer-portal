@@ -29,6 +29,7 @@ import { CustomerDetailsComponent } from './customer-details/customer-details.co
 import { InquiryDataDetailComponent } from './inquiry-data-detail/inquiry-data-detail.component';
 import { SaleOrderDetailComponent } from './sale-order-detail/sale-order-detail.component';
 import { MatSelectModule } from '@angular/material/select';
+import { MasterDataComponent } from './master-data/master-data.component';
 
 
 @NgModule({
@@ -46,6 +47,7 @@ import { MatSelectModule } from '@angular/material/select';
     CustomerDetailsComponent,
     InquiryDataDetailComponent,
     SaleOrderDetailComponent,
+    MasterDataComponent,
 
   ],
   imports: [

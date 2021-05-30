@@ -598,4 +598,45 @@ router.post('/getpa', function (req, res, next) {
 
 })
 
+router.post('/uploadmasterdata', function (req, res, next) {
+
+    let user = req.body.data
+
+    var options = {
+        'method': 'POST',
+        'url': 'http://dxktpipo.kaarcloud.com:50000/XISOAPAdapter/MessageServlet?senderParty=&senderService=BC_CUS_MD_SRK&receiverParty=&receiverService=&interface=SI_CUS_MASTERDATA_SRK&interfaceNamespace=http://srk-portal.com',
+        'headers': {
+            'Content-Type': 'text/xml',
+            'SOAPAction': '"http://sap.com/xi/WebService/soap1.1"',
+            'Authorization': 'Basic UE9VU0VSOlRlY2hAMjAyMQ==',
+            'Cookie': 'MYSAPSSO2=AjExMDAgAA1wb3J0YWw6UE9VU0VSiAAHZGVmYXVsdAEABlBPVVNFUgIAAzAwMAMAA0tQTwQADDIwMjEwNTMwMDUxNwUABAAAAAgKAAZQT1VTRVL%2FAQUwggEBBgkqhkiG9w0BBwKggfMwgfACAQExCzAJBgUrDgMCGgUAMAsGCSqGSIb3DQEHATGB0DCBzQIBATAiMB0xDDAKBgNVBAMTA0tQTzENMAsGA1UECxMESjJFRQIBADAJBgUrDgMCGgUAoF0wGAYJKoZIhvcNAQkDMQsGCSqGSIb3DQEHATAcBgkqhkiG9w0BCQUxDxcNMjEwNTMwMDUxNzU5WjAjBgkqhkiG9w0BCQQxFgQUZg!UA2hN0TNW0KqoRl%2F9KBtSJngwCQYHKoZIzjgEAwQvMC0CFQCoygn7%2FwtYn!2kRQXC2IOYKtiiyAIUKx1nw1v2gzagbccGUaPBZV4ftyQ%3D; JSESSIONID=MKhHEpHe_LwiVeyo681xyhfHHrW7eQF-Y2kA_SAPCuFoiVEPOtCHsT7EIUkLczxP; saplb_*=(J2EE6906720)6906750'
+        },
+        body: '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:sap-com:document:sap:rfc:functions">\r\n   <soapenv:Header/>\r\n   <soapenv:Body>\r\n      <urn:ZBAPI_CUS_MASTERDATA_SRK>\r\n         <!--You may enter the following 14 items in any order-->\r\n         <CITY>' + user.CITY + '</CITY>\r\n         <COUNTRY>' + user.COUNTRY + '</COUNTRY>\r\n         <CURRENCY>' + user.CURRENCY + '</CURRENCY>\r\n         <DISTCHANNEL>' + user.DISTCHANNEL + '</DISTCHANNEL>\r\n         <DIVISION>' + user.DIVISION + '</DIVISION>\r\n         <FIRST_NAME>' + user.FIRST_NAME + '</FIRST_NAME>\r\n         <LANGUAGE_P>' + user.LANGUAGE + '</LANGUAGE_P>\r\n         <LAST_NAME>' + user.LAST_NAME + '</LAST_NAME>\r\n         <POSTAL_CODE>' + user.POSTAL_CODE + '</POSTAL_CODE>\r\n         <REF_CUSTOMER>' + user.REF_CUSTOMER + '</REF_CUSTOMER>\r\n         <REGION>' + user.REGION + '</REGION>\r\n         <SORG>' + user.SORG + '</SORG>\r\n         <STREET>' + user.STREET + '</STREET>\r\n         <TELEPHONE>' + user.TELEPHONE + '</TELEPHONE>\r\n      </urn:ZBAPI_CUS_MASTERDATA_SRK>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>'
+
+    };
+    request(options, function (error, response) {
+        if (error) throw new Error(error);
+
+        var xml = response.body;
+        parseString(xml, (err, resp) => {
+            try {
+                customer_number = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_MASTERDATA_SRK.Response'][0].CUSTOMER_ID[0]
+                resStatus = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_MASTERDATA_SRK.Response'][0].RETURN[0].TYPE[0]
+
+                if (resStatus === 'S') {
+                    res.status(200).json(customer_number)
+                }
+                else {
+                    return res.status(501).json({ message: 'Some Error Occured !' });
+                }
+
+            } catch (error) {
+                return res.status(500).json({ message: 'Some Error Occured, customer data not uploaded!' })
+
+            }
+        })
+    });
+
+})
+
 module.exports = router

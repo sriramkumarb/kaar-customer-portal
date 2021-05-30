@@ -14,6 +14,7 @@ import { PaymentComponent } from './payment/payment.component';
 import { SaleOrderDetailComponent } from './sale-order-detail/sale-order-detail.component';
 import { SaleOrderComponent } from './sale-order/sale-order.component';
 import { AuthGuard } from '../../service/auth.guard'
+import { MasterDataComponent } from './master-data/master-data.component';
 const dashboardRoutes: Routes = [
     {
         path: '',
@@ -67,6 +68,10 @@ const dashboardRoutes: Routes = [
             {
                 path: 'customer-details',
                 component: CustomerDetailsComponent
+            },
+            {
+                path: 'master-data-upload',
+                component: MasterDataComponent
             }
         ]
     }
