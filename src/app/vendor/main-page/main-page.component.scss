@@ -1,20 +1,17 @@
 .container{
     width: 100vw;
     min-height: 100vh;
-    overflow: hidden;
 }
 
 .header{
     display: flex;
     justify-content: center;
     margin: 5vh;
-    padding: 20px;
+    padding: auto;
 }
 .headerLogo{
-    font-family: 'Noto Serif', serif;
-    font-size: 40px;
-    font-weight: bold;
-    color: black;
-    margin-top: 25px;
+    font-family: "Lucida Console", "Courier New", monospace;
+    font-size: 25px;
+    color: goldenrod;
     margin-bottom: 25px;
 }

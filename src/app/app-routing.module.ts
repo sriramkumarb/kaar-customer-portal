@@ -5,7 +5,7 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'cus-portal',
+    redirectTo: 'landing-page',
     pathMatch: 'full'
   },
   {

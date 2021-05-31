@@ -8,18 +8,23 @@ import { CustomerModule } from './customer/customer.module'
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { UserService } from './service';
 import { HttpClientModule } from '@angular/common/http';
+import { MatIconModule } from '@angular/material/icon';
+import { VendorModule } from './vendor/vendor.module';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    LandingPageComponent
+    LandingPageComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     CustomerModule,
-    HttpClientModule
+    HttpClientModule,
+    MatIconModule,
+    VendorModule
   ],
   providers: [
     UserService

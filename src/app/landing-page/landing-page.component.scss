@@ -1,0 +1,148 @@
+.navbar {
+    padding: 0;
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.1);
+  }
+  
+  .navbar ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    list-style: none;
+    align-items: center;
+  }
+  
+  .navbar li {
+    position: relative;
+  }
+  
+  .navbar a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0 10px 30px;
+    font-family: 'Noto Serif', serif;
+    font-weight: bold;
+    font-size: 15px;
+    color: #222;
+    white-space: nowrap;
+    transition: 0.3s;
+    letter-spacing: 0;
+  }
+  
+  .navbar a i {
+    font-size: 12px;
+    line-height: 0;
+    margin-left: 5px;
+  }
+  
+  .navbar a:hover, .navbar .active, .navbar li:hover > a {
+    color: #71c55d;
+  }
+
+  section {
+    overflow: hidden;
+  }
+  
+  .padd-section {
+    padding-bottom: 40px;
+    padding-top: 40px;
+  }
+  
+  @media (max-width: 992px) {
+    .padd-section {
+      padding-top: 40px;
+      padding-bottom: 40px;
+    }
+  }
+  
+  .section-title {
+    margin-bottom: 80px;
+  }
+  
+  @media (max-width: 992px) {
+    .section-title {
+      margin-bottom: 40px;
+    }
+  }
+  
+  .section-title h2 {
+    font-family: 'Noto Serif', serif;
+    font-size: 30px;
+    font-weight: bold;
+    // font-weight: 100;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    text-transform: capitalize;
+  }
+  
+  .section-title .separator {
+    margin: 0;
+  }
+  
+  .separator {
+    color: #626262;
+    font-family: 'Noto Serif', serif;
+    font-size: 15px;
+    font-weight: 300;
+    margin-bottom: 30px;
+    text-transform: capitalize;
+  }
+
+#get-started {
+    display: inline-block;
+    // height: 100%;
+    width: 100%;
+    font-family: 'Noto Serif', serif;
+  }
+  
+  #get-started .feature-block {
+    background: #fff none repeat scroll 0 0;
+    padding: 30px 20px;
+    transition: all 0.5s ease-in-out 0s;
+  }
+  
+  #get-started .feature-block img {
+    height: 60px;
+    margin-bottom: 30px;
+    width: 60px;
+  }
+  
+  @media (max-width: 991px) {
+    #get-started .feature-block {
+      margin-bottom: 30px;
+    }
+  }
+  
+  #get-started .feature-block:hover {
+    box-shadow: 0 0 35px rgba(0, 0, 0, 0.5);
+    transition: all 0.5s ease-in-out 0s;
+  }
+  
+  #get-started .feature-block h4 {
+    margin-bottom: 20px;
+    font-family: 'Noto Serif', serif;
+    font-weight: bold;
+  }
+  
+  #get-started .feature-block p {
+    margin-bottom: 20px;
+  }
+  
+  #get-started .feature-block a {
+    color: #505050;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    text-transform: capitalize;
+    transition: 0.3s;
+  }
+  
+  #get-started .feature-block a:hover {
+    color: #71c55d;
+  }
+  
+  .feature-block{
+    box-shadow: 0 3px 7px rgba(0.1, 0.1, 0.1, 0.1);
+    border-radius: 50px;
+  }
+
