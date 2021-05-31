@@ -25,7 +25,7 @@ section {
   }
   
   .section-title h2 {
-    font-family: "Roboto", sans-serif;
+    font-family: 'Noto Serif', serif;
     font-size: 30px;
     // font-weight: 100;
     letter-spacing: 2px;
@@ -39,7 +39,7 @@ section {
   
   .separator {
     color: #626262;
-    font-family: "Roboto", sans-serif;
+    font-family: 'Noto Serif', serif;
     font-size: 15px;
     font-weight: 300;
     margin-bottom: 30px;
@@ -77,10 +77,14 @@ section {
   
   #get-started .feature-block h4 {
     margin-bottom: 20px;
+    font-family: 'Noto Serif', serif;
+
   }
   
   #get-started .feature-block p {
     margin-bottom: 20px;
+    font-family: 'Noto Serif', serif;
+
   }
   
   #get-started .feature-block a {
@@ -94,5 +98,10 @@ section {
   
   #get-started .feature-block a:hover {
     color: #71c55d;
+  }
+
+  .feature-block{
+    box-shadow: 0 3px 7px rgba(0.1, 0.1, 0.1, 0.1);
+    border-radius: 10px;
   }
   

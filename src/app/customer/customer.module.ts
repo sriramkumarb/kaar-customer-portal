@@ -15,6 +15,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { UserService } from '../service';
 import { HttpClientModule } from '@angular/common/http';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     DashboardModule,
     CustomerRoutingModule,
+    MatIconModule
   ],
   providers: [
     UserService

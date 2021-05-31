@@ -1,7 +1,7 @@
 <div class="formcontainer">
     <div class="formbody">
         <form [formGroup]="loginForm">
-            <div class="header">Welcome</div>
+            <div class="header">Welcome!</div>
             <div>
                 <mat-form-field>
                     <input type="text" formControlName="email" matInput placeholder="Username">
@@ -15,7 +15,10 @@
                 <span *ngIf="isValid('password')">Password cannot be blank</span>
             </div>
             <div style="margin-top:40px; text-align: center;">
-                <button class="form-btn" mat-stroked-button (click)="login()">Sign In</button>
+                <button class="form-btn align-content-center" mat-stroked-button (click)="login()">
+                    Sign In
+                    <mat-icon class="ms-1">vpn_key</mat-icon>
+                </button>
             </div>
             <div style="text-align: center; margin-top: 20px;">
                 <p>{{ errorMessage }}</p>
@@ -23,9 +26,9 @@
         </form>
     </div>
 
-    <div>
+    <!-- <div>
         <div style="padding: 20px;">
             <button class="form-btn-hollow" mat-stroked-button (click)="movetoregister()">Register</button>
         </div>
-    </div>
+    </div> -->
 </div>

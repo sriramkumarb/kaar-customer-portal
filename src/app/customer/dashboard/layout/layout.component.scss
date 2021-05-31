@@ -64,4 +64,23 @@ body {
 
 mat-card {
     box-shadow: none !important;
+    font-family: 'Noto Serif', serif;
+    font-weight: bold;
+    text-shadow: none;
 }
+
+.mat-card-header .mat-card-title {
+    font-size: 18px;
+}
+
+button{
+    font-family: 'Noto Serif', serif;
+    font-weight: bold;
+}
+
+mat-toolbar{
+    font-family: 'Noto Serif', serif;
+    font-weight: bolder;
+    text-shadow: none;
+}
+
