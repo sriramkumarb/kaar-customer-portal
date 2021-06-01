@@ -10,6 +10,7 @@ import { UserService } from './service';
 import { HttpClientModule } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
 import { VendorModule } from './vendor/vendor.module';
+import { DashboardModule } from './vendor/dashboard/dashboard.module';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { VendorModule } from './vendor/vendor.module';
     CustomerModule,
     HttpClientModule,
     MatIconModule,
-    VendorModule
+    VendorModule,
+    DashboardModule
   ],
   providers: [
     UserService
