@@ -443,7 +443,7 @@ router.post('/getdellist', function (req, res, next) {
 })
 
 router.post('/getcredit', function (req, res, next) {
-    console.log(req.body.data)
+    // console.log(req.body.data)
     let user = req.body.data
     var options = {
         'method': 'POST',
