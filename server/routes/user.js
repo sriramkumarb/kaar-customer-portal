@@ -547,7 +547,6 @@ router.post('/getdebit', function (req, res, next) {
 
 router.post('/getpa', function (req, res, next) {
     let user = req.body.data
-    console.log(user)
 
     var options = {
         'method': 'POST',

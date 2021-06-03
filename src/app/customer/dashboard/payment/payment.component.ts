@@ -22,10 +22,30 @@ export class PaymentComponent implements OnInit {
     this.source = new LocalDataSource(this.payment_data);
 
     this.userService.getpaymentaging(this.user).subscribe((res: any) => {
+
+      res.map((o: any) => {
+        o.AGING = this.diff(
+          Date.parse(o.ENTRY_DATE),
+          Date.parse(o.BLINE_DATE))
+
+      })
       this.payment_data = res;
+
       this.source = new LocalDataSource(this.payment_data);
     })
 
+  }
+
+
+  diff(a: any, b: any) {
+    a = new Date(a)
+    b = new Date(b)
+
+    const _MS_PER_DAY = 1000 * 60 * 60 * 24;
+    const utc2 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
+    const utc1 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
+
+    return Math.floor((utc2 - utc1) / _MS_PER_DAY);
   }
 
   ngOnInit(): void {
@@ -65,12 +85,12 @@ export class PaymentComponent implements OnInit {
         title: 'DOC_TYPE',
         filter: false,
       },
-      BRANCH: {
-        title: 'BRANCH',
-        filter: false,
-      },
       BLINE_DATE: {
         title: 'BLINE_DATE',
+        filter: false,
+      },
+      AGING: {
+        title: 'AGING',
         filter: false,
       },
       AMOUNT: {
@@ -125,11 +145,11 @@ export class PaymentComponent implements OnInit {
         search: query,
       },
       {
-        field: 'BRANCH',
+        field: 'BLINE_DATE',
         search: query,
       },
       {
-        field: 'BLINE_DATE',
+        field: 'AGING',
         search: query,
       },
       {
