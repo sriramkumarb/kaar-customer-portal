@@ -6,6 +6,7 @@ const { mongoose } = require('./db/mongoose');
 
 
 app.use('/', require('./routes/user'));
+app.use('/', require('./routes/vendor'));
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)

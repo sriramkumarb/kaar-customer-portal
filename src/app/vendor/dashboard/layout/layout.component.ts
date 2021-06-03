@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
+import { Router, ActivatedRoute } from '@angular/router';
+import { VendorService } from '../../../service/index'
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LayoutComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private vendorservice: VendorService) { }
 
   ngOnInit(): void {
   }
@@ -23,6 +26,10 @@ export class LayoutComponent implements OnInit {
     } else {
       this.contentMargin = 240;
     }
+  }
+
+  vendorDetails() {
+    this.router.navigate(['./vendor-details'], { relativeTo: this.activatedRoute })
   }
 
 }

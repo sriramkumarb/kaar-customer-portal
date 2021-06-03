@@ -1,0 +1,121 @@
+<div class="card m-3">
+    <div class="ps-3 pt-2">
+        <mat-icon [routerLink]="['../../dashboard']"
+            style="cursor: pointer; border: 1px solid gray; border-radius: 25px;">
+            keyboard_backspace
+        </mat-icon>
+    </div>
+    <div class="p-4">
+
+        <div class="avatar m-4 mt-2">
+            <div class="row me-2">
+                <img src="assets/images/vendor.png" alt="profile-pic">
+            </div>
+            <div class="row">
+                <h2><b>Vendor Details</b></h2>
+            </div>
+            <div class="row m-4">
+                <img class="edit-logo" src="assets/images/nb-edit.svg" (click)="enableEdit()">
+            </div>
+        </div>
+
+        <form #userdetails="ngForm">
+            <div class="row mb-3 d-flex justify-content-center">
+                <label for="name" class="col-sm-2 col-form-label">Vendor First Name : </label>
+                <div class="col-sm-10 col-md-4">
+                    <input type="text" ngDefaultControl class="form-control" name="name"
+                        [(ngModel)]="vendorDetails.NAME" [disabled]=' disable'>
+                </div>
+            </div>
+            <div class="row mb-3 d-flex justify-content-center">
+                <label for="name_2" class="col-sm-2 col-form-label">Vendor Last Name : </label>
+                <div class="col-sm-10 col-md-4">
+                    <input type="text" ngDefaultControl class="form-control" name="name_2"
+                        [(ngModel)]='vendorDetails.NAME_2' [disabled]='disable'>
+                </div>
+            </div>
+            <div class="row mb-3 d-flex justify-content-center">
+                <label for="customer_id" class="col-sm-2 col-form-label">Vendor Number : </label>
+                <div class="col-sm-10 col-md-4">
+                    <input type="text" ngDefaultControl class="form-control" name="customer_id"
+                        [(ngModel)]='vendorDetails.VENDOR' [disabled]='disable'>
+                </div>
+            </div>
+            <div class="row mb-3 d-flex justify-content-center">
+                <label for="search_term" class="col-sm-2 col-form-label">Language : </label>
+                <div class="col-sm-10 col-md-4">
+                    <input type="text" ngDefaultControl class="form-control" name="search_term"
+                        [(ngModel)]='vendorDetails.LANGU' [disabled]='disable'>
+                </div>
+            </div>
+            <div class="row mb-3 d-flex justify-content-center">
+                <label for="one_time_acc" class="col-sm-2 col-form-label">Region : </label>
+                <div class="col-sm-10 col-md-4">
+                    <input type="text" ngDefaultControl class="form-control" name="one_time_acc"
+                        [(ngModel)]='vendorDetails.REGION' [disabled]='disable'>
+                </div>
+            </div>
+            <div class="row mb-3 d-flex justify-content-center">
+                <label for="telephone" class="col-sm-2 col-form-label">Telephone Number : </label>
+                <div class="col-sm-10 col-md-4">
+                    <input type="text" ngDefaultControl class="form-control" name="telephone"
+                        [(ngModel)]='vendorDetails.TELEPHONE' [disabled]='disable'>
+                </div>
+            </div>
+            <!-- <div class="row mb-3 d-flex justify-content-center">
+                <label for="fax_number" class="col-sm-2 col-form-label">Fax Number : </label>
+                <div class="col-sm-10 col-md-4">
+                    <input type="text" ngDefaultControl class="form-control" name="fax_number"
+                        [(ngModel)]='customerDetails.FAX_NUMBER' [disabled]='disable'>
+                </div>
+            </div> -->
+            <div class="row mb-3 d-flex justify-content-center">
+                <label for="street" class="col-sm-2 col-form-label">House Number & Street : </label>
+                <div class="col-sm-10 col-md-4">
+                    <input type="text" ngDefaultControl class="form-control" name="street"
+                        [(ngModel)]='vendorDetails.STREET' [disabled]='disable'>
+                </div>
+            </div>
+            <!-- <div class="row mb-3 d-flex justify-content-center">
+                <label for="address" class="col-sm-2 col-form-label">Address : </label>
+                <div class="col-sm-10 col-md-4">
+                    <input type="text" ngDefaultControl class="form-control" name="address"
+                        [(ngModel)]='customerDetails.ADDRESS' [disabled]='disable'>
+                </div>
+            </div> -->
+            <div class="row mb-3 d-flex justify-content-center">
+                <label for="city" class="col-sm-2 col-form-label">City : </label>
+                <div class="col-sm-10 col-md-4">
+                    <input type="text" ngDefaultControl class="form-control" name="city"
+                        [(ngModel)]='vendorDetails.CITY' [disabled]='disable'>
+                </div>
+            </div>
+            <div class="row mb-3 d-flex justify-content-center">
+                <label for="state" class="col-sm-2 col-form-label">District : </label>
+                <div class="col-sm-10 col-md-4">
+                    <input type="text" ngDefaultControl class="form-control" name="state"
+                        [(ngModel)]='vendorDetails.DISTRICT' [disabled]='disable'>
+                </div>
+            </div>
+            <div class="row mb-3 d-flex justify-content-center">
+                <label for="country" class="col-sm-2 col-form-label">Country : </label>
+                <div class="col-sm-10 col-md-4">
+                    <input type="text" ngDefaultControl class="form-control" name="country"
+                        [(ngModel)]='vendorDetails.COUNTRY' [disabled]='disable'>
+                </div>
+            </div>
+            <div class="row mb-3 d-flex justify-content-center">
+                <label for="postal_code" class="col-sm-2 col-form-label">Postal Code : </label>
+                <div class="col-sm-10 col-md-4">
+                    <input type="text" ngDefaultControl class="form-control" name="postal_code"
+                        [(ngModel)]='vendorDetails.POSTL_CODE' [disabled]='disable'>
+                </div>
+            </div>
+            <!-- <div class="d-flex justify-content-center m-4">
+                <button type="submit" class="btn btn-outline-success" (click)="updateCustomerDetails(userdetails.value)"
+                    [disabled]='disable'>Update</button>
+                <p class="ms-5 text-center">{{ res_status }}</p>
+            </div> -->
+        </form>
+    </div>
+</div>

@@ -13,12 +13,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { VenDetailsComponent } from './ven-details/ven-details.component';
 
 
 @NgModule({
   declarations: [
     LayoutComponent,
-    HomeComponent
+    HomeComponent,
+    VenDetailsComponent
   ],
   imports: [
     CommonModule,
