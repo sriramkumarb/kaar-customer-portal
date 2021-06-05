@@ -1,1 +1,54 @@
-<p>credit works!</p>
+<div class="card">
+    <div class="ps-3 mt-3">
+        <mat-icon [routerLink]="['../../dashboard']"
+            style="cursor: pointer; border: 1px solid gray; border-radius: 25px;">
+            keyboard_backspace
+        </mat-icon>
+    </div>
+    <div class="row mt-4">
+        <div class="col ms-3 mb-3">
+            <h2><b>credit/debit Memo for {{ user }}</b></h2>
+        </div>
+        <div class="col me-3 mb-3 d-flex justify-content-end">
+            <form class="">
+                <div class="input-group">
+                    <input #search class="form-control" type="text" placeholder="Search..."
+                        (keyup)="onSearch(search.value)">
+                    <div class=" input-group-btn">
+                        <button (click)='onSearch(search.value)' class="menu-item" mat-flat-button
+                            style="border: 1px solid rgb(218, 213, 213);">
+                            <mat-icon>search</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row mt-4 ms-4">
+        <mat-form-field appearance='fill' style="width: fit-content;">
+            <mat-label>Select an option</mat-label>
+            <mat-select>
+                <mat-option (click)="enablecredit()" value="credit">Credit Memo</mat-option>
+                <mat-option (click)="enabledebit()" value="debit">Debit Memo</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div class="card-body">
+        <div *ngIf="credit; then credit1 else debit1"></div>
+        <ng-template #credit1>
+            <p class="text-center m-3"><b>Credit Memo</b></p>
+            <ng2-smart-table [settings]="settings" [source]="source">
+            </ng2-smart-table>
+
+        </ng-template>
+        <ng-template #debit1>
+            <p class="text-center m-3"><b>Debit Memo</b></p>
+            <ng2-smart-table [settings]="settings" [source]="source">
+            </ng2-smart-table>
+
+
+        </ng-template>
+
+    </div>
+</div>

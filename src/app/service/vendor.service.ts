@@ -45,4 +45,12 @@ export class VendorService {
     return this.http.post(this.API_URL + '/ven/payment', { data })
   }
 
+  getcreditdetails(data: any) {
+    return this.http.post(this.API_URL + '/ven/credit', { data })
+  }
+
+  getdebitdetails(data: any) {
+    return this.http.post(this.API_URL + '/ven/debit', { data })
+  }
+
 }

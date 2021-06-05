@@ -12,9 +12,11 @@
         <div class="col me-3 mb-3 d-flex justify-content-end">
             <form class="">
                 <div class="input-group">
-                    <input #search class="form-control" type="text" placeholder="Search...">
+                    <input #search class="form-control" type="text" placeholder="Search..."
+                        (keyup)="onSearch(search.value)">
                     <div class="input-group-btn">
-                        <button class="menu-item" mat-flat-button style="border: 1px solid rgb(218, 213, 213);">
+                        <button (click)='onSearch(search.value)' class="menu-item" mat-flat-button
+                            style="border: 1px solid rgb(218, 213, 213);">
                             <mat-icon>search</mat-icon>
                         </button>
                     </div>

@@ -197,4 +197,100 @@ router.post('/ven/payment', function (req, res) {
 
 })
 
+router.post('/ven/credit', function (req, res) {
+    let user = req.body.data
+
+    var options = {
+        'method': 'POST',
+        'url': 'http://dxktpipo.kaarcloud.com:50000/XISOAPAdapter/MessageServlet?senderParty=&senderService=BC_VEN_SRK&receiverParty=&receiverService=&interface=SI_VEN_CREDIT_SRK&interfaceNamespace=http://srk-vendor-portal.com',
+        'headers': {
+            'Content-Type': 'text/xml',
+            'SOAPAction': '"http://sap.com/xi/WebService/soap1.1"',
+            'Authorization': 'Basic UE9VU0VSOlRlY2hAMjAyMQ==',
+            'Cookie': 'MYSAPSSO2=AjExMDAgAA1wb3J0YWw6UE9VU0VSiAAHZGVmYXVsdAEABlBPVVNFUgIAAzAwMAMAA0tQTwQADDIwMjEwNjA1MTI0MwUABAAAAAgKAAZQT1VTRVL%2FAQUwggEBBgkqhkiG9w0BBwKggfMwgfACAQExCzAJBgUrDgMCGgUAMAsGCSqGSIb3DQEHATGB0DCBzQIBATAiMB0xDDAKBgNVBAMTA0tQTzENMAsGA1UECxMESjJFRQIBADAJBgUrDgMCGgUAoF0wGAYJKoZIhvcNAQkDMQsGCSqGSIb3DQEHATAcBgkqhkiG9w0BCQUxDxcNMjEwNjA1MTI0MzUxWjAjBgkqhkiG9w0BCQQxFgQUSjTdLgZfgzHN6hjUa4mNMc7x5GowCQYHKoZIzjgEAwQvMC0CFQCJdQoIYh5mzxnu61W8UrJka6fELwIUPbi6TKN4heo88P88%2F56EZYFbH!w%3D; JSESSIONID=2q2WssIvkGKQn7Q4nGWD7WhwdzPceQF-Y2kA_SAPa2WjNGCGOCqOr94cfJ7yz4wg; JSESSIONMARKID=CYNdAgGEahigrLQqXeVJjg1kLxF-bN0TZmPX5jaQA; saplb_*=(J2EE6906720)6906750'
+        },
+        body: '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:sap-com:document:sap:rfc:functions">\r\n   <soapenv:Header/>\r\n   <soapenv:Body>\r\n      <urn:ZBAPI_VEN_CREDIT_SRK>\r\n         <!--You may enter the following 2 items in any order-->\r\n         <VENDOR_ID>' + user + '</VENDOR_ID>\r\n      </urn:ZBAPI_VEN_CREDIT_SRK>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>'
+
+    };
+    request(options, function (error, response) {
+        if (error) throw new Error(error);
+
+        var xml = response.body;
+        parseString(xml, (err, result) => {
+            try {
+                len = result['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_VEN_CREDIT_SRK.Response'][0].CREDIT[0].length
+                if (len == undefined && typeof len !== 'number') {
+                    res_data = result['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_VEN_CREDIT_SRK.Response'][0].CREDIT[0].item
+                    res_status = result['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_VEN_CREDIT_SRK.Response'][0].RETURN[0].TYPE[0]
+
+                    for (i = 0; i < res_data.length; i++) {
+                        Object.keys(res_data[i]).forEach((key) => {
+                            if (res_data[i][key] instanceof Array) {
+                                res_data[i][key] = res_data[i][key][0]
+                            }
+                        })
+                    }
+                    if (res_status === 'S') {
+                        res.status(200).json(res_data)
+                    }
+                }
+                else {
+                    return res.status(501).json({ message: 'Some Error Occured !' });
+                }
+            } catch (error) {
+                return res.status(500).json({ message: 'Length of SAP result cannot be identified' })
+            }
+        })
+    });
+
+})
+
+router.post('/ven/debit', function (req, res) {
+    let user = req.body.data
+
+    var options = {
+        'method': 'POST',
+        'url': 'http://dxktpipo.kaarcloud.com:50000/XISOAPAdapter/MessageServlet?senderParty=&senderService=BC_VEN_SRK&receiverParty=&receiverService=&interface=SI_VEN_DEBIT_SRK&interfaceNamespace=http://srk-vendor-portal.com',
+        'headers': {
+            'Content-Type': 'text/xml',
+            'SOAPAction': '"http://sap.com/xi/WebService/soap1.1"',
+            'Authorization': 'Basic UE9VU0VSOlRlY2hAMjAyMQ==',
+            'Cookie': 'MYSAPSSO2=AjExMDAgAA1wb3J0YWw6UE9VU0VSiAAHZGVmYXVsdAEABlBPVVNFUgIAAzAwMAMAA0tQTwQADDIwMjEwNjA1MTI0MwUABAAAAAgKAAZQT1VTRVL%2FAQUwggEBBgkqhkiG9w0BBwKggfMwgfACAQExCzAJBgUrDgMCGgUAMAsGCSqGSIb3DQEHATGB0DCBzQIBATAiMB0xDDAKBgNVBAMTA0tQTzENMAsGA1UECxMESjJFRQIBADAJBgUrDgMCGgUAoF0wGAYJKoZIhvcNAQkDMQsGCSqGSIb3DQEHATAcBgkqhkiG9w0BCQUxDxcNMjEwNjA1MTI0MzUxWjAjBgkqhkiG9w0BCQQxFgQUSjTdLgZfgzHN6hjUa4mNMc7x5GowCQYHKoZIzjgEAwQvMC0CFQCJdQoIYh5mzxnu61W8UrJka6fELwIUPbi6TKN4heo88P88%2F56EZYFbH!w%3D; JSESSIONID=GYj7-Ra0F9DpD2bhs5QIfa_jLjzceQF-Y2kA_SAPnDA9a6vYiPGjQTheUZmG39kw; JSESSIONMARKID=4w1XQQ6FRJoLhhdAdaQlvDp6I2RTmvBzjrPX5jaQA; saplb_*=(J2EE6906720)6906750'
+        },
+        body: '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:sap-com:document:sap:rfc:functions">\r\n   <soapenv:Header/>\r\n   <soapenv:Body>\r\n      <urn:ZBAPI_VEN_DEBIT_SRK>\r\n         <!--You may enter the following 2 items in any order-->\r\n         <VENDOR_ID>' + user + '</VENDOR_ID>\r\n      </urn:ZBAPI_VEN_DEBIT_SRK>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>'
+
+    };
+    request(options, function (error, response) {
+        if (error) throw new Error(error);
+
+        var xml = response.body;
+        parseString(xml, (err, result) => {
+            try {
+                len = result['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_VEN_DEBIT_SRK.Response'][0].DEBIT[0].length
+                if (len == undefined && typeof len !== 'number') {
+                    res_data = result['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_VEN_DEBIT_SRK.Response'][0].DEBIT[0].item
+                    res_status = result['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_VEN_DEBIT_SRK.Response'][0].RETURN[0].TYPE[0]
+
+                    for (i = 0; i < res_data.length; i++) {
+                        Object.keys(res_data[i]).forEach((key) => {
+                            if (res_data[i][key] instanceof Array) {
+                                res_data[i][key] = res_data[i][key][0]
+                            }
+                        })
+                    }
+                    if (res_status === 'S') {
+                        res.status(200).json(res_data)
+                    }
+                }
+                else {
+                    return res.status(501).json({ message: 'Some Error Occured !' });
+                }
+            } catch (error) {
+                return res.status(500).json({ message: 'Length of SAP result cannot be identified' })
+            }
+        })
+    });
+
+})
+
 module.exports = router;
