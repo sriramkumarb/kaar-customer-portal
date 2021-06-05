@@ -13,7 +13,7 @@ export class VenDetailsComponent implements OnInit {
   vendorDetails: any = ''
   disable = true;
   res_status: any = '';
-
+  error_msg: any = '';
 
   constructor(private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -34,6 +34,19 @@ export class VenDetailsComponent implements OnInit {
 
   enableEdit() {
     this.disable = !this.disable
+
+  }
+
+  updateVendorDetails(data: any) {
+    this.vendorservice.updatevendorDetails(data).subscribe((res: any) => {
+      if (res.res_status == 'S') {
+        this.res_status = res.message
+      }
+      else {
+        this.error_msg = res.message
+      }
+
+    })
 
   }
 

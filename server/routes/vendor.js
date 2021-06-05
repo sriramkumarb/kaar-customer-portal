@@ -106,4 +106,45 @@ router.post('/ven/details', function (req, res) {
 
 })
 
+router.post('/ven/edit-details', function (req, res) {
+    const user = req.body.data
+    Object.keys(user).forEach((key) => {
+        if (user[key] instanceof Array) {
+            user[key] = user[key][0]
+        }
+    })
+
+    var options = {
+        'method': 'POST',
+        'url': 'http://dxktpipo.kaarcloud.com:50000/XISOAPAdapter/MessageServlet?senderParty=&senderService=BC_VEN_SRK&receiverParty=&receiverService=&interface=SI_VEN_EDIT_SRK&interfaceNamespace=http://srk-vendor-portal.com',
+        'headers': {
+            'Content-Type': 'text/xml',
+            'SOAPAction': '"http://sap.com/xi/WebService/soap1.1"',
+            'Authorization': 'Basic UE9VU0VSOlRlY2hAMjAyMQ==',
+            'Cookie': 'MYSAPSSO2=AjExMDAgAA1wb3J0YWw6UE9VU0VSiAAHZGVmYXVsdAEABlBPVVNFUgIAAzAwMAMAA0tQTwQADDIwMjEwNjA1MDUyMgUABAAAAAgKAAZQT1VTRVL%2FAQQwggEABgkqhkiG9w0BBwKggfIwge8CAQExCzAJBgUrDgMCGgUAMAsGCSqGSIb3DQEHATGBzzCBzAIBATAiMB0xDDAKBgNVBAMTA0tQTzENMAsGA1UECxMESjJFRQIBADAJBgUrDgMCGgUAoF0wGAYJKoZIhvcNAQkDMQsGCSqGSIb3DQEHATAcBgkqhkiG9w0BCQUxDxcNMjEwNjA1MDUyMjE5WjAjBgkqhkiG9w0BCQQxFgQUQAk!XtNgywCu%2FbOdaYKlzGNSg14wCQYHKoZIzjgEAwQuMCwCFHXDSfatzNtBBYC10m6FmewW1YREAhQiKw9ACFgfjRFSXPJWkYITDflUQw%3D%3D; JSESSIONID=blKpATB9nT0d8-r8lVbKXbyrPJ_aeQF-Y2kA_SAPc7ZoD3F4POQQgb1l8AxnbFP-; JSESSIONMARKID=Tn0LgQdHkZOerNxTSJI_4zclmeLJjGA3dQJX5jaQA; saplb_*=(J2EE6906720)6906750'
+        },
+        body: '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:sap-com:document:sap:rfc:functions">\r\n   <soapenv:Header/>\r\n   <soapenv:Body>\r\n      <urn:ZBAPI_VEN_EDIT_SRK>\r\n         <VENDOR_DETAILS>\r\n            <!--Optional:-->\r\n            <VENDOR>' + user.customer_id + '</VENDOR>\r\n            <!--Optional:-->\r\n            <NAME>' + user.name + '</NAME>\r\n            <!--Optional:-->\r\n            <NAME_2>' + user.name_2 + '</NAME_2>\r\n            <!--Optional:-->\r\n            <CITY>' + user.city + '</CITY>\r\n            <!--Optional:-->\r\n            <DISTRICT>' + user.state + '</DISTRICT>\r\n            <!--Optional:-->\r\n            <POSTL_CODE>' + user.postal_code + '</POSTL_CODE>\r\n            <!--Optional:-->\r\n            <REGION>' + user.one_time_acc + '</REGION>\r\n            <!--Optional:-->\r\n            <STREET>' + user.street + '</STREET>\r\n            <!--Optional:-->\r\n            <COUNTRY>' + user.country + '</COUNTRY>\r\n            <!--Optional:-->\r\n            <LANGU>' + user.search_term + '</LANGU>\r\n         <!--Optional:-->\r\n            <TELEPHONE>' + user.telephone + '</TELEPHONE>\r\n         </VENDOR_DETAILS>\r\n      </urn:ZBAPI_VEN_EDIT_SRK>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>'
+
+    };
+    request(options, function (error, response) {
+        if (error) throw new Error(error);
+        var xml = response.body;
+        parseString(xml, (err, result) => {
+            try {
+                res_status = result['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_VEN_EDIT_SRK.Response'][0].RETURN[0].TYPE[0]
+
+                if (res_status == 'S') {
+                    res.status(200).json({ res_status, message: 'Details Updated Successfully!' })
+                }
+                else {
+                    return res.status(501).json({ res_status, message: 'Some Error Occured !' });
+                }
+            } catch (error) {
+                return res.status(500).json({ message: 'SAP server error!' })
+            }
+        })
+    });
+
+})
+
 module.exports = router;

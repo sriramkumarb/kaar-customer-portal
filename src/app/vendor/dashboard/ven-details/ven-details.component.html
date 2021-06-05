@@ -41,13 +41,13 @@
                         [(ngModel)]='vendorDetails.VENDOR' [disabled]='disable'>
                 </div>
             </div>
-            <div class="row mb-3 d-flex justify-content-center">
+            <!-- <div class="row mb-3 d-flex justify-content-center">
                 <label for="search_term" class="col-sm-2 col-form-label">Language : </label>
                 <div class="col-sm-10 col-md-4">
                     <input type="text" ngDefaultControl class="form-control" name="search_term"
                         [(ngModel)]='vendorDetails.LANGU' [disabled]='disable'>
                 </div>
-            </div>
+            </div> -->
             <div class="row mb-3 d-flex justify-content-center">
                 <label for="one_time_acc" class="col-sm-2 col-form-label">Region : </label>
                 <div class="col-sm-10 col-md-4">
@@ -111,11 +111,12 @@
                         [(ngModel)]='vendorDetails.POSTL_CODE' [disabled]='disable'>
                 </div>
             </div>
-            <!-- <div class="d-flex justify-content-center m-4">
-                <button type="submit" class="btn btn-outline-success" (click)="updateCustomerDetails(userdetails.value)"
+            <div class="d-flex justify-content-center m-4">
+                <button type="submit" class="btn btn-outline-success" (click)="updateVendorDetails(userdetails.value)"
                     [disabled]='disable'>Update</button>
-                <p class="ms-5 text-center">{{ res_status }}</p>
-            </div> -->
+                <p class="ms-5 text-center" style="color: green; font-size: larger;">{{ res_status }}</p>
+                <p class="ms-5 text-center" style="color: red; font-size: larger;">{{ error_msg }}</p>
+            </div>
         </form>
     </div>
 </div>
