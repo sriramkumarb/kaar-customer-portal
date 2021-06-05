@@ -5,6 +5,9 @@
     <mat-icon (click)="vendorDetails()" class="toolbar-icon" matBadge="8" matBadgePosition="after"
         matBadgeColor="accent">account_circle
     </mat-icon>
+    <mat-icon data-bs-toggle="tooltip" data-bs-placement="bottom" title="logout" class="toolbar-icon d-inline-block"
+        matBadge="8" matBadgePosition="after" matBadgeColor="accent" (click)="logout()">logout
+    </mat-icon>
 </mat-toolbar>
 
 <mat-sidenav-container id="sidenavContainer" fullscreen>

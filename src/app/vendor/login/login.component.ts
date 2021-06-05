@@ -24,6 +24,15 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  ngAfterViewInit(): void {
+    // redirect to home if already logged in
+    if (this.vendorservice.currentUserValue) {
+      console.log(this.vendorservice.currentUserValue);
+
+      this.router.navigate(['/ven-portal/dashboard']);
+    }
+  }
+
   isValid(controlName: any) {
     return this.loginForm.get(controlName)?.invalid && this.loginForm.get(controlName)?.touched;
   }
@@ -35,6 +44,7 @@ export class LoginComponent implements OnInit {
       this.vendorservice.login(this.loginForm.value).subscribe(data => {
         localStorage.setItem('vendor', JSON.stringify(data));
         this.router.navigate(['/ven-portal/dashboard'], { relativeTo: this.activatedRoute });
+        location.reload()
       },
         error => {
           this.errorMessage = "Username and Password is Incorrect!"
@@ -42,4 +52,8 @@ export class LoginComponent implements OnInit {
     }
 
   }
+}
+
+function ngAfterViewInit() {
+  throw new Error('Function not implemented.');
 }

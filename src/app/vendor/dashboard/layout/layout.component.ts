@@ -32,4 +32,10 @@ export class LayoutComponent implements OnInit {
     this.router.navigate(['./vendor-details'], { relativeTo: this.activatedRoute })
   }
 
+  logout() {
+    this.vendorservice.logout()
+    this.router.navigate(['/ven-portal/login'])
+    location.reload()
+  }
+
 }
