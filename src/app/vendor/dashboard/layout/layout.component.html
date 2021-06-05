@@ -2,8 +2,8 @@
     <mat-icon (click)="onToolbarMenuToggle()" id="toolbarMenu">subject</mat-icon>
     Vendor-Portal
     <span class="toolbar-spacer"></span>
-    <mat-icon (click)="vendorDetails()" class="toolbar-icon" matBadge="8" matBadgePosition="after"
-        matBadgeColor="accent">account_circle
+    <mat-icon data-bs-toggle="tooltip" data-bs-placement="bottom" title="Profile" (click)="vendorDetails()"
+        class="toolbar-icon" matBadge="8" matBadgePosition="after" matBadgeColor="accent">account_circle
     </mat-icon>
     <mat-icon data-bs-toggle="tooltip" data-bs-placement="bottom" title="logout" class="toolbar-icon d-inline-block"
         matBadge="8" matBadgePosition="after" matBadgeColor="accent" (click)="logout()">logout
@@ -16,35 +16,35 @@
 
         <mat-list id="menus">
             <mat-card>
-                <mat-card-header>
+                <mat-card-header [routerLink]="['../dashboard']">
                     <div mat-card-avatar class="avatar"></div>
 
                     <mat-card-title>Sriramkumar B</mat-card-title>
                     <mat-card-subtitle>Intern</mat-card-subtitle>
                 </mat-card-header>
             </mat-card>
-            <mat-list-item [routerLink]="['home']">
+            <mat-list-item [routerLink]="['./']">
                 <button class="menu-item" mat-flat-button>
                     <mat-icon>dashboard</mat-icon>
                     Dashboard
                 </button>
             </mat-list-item>
 
-            <mat-list-item [routerLink]="['inquiry-data']">
+            <mat-list-item [routerLink]="['quotation']">
                 <button class="menu-item" mat-flat-button>
-                    <mat-icon>article</mat-icon>
+                    <mat-icon>request_quote</mat-icon>
                     Request for Quotation
                 </button>
             </mat-list-item>
 
-            <mat-list-item [routerLink]="['sale-order']">
+            <mat-list-item [routerLink]="['purchase-order']">
                 <button class="menu-item" mat-flat-button>
-                    <mat-icon>receipt</mat-icon>
+                    <mat-icon>inventory</mat-icon>
                     Purchase Order
                 </button>
             </mat-list-item>
 
-            <mat-list-item [routerLink]="['delivery-list']">
+            <mat-list-item [routerLink]="['goods-receipt']">
                 <button class="menu-item" mat-flat-button>
                     <mat-icon>local_shipping</mat-icon>
                     Goods Receipt
@@ -76,13 +76,6 @@
                 <button class="menu-item" mat-flat-button>
                     <mat-icon>credit_card</mat-icon>
                     Credit Memo
-                </button>
-            </mat-list-item>
-
-            <mat-list-item [routerLink]="['overall-sale']">
-                <button class="menu-item" mat-flat-button>
-                    <mat-icon>topic</mat-icon>
-                    Overall Sale Data
                 </button>
             </mat-list-item>
 

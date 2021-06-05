@@ -30,9 +30,6 @@ export class PaymentComponent implements OnInit {
 
       })
 
-      console.log(res);
-
-
       this.payment_data = res;
 
       this.source = new LocalDataSource(this.payment_data);

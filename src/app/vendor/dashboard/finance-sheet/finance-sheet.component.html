@@ -1,0 +1,58 @@
+<section id="get-started" class="padd-section text-center">
+
+    <div class="container" data-aos="fade-up">
+        <div class="section-title text-center">
+
+            <h2>Vendor Financial Sheet</h2>
+            <p class="separator">Vendor Financial Sheet and it's Features!</p>
+
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-6 col-lg-4 mb-3" data-aos="zoom-in" data-aos-delay="100">
+                <div class="feature-block">
+
+                    <mat-icon>description</mat-icon>
+                    <h4>Invoice Details</h4>
+                    <p>This Section displays all the billing and receipts between the Vendor and the Company!</p>
+                    <a [routerLink]="['../invoice']">
+                        <mat-icon style="border: 1px solid black; width: 2ch; border-radius: 100px;">east</mat-icon>
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4 mb-3" data-aos="zoom-in" data-aos-delay="200">
+                <div class="feature-block">
+
+                    <mat-icon>payments</mat-icon>
+                    <h4>Payment and Aging</h4>
+                    <p>This Section displays the balances, sorted by date interval between the Vendor and the Company!
+                    </p>
+                    <a [routerLink]="['../payment']">
+                        <mat-icon style="border: 1px solid black; width: 2ch; border-radius: 100px;">east</mat-icon>
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4 mb-3" data-aos="zoom-in" data-aos-delay="300">
+                <div class="feature-block">
+
+                    <mat-icon>credit_card</mat-icon>
+                    <h4>Credit/Debit memo</h4>
+                    <p>This Section Contains all the history of payments between the Vendor and the Company!</p>
+                    <a [routerLink]="['../credit']">
+                        <mat-icon style="border: 1px solid black; width: 2ch; border-radius: 100px;">east</mat-icon>
+                    </a>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</section>

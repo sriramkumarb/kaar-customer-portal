@@ -19,6 +19,12 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatSelectModule } from '@angular/material/select';
+import { InvoiceComponent } from './invoice/invoice.component';
+import { CreditComponent } from './credit/credit.component';
+import { FinanceSheetComponent } from './finance-sheet/finance-sheet.component';
+import { QuotationComponent } from './quotation/quotation.component';
+import { PurchaseOrderComponent } from './purchase-order/purchase-order.component';
+import { GoodsReceiptComponent } from './goods-receipt/goods-receipt.component';
 
 
 @NgModule({
@@ -26,7 +32,13 @@ import { MatSelectModule } from '@angular/material/select';
     LayoutComponent,
     HomeComponent,
     VenDetailsComponent,
-    PaymentComponent
+    PaymentComponent,
+    InvoiceComponent,
+    CreditComponent,
+    FinanceSheetComponent,
+    QuotationComponent,
+    PurchaseOrderComponent,
+    GoodsReceiptComponent
   ],
   imports: [
     CommonModule,

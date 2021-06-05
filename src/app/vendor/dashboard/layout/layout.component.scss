@@ -4,6 +4,10 @@ body {
     margin: 0;
 }
 
+mat-card-header{
+    cursor: pointer;
+}
+
 #toolbarMenu {
     cursor: pointer;
     margin-right: 20px;

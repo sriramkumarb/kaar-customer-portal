@@ -1,1 +1,58 @@
-<p>home works!</p>
+<section id="get-started" class="padd-section text-center">
+
+    <div class="container" data-aos="fade-up">
+        <div class="section-title text-center">
+
+            <h2>Vendor Dashboard</h2>
+            <p class="separator">Vendor Dashboard and it's Features!</p>
+
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="100">
+                <div class="feature-block">
+
+                    <mat-icon>request_quote</mat-icon>
+                    <h4>Request for Quotation</h4>
+                    <p>This Section Contains all the Quotation details between the Vendor and the Company!</p>
+                    <a [routerLink]="['quotation']">
+                        <mat-icon style="border: 1px solid black; width: 2ch; border-radius: 100px;">east</mat-icon>
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="200">
+                <div class="feature-block">
+
+                    <mat-icon>inventory</mat-icon>
+                    <h4>Purchase Order</h4>
+                    <p>This Section Contains all the Purchase order records between the Vendor and the Company!</p>
+                    <a [routerLink]="['purchase-order']">
+                        <mat-icon style="border: 1px solid black; width: 2ch; border-radius: 100px;">east</mat-icon>
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="300">
+                <div class="feature-block">
+
+                    <mat-icon>local_shipping</mat-icon>
+                    <h4>Goods Receipt</h4>
+                    <p>This Section refers to the physical movement of goods into the warehouse from external vendors!
+                    </p>
+                    <a [routerLink]="['goods-receipt']">
+                        <mat-icon style="border: 1px solid black; width: 2ch; border-radius: 100px;">east</mat-icon>
+                    </a>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</section>
