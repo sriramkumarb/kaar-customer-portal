@@ -23,4 +23,8 @@ export class VendorService {
     return this.http.post(this.API_URL + '/ven/edit-details', { data })
   }
 
+  getpaymentandaging(data: any) {
+    return this.http.post(this.API_URL + '/ven/payment', { data })
+  }
+
 }
