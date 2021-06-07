@@ -557,7 +557,7 @@ router.post('/getpa', function (req, res, next) {
             'Authorization': 'Basic UE9VU0VSOlRlY2hAMjAyMQ==',
             'Cookie': 'MYSAPSSO2=AjExMDAgAA1wb3J0YWw6UE9VU0VSiAAHZGVmYXVsdAEABlBPVVNFUgIAAzAwMAMAA0tQTwQADDIwMjEwNTI0MTY1NgUABAAAAAgKAAZQT1VTRVL%2FAQQwggEABgkqhkiG9w0BBwKggfIwge8CAQExCzAJBgUrDgMCGgUAMAsGCSqGSIb3DQEHATGBzzCBzAIBATAiMB0xDDAKBgNVBAMTA0tQTzENMAsGA1UECxMESjJFRQIBADAJBgUrDgMCGgUAoF0wGAYJKoZIhvcNAQkDMQsGCSqGSIb3DQEHATAcBgkqhkiG9w0BCQUxDxcNMjEwNTI0MTY1NjAzWjAjBgkqhkiG9w0BCQQxFgQUUnFm78HTFr00q!QNCAFw%2FANmsxowCQYHKoZIzjgEAwQuMCwCFG99uuYNiWAChowHPu%2FQ55ZpjhPwAhQLTE5xN1fKMwxDnwc!Cm!yIzIafA%3D%3D; JSESSIONID=fQj52T3oRLOEOgu306QSwTHODE6feQF-Y2kA_SAPMhVgbzPgz0btcu4jNzNzSn8r; JSESSIONMARKID=XJIh-QsNVlpaqZ-KdKY6YRQQ39kfR0f5gynH5jaQA; saplb_*=(J2EE6906720)6906750'
         },
-        body: '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:sap-com:document:sap:rfc:functions">\r\n   <soapenv:Header/>\r\n   <soapenv:Body>\r\n      <urn:ZBAPI_CUS_PA_SRK>\r\n         <CUSTOMER_ID>AABBAAA</CUSTOMER_ID>\r\n      </urn:ZBAPI_CUS_PA_SRK>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>'
+        body: '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:sap-com:document:sap:rfc:functions">\r\n   <soapenv:Header/>\r\n   <soapenv:Body>\r\n      <urn:ZBAPI_CUS_PA_SRK>\r\n         <CUSTOMER_ID>' + user + '</CUSTOMER_ID>\r\n      </urn:ZBAPI_CUS_PA_SRK>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>'
 
     };
     request(options, function (error, response) {
