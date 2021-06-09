@@ -31,6 +31,11 @@ export class DeliveryListComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onUserSelected(event: any) {
+    this.router.navigate(['./detail', event.data.VBELN], { relativeTo: this.activatedRoute })
+
+  }
+
   settings = {
     columns: {
       KUNNR: {
@@ -45,30 +50,6 @@ export class DeliveryListComponent implements OnInit {
         title: 'Sales Document Number',
         filter: false,
       },
-      AUDAT: {
-        title: 'Document Date',
-        filter: false
-      },
-      WAERK: {
-        title: 'SD Document Currency',
-        filter: false
-      },
-      VKORG: {
-        title: 'Sales Organization',
-        filter: false
-      },
-      VTWEG: {
-        title: 'Distribution Channel',
-        filter: false
-      },
-      SPART: {
-        title: 'Division',
-        filter: false
-      },
-      BSTNK: {
-        title: 'Purchase order number',
-        filter: false
-      }
     },
     attr: {
       class: 'table table-bordered'
@@ -94,29 +75,6 @@ export class DeliveryListComponent implements OnInit {
       },
       {
         field: 'VBELN',
-        search: query,
-      },
-      {
-        field: 'AUDAT',
-        search: query,
-      },
-      {
-        field: 'WAERK',
-        search: query,
-      },
-      {
-        field: 'VKORG',
-        search: query,
-      }, {
-        field: 'VTWEG',
-        search: query,
-      },
-      {
-        field: 'SPART',
-        search: query,
-      },
-      {
-        field: 'BSTNK',
         search: query,
       },
     ], false);

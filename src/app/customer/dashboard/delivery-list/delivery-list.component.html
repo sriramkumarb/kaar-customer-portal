@@ -26,7 +26,7 @@
     </div>
 
     <div class="card-body">
-        <ng2-smart-table [settings]="settings" [source]="source">
+        <ng2-smart-table [settings]="settings" [source]="source" (userRowSelect)="onUserSelected($event)">
         </ng2-smart-table>
     </div>
 </div>

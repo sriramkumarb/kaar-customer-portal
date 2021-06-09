@@ -57,34 +57,40 @@ router.post('/login', function (req, res, next) {
     };
 
     request(options, function (error, response) {
-        if (error) throw new Error(error);
-        // console.log(response.body);
-        var xml = response.body;
-        parseString(xml, (err, result) => {
+        if (error) {
+            console.log(error);
+            return res.status(500).json({ message: 'Server connect ETIMEDOUT 172.17.12.151:50000' })
 
-            try {
+        }
+        else {
+            var xml = response.body;
+            parseString(xml, (err, result) => {
 
-                result = result['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_LOGIN_SRK.Response'][0]['RESULT'][0];
-                if (result == 'SUCCESS') {
-                    // generate token
-                    let token = jwt.sign({ username: user }, 'secret', { expiresIn: '3h' });
+                try {
 
-                    let user_token = {
-                        username: user,
-                        token: token
+                    result = result['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_LOGIN_SRK.Response'][0]['RESULT'][0];
+                    if (result == 'SUCCESS') {
+                        // generate token
+                        let token = jwt.sign({ username: user }, 'secret', { expiresIn: '3h' });
+
+                        let user_token = {
+                            username: user,
+                            token: token
+                        }
+
+                        return res.status(200).json(user_token);
                     }
+                    else {
+                        return res.status(501).json({ message: ' Invalid Credentials' });
+                    }
+                } catch (error) {
+                    return res.status(500).json({ message: 'SAP Server Error!' })
 
-                    return res.status(200).json(user_token);
                 }
-                else {
-                    return res.status(501).json({ message: ' Invalid Credentials' });
-                }
-            } catch (error) {
-                return res.status(500).json({ message: 'SAP Server Error!' })
 
-            }
-
-        })
+            })
+        }
+        // console.log(response.body);
     });
 })
 
@@ -105,28 +111,34 @@ router.post('/userDetails', function (req, res, next) {
 
     };
     request(options, function (error, response) {
-        if (error) throw new Error(error);
-        // console.log(response.body);
-        var xml = response.body;
-        parseString(xml, (err, result) => {
+        if (error) {
+            console.log(error);
+            return res.status(500).json({ message: 'Server connect ETIMEDOUT 172.17.12.151:50000' })
 
-            try {
+        }
+        else {
+            var xml = response.body;
+            parseString(xml, (err, result) => {
 
-                data = result['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_DETAILS_SRK.Response'][0].CUSTOMER_DETAILS[0];
-                resultStatus = result['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_DETAILS_SRK.Response'][0].RETURN[0].TYPE[0]
-                // console.log(JSON.stringify(data))
-                if (resultStatus === 'S') {
-                    res.status(200).json(data)
-                } else {
-                    return res.status(501).json({ message: 'Some Error Occured !' });
+                try {
+
+                    data = result['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_DETAILS_SRK.Response'][0].CUSTOMER_DETAILS[0];
+                    resultStatus = result['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_DETAILS_SRK.Response'][0].RETURN[0].TYPE[0]
+                    // console.log(JSON.stringify(data))
+                    if (resultStatus === 'S') {
+                        res.status(200).json(data)
+                    } else {
+                        return res.status(501).json({ message: 'Some Error Occured !' });
+                    }
+                } catch (error) {
+                    return res.status(500).json({ message: 'SAP Server Error!' })
+
                 }
-            } catch (error) {
-                return res.status(500).json({ message: 'SAP Server Error!' })
-
-            }
 
 
-        })
+            })
+        }
+        // console.log(response.body);
     });
 })
 
@@ -150,30 +162,33 @@ router.post('/editUserDetails', function (req, res, next) {
 
     };
     request(options, function (error, response) {
-        if (error) throw new Error(error);
+        if (error) {
+            console.log(error);
+            return res.status(500).json({ message: 'Server connect ETIMEDOUT 172.17.12.151:50000' })
+        }
+        else {
+            var xml = response.body;
+            parseString(xml, (err, resp) => {
 
-        var xml = response.body;
-        parseString(xml, (err, resp) => {
+                try {
 
-            try {
+                    res_data = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_EDIT_SRK.Response'][0].RESULT[0]
+                    res_status = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_EDIT_SRK.Response'][0].RETURN[0].TYPE[0]
 
-                res_data = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_EDIT_SRK.Response'][0].RESULT[0]
-                res_status = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_EDIT_SRK.Response'][0].RETURN[0].TYPE[0]
+                    if (res_data === 'SUCCESS' && res_status === 'S') {
+                        res.status(200).json({ res_data, message: 'Details Updated Successfully!' })
+                    }
+                    else {
+                        return res.status(501).json({ message: 'Some Error Occured !' });
+                    }
+                } catch (error) {
+                    return res.status(500).json({ message: 'SAP server error!' })
 
-                if (res_data === 'SUCCESS' && res_status === 'S') {
-                    res.status(200).json({ res_data, message: 'Details Updated Successfully!' })
                 }
-                else {
-                    return res.status(501).json({ message: 'Some Error Occured !' });
-                }
-            } catch (error) {
-                return res.status(500).json({ message: 'SAP server error!' })
-
-            }
 
 
-        })
-
+            })
+        }
     });
 
 })
@@ -194,43 +209,47 @@ router.post('/getinqlist', function (req, res, next) {
 
     };
     request(options, function (error, response) {
-        if (error) throw new Error(error);
+        if (error) {
+            console.log(error);
+            return res.status(500).json({ message: 'Server connect ETIMEDOUT 172.17.12.151:50000' })
+        }
+        else {
+            var xml = response.body;
+            parseString(xml, (err, resp) => {
+
+                try {
+
+                    len = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_INQLIST_SRK.Response'][0].IT_VBAK[0].length
+                    if (len == undefined && typeof len !== 'number') {
+
+                        res_data = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_INQLIST_SRK.Response'][0].IT_VBAK[0].item
+                        resultStatus = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_INQLIST_SRK.Response'][0].RETURN[0].TYPE[0]
+
+                        for (i = 0; i < res_data.length; i++) {
+                            Object.keys(res_data[i]).forEach((key) => {
+                                if (res_data[i][key] instanceof Array) {
+                                    res_data[i][key] = res_data[i][key][0]
+                                }
+                            })
+                        }
+
+
+                        if (resultStatus === 'S') {
+                            res.status(200).json(res_data)
+                        }
+                    }
+                    else {
+                        return res.status(501).json({ message: 'Some Error Occured !' });
+                    }
+                } catch (error) {
+                    return res.status(500).json({ message: 'Length of SAP result cannot be identified' })
+
+                }
+
+
+            })
+        }
         // console.log(response.body);
-
-        var xml = response.body;
-        parseString(xml, (err, resp) => {
-
-            try {
-
-                len = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_INQLIST_SRK.Response'][0].IT_VBAK[0].length
-                if (len == undefined && typeof len !== 'number') {
-
-                    res_data = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_INQLIST_SRK.Response'][0].IT_VBAK[0].item
-                    resultStatus = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_INQLIST_SRK.Response'][0].RETURN[0].TYPE[0]
-
-                    for (i = 0; i < res_data.length; i++) {
-                        Object.keys(res_data[i]).forEach((key) => {
-                            if (res_data[i][key] instanceof Array) {
-                                res_data[i][key] = res_data[i][key][0]
-                            }
-                        })
-                    }
-
-
-                    if (resultStatus === 'S') {
-                        res.status(200).json(res_data)
-                    }
-                }
-                else {
-                    return res.status(501).json({ message: 'Some Error Occured !' });
-                }
-            } catch (error) {
-                return res.status(500).json({ message: 'Length of SAP result cannot be identified' })
-
-            }
-
-
-        })
     });
 
 })
@@ -251,31 +270,48 @@ router.post('/getinqdetails', function (req, res, next) {
     };
 
     request(options, function (error, response) {
-        if (error) throw new Error(error);
+        if (error) {
+            console.log(error);
+            return res.status(500).json({ message: 'Server connect ETIMEDOUT 172.17.12.151:50000' })
+
+        }
+        else {
+            var xml = response.body;
+            parseString(xml, (err, resp) => {
+                try {
+
+                    len = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_INQDET_SRK.Response'][0].ITEMS[0].length
+                    if (len == undefined && typeof len !== 'number') {
+
+                        header = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_INQDET_SRK.Response'][0].HEADER[0]
+                        item = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_INQDET_SRK.Response'][0].ITEMS[0].item[0]
+
+                        Object.keys(item).forEach((key) => {
+                            if (item[key] instanceof Array) {
+                                item[key] = item[key][0]
+                            }
+                        })
+
+                        Object.keys(header).forEach((key) => {
+                            if (header[key] instanceof Array) {
+                                header[key] = header[key][0]
+                            }
+                        })
+
+                        res.status(200).send({ item, header })
+                    }
+                    else {
+                        return res.status(501).json({ message: 'Some Error Occured !' });
+                    }
+                } catch (error) {
+                    return res.status(500).json({ message: 'Length of SAP result cannot be identified' });
+
+                }
+
+            })
+        }
         // console.log(response.body);
 
-        var xml = response.body;
-        parseString(xml, (err, resp) => {
-            try {
-                len = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_INQDET_SRK.Response'][0].ITEMS[0].length
-                if (len == undefined && typeof len !== 'number') {
-                    item = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_INQDET_SRK.Response'][0].ITEMS[0].item[0]
-                    Object.keys(item).forEach((key) => {
-                        if (item[key] instanceof Array) {
-                            item[key] = item[key][0]
-                        }
-                    })
-                    res.status(200).send(item)
-                }
-                else {
-                    return res.status(501).json({ message: 'Some Error Occured !' });
-                }
-            } catch (error) {
-                return res.status(500).json({ message: 'Length of SAP result cannot be identified' });
-
-            }
-
-        })
     });
 
 })
@@ -296,41 +332,46 @@ router.post('/getsolist', function (req, res, next) {
 
     };
     request(options, function (error, response) {
-        if (error) throw new Error(error);
+        if (error) {
+            console.log(error);
+            return res.status(500).json({ message: 'Server connect ETIMEDOUT 172.17.12.151:50000' })
+
+        }
+        else {
+            var xml = response.body;
+            parseString(xml, (err, resp) => {
+
+                try {
+
+                    len = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_SOLIST_SRK.Response'][0].IT_VBAK[0].length
+                    if (len == undefined && typeof len !== 'number') {
+
+                        res_data = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_SOLIST_SRK.Response'][0].IT_VBAK[0].item
+                        resultStatus = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_SOLIST_SRK.Response'][0].RETURN[0].TYPE[0]
+
+                        for (i = 0; i < res_data.length; i++) {
+                            Object.keys(res_data[i]).forEach((key) => {
+                                if (res_data[i][key] instanceof Array) {
+                                    res_data[i][key] = res_data[i][key][0]
+                                }
+                            })
+                        }
+
+
+                        if (resultStatus === 'S') {
+                            res.status(200).json(res_data)
+                        }
+                    }
+                    else {
+                        return res.status(501).json({ message: 'Some Error Occured !' });
+                    }
+                } catch (error) {
+                    return res.status(500).json({ message: 'Length of SAP result cannot be identified' });
+                }
+
+            })
+        }
         // console.log(response.body);
-
-        var xml = response.body;
-        parseString(xml, (err, resp) => {
-
-            try {
-
-                len = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_SOLIST_SRK.Response'][0].IT_VBAK[0].length
-                if (len == undefined && typeof len !== 'number') {
-
-                    res_data = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_SOLIST_SRK.Response'][0].IT_VBAK[0].item
-                    resultStatus = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_SOLIST_SRK.Response'][0].RETURN[0].TYPE[0]
-
-                    for (i = 0; i < res_data.length; i++) {
-                        Object.keys(res_data[i]).forEach((key) => {
-                            if (res_data[i][key] instanceof Array) {
-                                res_data[i][key] = res_data[i][key][0]
-                            }
-                        })
-                    }
-
-
-                    if (resultStatus === 'S') {
-                        res.status(200).json(res_data)
-                    }
-                }
-                else {
-                    return res.status(501).json({ message: 'Some Error Occured !' });
-                }
-            } catch (error) {
-                return res.status(500).json({ message: 'Length of SAP result cannot be identified' });
-            }
-
-        })
 
     });
 
@@ -338,7 +379,7 @@ router.post('/getsolist', function (req, res, next) {
 
 router.post('/getsodetails', function (req, res, next) {
     let sd_no = req.body.data;
-
+    // console.log(sd_no);
     var options = {
         'method': 'POST',
         'url': 'http://dxktpipo.kaarcloud.com:50000/XISOAPAdapter/MessageServlet?senderParty=&senderService=BC_CUS_SODET_SRK&receiverParty=&receiverService=&interface=SI_CUS_SODET_SRK&interfaceNamespace=http://srk-portal.com',
@@ -352,34 +393,46 @@ router.post('/getsodetails', function (req, res, next) {
 
     };
     request(options, function (error, response) {
-        if (error) throw new Error(error);
+        if (error) {
+            console.log(error);
+            return res.status(500).json({ message: 'Server connect ETIMEDOUT 172.17.12.151:50000' })
+
+        }
+        else {
+            var xml = response.body;
+            parseString(xml, (err, resp) => {
+
+                try {
+
+                    len = (resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_SODET_SRK.Response'][0].ITEMS[0]).length
+                    if (len == undefined && typeof len !== 'number') {
+                        header = item = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_SODET_SRK.Response'][0].HEADER[0]
+                        item = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_SODET_SRK.Response'][0].ITEMS[0].item[0]
+                        Object.keys(item).forEach((key) => {
+                            if (item[key] instanceof Array) {
+                                item[key] = item[key][0]
+                            }
+                        })
+                        Object.keys(header).forEach((key) => {
+                            if (header[key] instanceof Array) {
+                                header[key] = header[key][0]
+                            }
+                        })
+                        res.status(200).send({ item, header })
+                    }
+                    else {
+                        return res.status(501).json({ message: 'Some Error Occured !' });
+
+                    }
+                } catch (error) {
+                    return res.status(500).json({ message: 'Length of SAP result cannot be identified' })
+                }
+
+
+            })
+        }
         // console.log(response.body);
 
-        var xml = response.body;
-        parseString(xml, (err, resp) => {
-
-            try {
-
-                len = (resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_SODET_SRK.Response'][0].ITEMS[0]).length
-                if (len == undefined && typeof len !== 'number') {
-                    item = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_SODET_SRK.Response'][0].ITEMS[0].item[0]
-                    Object.keys(item).forEach((key) => {
-                        if (item[key] instanceof Array) {
-                            item[key] = item[key][0]
-                        }
-                    })
-                    res.status(200).send(item)
-                }
-                else {
-                    return res.status(501).json({ message: 'Some Error Occured !' });
-
-                }
-            } catch (error) {
-                return res.status(500).json({ message: 'Length of SAP result cannot be identified' })
-            }
-
-
-        })
 
     });
 
@@ -401,43 +454,103 @@ router.post('/getdellist', function (req, res, next) {
 
     };
     request(options, function (error, response) {
-        if (error) throw new Error(error);
+        if (error) {
+            console.log(error);
+            return res.status(500).json({ message: 'Server connect ETIMEDOUT 172.17.12.151:50000' })
+
+        }
+        else {
+            var xml = response.body;
+            parseString(xml, (err, resp) => {
+
+                try {
+
+                    len = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_DELLIST_SRK.Response'][0].IT_VBAK[0].length
+                    if (len == undefined && typeof len !== 'number') {
+                        res_data = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_DELLIST_SRK.Response'][0].IT_VBAK[0].item
+                        resultStatus = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_DELLIST_SRK.Response'][0].RETURN[0].TYPE[0]
+
+                        for (i = 0; i < res_data.length; i++) {
+                            Object.keys(res_data[i]).forEach((key) => {
+                                if (res_data[i][key] instanceof Array) {
+                                    res_data[i][key] = res_data[i][key][0]
+                                }
+                            })
+                        }
+
+
+                        if (resultStatus === 'S') {
+                            res.status(200).json(res_data)
+                        }
+                    }
+                    else {
+                        return res.status(501).json({ message: 'Some Error Occured !' });
+
+                    }
+                } catch (error) {
+                    return res.status(500).json({ message: 'Length of SAP result cannot be identified' })
+
+                }
+
+
+            })
+        }
         // console.log(response.body);
 
-        var xml = response.body;
-        parseString(xml, (err, resp) => {
+    });
 
-            try {
+})
 
-                len = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_DELLIST_SRK.Response'][0].IT_VBAK[0].length
-                if (len == undefined && typeof len !== 'number') {
-                    res_data = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_DELLIST_SRK.Response'][0].IT_VBAK[0].item
-                    resultStatus = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_DELLIST_SRK.Response'][0].RETURN[0].TYPE[0]
+router.post('/getdeldetails', function (req, res) {
+    let sd_no = req.body.data
 
-                    for (i = 0; i < res_data.length; i++) {
-                        Object.keys(res_data[i]).forEach((key) => {
-                            if (res_data[i][key] instanceof Array) {
-                                res_data[i][key] = res_data[i][key][0]
+    var options = {
+        'method': 'POST',
+        'url': 'http://dxktpipo.kaarcloud.com:50000/XISOAPAdapter/MessageServlet?senderParty=&senderService=BC_CUS_DELLIST_SRK&receiverParty=&receiverService=&interface=SI_CUS_DELDET_SRK&interfaceNamespace=http://srk-portal.com',
+        'headers': {
+            'SOAPAction': '"http://sap.com/xi/WebService/soap1.1"',
+            'Authorization': 'Basic UE9VU0VSOlRlY2hAMjAyMQ==',
+            'Content-Type': 'application/xml',
+            'Cookie': 'MYSAPSSO2=AjExMDAgAA1wb3J0YWw6UE9VU0VSiAAHZGVmYXVsdAEABlBPVVNFUgIAAzAwMAMAA0tQTwQADDIwMjEwNjA5MTc1OQUABAAAAAgKAAZQT1VTRVL%2FAQUwggEBBgkqhkiG9w0BBwKggfMwgfACAQExCzAJBgUrDgMCGgUAMAsGCSqGSIb3DQEHATGB0DCBzQIBATAiMB0xDDAKBgNVBAMTA0tQTzENMAsGA1UECxMESjJFRQIBADAJBgUrDgMCGgUAoF0wGAYJKoZIhvcNAQkDMQsGCSqGSIb3DQEHATAcBgkqhkiG9w0BCQUxDxcNMjEwNjA5MTc1OTAwWjAjBgkqhkiG9w0BCQQxFgQUm3kQrA!!%2FTDdXj8GoBh04bo304YwCQYHKoZIzjgEAwQvMC0CFQDG%2FYugKSN7UumcZaqGyx9eD4QNIgIUIHqaMffFrzucLmk1qwe6Yiiy60k%3D; JSESSIONID=2uAD7hQRqgYDVgYt2WVEj2iCce3xeQF-Y2kA_SAP8DJU2BUz4rFcyZAxouRypiGg; JSESSIONMARKID=9UUcrgmC7xCGh6Kd97FsNCfq55NaqtwTT-iH5jaQA; saplb_*=(J2EE6906720)6906750'
+        },
+        body: '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:sap-com:document:sap:rfc:functions">\r\n   <soapenv:Header/>\r\n   <soapenv:Body>\r\n      <urn:ZBAPI_CUS_DELDET_SRK>\r\n         <!--You may enter the following 3 items in any order-->\r\n         <SALES_DOC_NO>' + sd_no + '</SALES_DOC_NO>\r\n\r\n      </urn:ZBAPI_CUS_DELDET_SRK>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>'
+
+    };
+    request(options, function (error, response) {
+        if (error) {
+            console.log(error)
+            return res.status(500).json({ message: 'Server connect ETIMEDOUT 172.17.12.151:50000' })
+        }
+        else {
+            var xml = response.body;
+            parseString(xml, (err, result) => {
+                try {
+                    len = (result['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_DELDET_SRK.Response'][0].ITEMS[0]).length
+                    if (len == undefined && typeof len !== 'number') {
+                        header = result['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_DELDET_SRK.Response'][0].HEADER[0].item[0]
+                        item = result['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_DELDET_SRK.Response'][0].ITEMS[0].item[0]
+                        Object.keys(item).forEach((key) => {
+                            if (item[key] instanceof Array) {
+                                item[key] = item[key][0]
                             }
                         })
+                        Object.keys(header).forEach((key) => {
+                            if (header[key] instanceof Array) {
+                                header[key] = header[key][0]
+                            }
+                        })
+                        res.status(200).send({ item, header })
                     }
+                    else {
+                        return res.status(501).json({ message: 'Some Error Occured !' });
 
-
-                    if (resultStatus === 'S') {
-                        res.status(200).json(res_data)
                     }
+                } catch (error) {
+                    return res.status(500).json({ message: 'Length of SAP result cannot be identified' })
                 }
-                else {
-                    return res.status(501).json({ message: 'Some Error Occured !' });
-
-                }
-            } catch (error) {
-                return res.status(500).json({ message: 'Length of SAP result cannot be identified' })
-
-            }
-
-
-        })
+            })
+        }
+        // console.log(response.body);
     });
 
 })
@@ -458,37 +571,43 @@ router.post('/getcredit', function (req, res, next) {
 
     };
     request(options, function (error, response) {
-        if (error) throw new Error(error);
+        if (error) {
+            console.log(error);
+            return res.status(500).json({ message: 'Server connect ETIMEDOUT 172.17.12.151:50000' })
+
+        }
+        else {
+            var xml = response.body;
+            parseString(xml, (err, resp) => {
+
+                try {
+
+                    len = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_CREDIT_SRK.Response'][0].MEMO[0].length;
+                    if (len == undefined && typeof len !== 'number') {
+                        res_data = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_CREDIT_SRK.Response'][0].MEMO[0].item;
+                        resultStatus = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_CREDIT_SRK.Response'][0].RETURN[0].TYPE[0]
+
+                        for (i = 0; i < res_data.length; i++) {
+                            Object.keys(res_data[i]).forEach((key) => {
+                                if (res_data[i][key] instanceof Array) {
+                                    res_data[i][key] = res_data[i][key][0]
+                                }
+                            })
+                        }
+                        if (resultStatus === 'S') {
+                            res.status(200).json(res_data)
+                        }
+                    }
+                    else {
+                        return res.status(501).json({ message: 'Some Error Occured !' });
+                    }
+                } catch (error) {
+                    return res.status(500).json({ message: 'Length of SAP result cannot be identified' })
+
+                }
+            })
+        }
         // console.log(response.body);
-        var xml = response.body;
-        parseString(xml, (err, resp) => {
-
-            try {
-
-                len = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_CREDIT_SRK.Response'][0].MEMO[0].length;
-                if (len == undefined && typeof len !== 'number') {
-                    res_data = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_CREDIT_SRK.Response'][0].MEMO[0].item;
-                    resultStatus = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_CREDIT_SRK.Response'][0].RETURN[0].TYPE[0]
-
-                    for (i = 0; i < res_data.length; i++) {
-                        Object.keys(res_data[i]).forEach((key) => {
-                            if (res_data[i][key] instanceof Array) {
-                                res_data[i][key] = res_data[i][key][0]
-                            }
-                        })
-                    }
-                    if (resultStatus === 'S') {
-                        res.status(200).json(res_data)
-                    }
-                }
-                else {
-                    return res.status(501).json({ message: 'Some Error Occured !' });
-                }
-            } catch (error) {
-                return res.status(500).json({ message: 'Length of SAP result cannot be identified' })
-
-            }
-        })
     });
 
 })
@@ -509,38 +628,44 @@ router.post('/getdebit', function (req, res, next) {
 
     };
     request(options, function (error, response) {
-        if (error) throw new Error(error);
+        if (error) {
+            console.log(error);
+            return res.status(500).json({ message: 'Server connect ETIMEDOUT 172.17.12.151:50000' })
+
+        }
+        else {
+            var xml = response.body;
+            parseString(xml, (err, resp) => {
+
+                try {
+
+                    len = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_DEBIT_SRK.Response'][0].MEMO[0].length;
+                    if (len == undefined && typeof len !== 'number') {
+                        res_data = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_DEBIT_SRK.Response'][0].MEMO[0].item;
+                        resultStatus = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_DEBIT_SRK.Response'][0].RETURN[0].TYPE[0]
+
+                        for (i = 0; i < res_data.length; i++) {
+                            Object.keys(res_data[i]).forEach((key) => {
+                                if (res_data[i][key] instanceof Array) {
+                                    res_data[i][key] = res_data[i][key][0]
+                                }
+                            })
+                        }
+                        if (resultStatus === 'S') {
+                            res.status(200).json(res_data)
+                        }
+                    }
+                    else {
+                        return res.status(501).json({ message: 'Some Error Occured !' });
+                    }
+                } catch (error) {
+                    return res.status(500).json({ message: 'Length of SAP result cannot be identified' })
+
+                }
+
+            })
+        }
         // console.log(response.body);
-        var xml = response.body;
-        parseString(xml, (err, resp) => {
-
-            try {
-
-                len = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_DEBIT_SRK.Response'][0].MEMO[0].length;
-                if (len == undefined && typeof len !== 'number') {
-                    res_data = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_DEBIT_SRK.Response'][0].MEMO[0].item;
-                    resultStatus = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_DEBIT_SRK.Response'][0].RETURN[0].TYPE[0]
-
-                    for (i = 0; i < res_data.length; i++) {
-                        Object.keys(res_data[i]).forEach((key) => {
-                            if (res_data[i][key] instanceof Array) {
-                                res_data[i][key] = res_data[i][key][0]
-                            }
-                        })
-                    }
-                    if (resultStatus === 'S') {
-                        res.status(200).json(res_data)
-                    }
-                }
-                else {
-                    return res.status(501).json({ message: 'Some Error Occured !' });
-                }
-            } catch (error) {
-                return res.status(500).json({ message: 'Length of SAP result cannot be identified' })
-
-            }
-
-        })
     });
 
 })
@@ -561,38 +686,44 @@ router.post('/getpa', function (req, res, next) {
 
     };
     request(options, function (error, response) {
-        if (error) throw new Error(error);
+        if (error) {
+            console.log(error);
+            return res.status(500).json({ message: 'Server connect ETIMEDOUT 172.17.12.151:50000' })
 
-        var xml = response.body;
-        parseString(xml, (err, resp) => {
+        }
+        else {
+            var xml = response.body;
+            parseString(xml, (err, resp) => {
 
-            try {
+                try {
 
-                len = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_PA_SRK.Response'][0].IT_RES[0].length;
-                if (len == undefined && typeof len !== 'number') {
-                    res_data = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_PA_SRK.Response'][0].IT_RES[0].item;
-                    resultStatus = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_PA_SRK.Response'][0].RETURN[0].TYPE[0]
+                    len = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_PA_SRK.Response'][0].IT_RES[0].length;
+                    if (len == undefined && typeof len !== 'number') {
+                        res_data = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_PA_SRK.Response'][0].IT_RES[0].item;
+                        resultStatus = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_PA_SRK.Response'][0].RETURN[0].TYPE[0]
 
-                    for (i = 0; i < res_data.length; i++) {
-                        Object.keys(res_data[i]).forEach((key) => {
-                            if (res_data[i][key] instanceof Array) {
-                                res_data[i][key] = res_data[i][key][0]
-                            }
-                        })
+                        for (i = 0; i < res_data.length; i++) {
+                            Object.keys(res_data[i]).forEach((key) => {
+                                if (res_data[i][key] instanceof Array) {
+                                    res_data[i][key] = res_data[i][key][0]
+                                }
+                            })
+                        }
+
+                        if (resultStatus === 'S') {
+                            res.status(200).json(res_data)
+                        }
                     }
-
-                    if (resultStatus === 'S') {
-                        res.status(200).json(res_data)
+                    else {
+                        return res.status(501).json({ message: 'Some Error Occured !' });
                     }
-                }
-                else {
-                    return res.status(501).json({ message: 'Some Error Occured !' });
-                }
-            } catch (error) {
-                return res.status(500).json({ message: 'Length of SAP result cannot be identified' })
+                } catch (error) {
+                    return res.status(500).json({ message: 'Length of SAP result cannot be identified' })
 
-            }
-        })
+                }
+            })
+        }
+
     });
 
 })
@@ -614,26 +745,32 @@ router.post('/uploadmasterdata', function (req, res, next) {
 
     };
     request(options, function (error, response) {
-        if (error) throw new Error(error);
+        if (error) {
+            console.log(error);
+            return res.status(500).json({ message: 'Server connect ETIMEDOUT 172.17.12.151:50000' })
 
-        var xml = response.body;
-        parseString(xml, (err, resp) => {
-            try {
-                customer_number = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_MASTERDATA_SRK.Response'][0].CUSTOMER_ID[0]
-                resStatus = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_MASTERDATA_SRK.Response'][0].RETURN[0].TYPE[0]
+        }
+        else {
+            var xml = response.body;
+            parseString(xml, (err, resp) => {
+                try {
+                    customer_number = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_MASTERDATA_SRK.Response'][0].CUSTOMER_ID[0]
+                    resStatus = resp['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_MASTERDATA_SRK.Response'][0].RETURN[0].TYPE[0]
 
-                if (resStatus === 'S') {
-                    res.status(200).json(customer_number)
+                    if (resStatus === 'S') {
+                        res.status(200).json(customer_number)
+                    }
+                    else {
+                        return res.status(501).json({ message: 'Some Error Occured !' });
+                    }
+
+                } catch (error) {
+                    return res.status(500).json({ message: 'Some Error Occured, customer data not uploaded!' })
+
                 }
-                else {
-                    return res.status(501).json({ message: 'Some Error Occured !' });
-                }
+            })
+        }
 
-            } catch (error) {
-                return res.status(500).json({ message: 'Some Error Occured, customer data not uploaded!' })
-
-            }
-        })
     });
 
 })

@@ -12,6 +12,7 @@ export class SaleOrderDetailComponent implements OnInit {
   source: LocalDataSource;
   salesDataNumber: any = '';
   data: any = [];
+  header_data: any = ''
 
   constructor(private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -22,7 +23,9 @@ export class SaleOrderDetailComponent implements OnInit {
 
     this.userService.getsaleorderdetails(this.salesDataNumber).subscribe((res: any) => {
 
-      this.data.push(res);
+      this.header_data = res.header
+
+      this.data.push(res.item);
 
       this.source = new LocalDataSource(this.data);
     })

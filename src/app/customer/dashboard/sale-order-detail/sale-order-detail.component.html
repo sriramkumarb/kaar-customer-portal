@@ -25,6 +25,179 @@
         </div>
     </div>
 
+    <div class="ms-3 me-3 mb-2">
+        <h3 class="text-center" style="font-weight: bolder;">Header : </h3>
+        <div class="row">
+            <div class="col d-flex justify-content-center">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <p>COMP_CODE</p>
+                            </td>
+                            <td>
+                                <p>:</p>
+                            </td>
+                            <td>
+                                <p>{{ header_data.COMP_CODE }}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>CURRENCY</p>
+                            </td>
+                            <td>
+                                <p>:</p>
+                            </td>
+                            <td>
+                                <p>{{ header_data.CURRENCY }}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>DISTR_CHAN</p>
+                            </td>
+                            <td>
+                                <p>:</p>
+                            </td>
+                            <td>
+                                <p>{{ header_data.DISTR_CHAN }}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>DIVISION</p>
+                            </td>
+                            <td>
+                                <p>:</p>
+                            </td>
+                            <td>
+                                <p>{{ header_data.DIVISION }}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>DOC_NUMBER</p>
+                            </td>
+                            <td>
+                                <p>:</p>
+                            </td>
+                            <td>
+                                <p>{{ header_data.DOC_NUMBER }}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>DOC_TYPE</p>
+                            </td>
+                            <td>
+                                <p>:</p>
+                            </td>
+                            <td>
+                                <p>{{ header_data.DOC_TYPE }}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>NET_VAL_HD</p>
+                            </td>
+                            <td>
+                                <p>:</p>
+                            </td>
+                            <td>
+                                <p>{{ header_data.NET_VAL_HD }}</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col d-flex justify-content-center">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <p>OPERATION</p>
+                            </td>
+                            <td>
+                                <p>:</p>
+                            </td>
+                            <td>
+                                <p>{{ header_data.OPERATION }}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>ORDBILLTYP</p>
+                            </td>
+                            <td>
+                                <p>:</p>
+                            </td>
+                            <td>
+                                <p>{{ header_data.ORDBILLTYP }}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>REC_DATE</p>
+                            </td>
+                            <td>
+                                <p>:</p>
+                            </td>
+                            <td>
+                                <p>{{ header_data.REC_DATE }}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>REC_TIME</p>
+                            </td>
+                            <td>
+                                <p>:</p>
+                            </td>
+                            <td>
+                                <p>{{ header_data.REC_TIME }}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>SALES_ORG</p>
+                            </td>
+                            <td>
+                                <p>:</p>
+                            </td>
+                            <td>
+                                <p>{{ header_data.SALES_ORG }}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>SOLD_TO</p>
+                            </td>
+                            <td>
+                                <p>:</p>
+                            </td>
+                            <td>
+                                <p>{{ header_data.SOLD_TO }}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p>PURCH_NO</p>
+                            </td>
+                            <td>
+                                <p>:</p>
+                            </td>
+                            <td>
+                                <p>{{ header_data.PURCH_NO }}</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
     <div class="main">
         <ng2-smart-table [settings]="settings" [source]="source">
         </ng2-smart-table>

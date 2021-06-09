@@ -30,6 +30,7 @@ import { InquiryDataDetailComponent } from './inquiry-data-detail/inquiry-data-d
 import { SaleOrderDetailComponent } from './sale-order-detail/sale-order-detail.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MasterDataComponent } from './master-data/master-data.component';
+import { DeliveryDetailsComponent } from './delivery-details/delivery-details.component';
 
 
 @NgModule({
@@ -48,6 +49,7 @@ import { MasterDataComponent } from './master-data/master-data.component';
     InquiryDataDetailComponent,
     SaleOrderDetailComponent,
     MasterDataComponent,
+    DeliveryDetailsComponent,
 
   ],
   imports: [

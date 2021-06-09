@@ -15,6 +15,7 @@ import { SaleOrderDetailComponent } from './sale-order-detail/sale-order-detail.
 import { SaleOrderComponent } from './sale-order/sale-order.component';
 import { AuthGuard } from '../../service/auth.guard'
 import { MasterDataComponent } from './master-data/master-data.component';
+import { DeliveryDetailsComponent } from './delivery-details/delivery-details.component';
 const dashboardRoutes: Routes = [
     {
         path: '',
@@ -44,6 +45,10 @@ const dashboardRoutes: Routes = [
             {
                 path: 'delivery-list',
                 component: DeliveryListComponent
+            },
+            {
+                path: 'delivery-list/detail/:vbeln',
+                component: DeliveryDetailsComponent
             },
             {
                 path: 'finance-sheet',

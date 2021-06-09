@@ -1,3 +1,12 @@
 :host ng2-smart-table {
     text-align: center;
   }
+
+  tr {
+    border: 1px solid gainsboro;
+  }
+  td {
+    padding-left: 15px;
+    padding-right: 15px;
+    text-align: left;
+  }

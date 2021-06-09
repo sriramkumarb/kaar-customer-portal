@@ -4,16 +4,17 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from '../../../service';
 
 @Component({
-  selector: 'app-inquiry-data-detail',
-  templateUrl: './inquiry-data-detail.component.html',
-  styleUrls: ['./inquiry-data-detail.component.scss']
+  selector: 'app-delivery-details',
+  templateUrl: './delivery-details.component.html',
+  styleUrls: ['./delivery-details.component.scss']
 })
-export class InquiryDataDetailComponent implements OnInit {
+export class DeliveryDetailsComponent implements OnInit {
 
   source: LocalDataSource;
   salesDataNumber: any = '';
   data: any = [];
   header_data: any = ''
+
   constructor(private router: Router,
     private activatedRoute: ActivatedRoute,
     private userService: UserService) {
@@ -22,72 +23,73 @@ export class InquiryDataDetailComponent implements OnInit {
 
     this.source = new LocalDataSource(this.data);
 
-    this.userService.getinquirydetails(this.salesDataNumber).subscribe((res: any) => {
+    this.userService.getdeliverydetails(this.salesDataNumber).subscribe((res: any) => {
 
       this.header_data = res.header
 
       this.data.push(res.item);
 
       this.source = new LocalDataSource(this.data);
+
     })
+
+  }
+
+  ngOnInit(): void {
   }
 
   settings = {
     columns: {
-      DOC_NUMBER: {
-        title: 'Document No',
+      VBELN: {
+        title: 'VBELN',
         filter: false
       },
-      SHORT_TEXT: {
-        title: 'Name',
+      POSNR: {
+        title: 'POSNR',
         filter: false
       },
-      MATERIAL: {
-        title: 'Material',
+      MATNR: {
+        title: 'MATNR',
         filter: false
       },
-      ITM_NUMBER: {
-        title: 'Item Number',
+      BRGEW: {
+        title: 'BRGEW',
         filter: false
       },
-      ITEM_CATEG: {
-        title: 'Item Category',
+      CHARG: {
+        title: 'CHARG',
         filter: false
       },
-      NET_PRICE: {
-        title: 'Net Price',
+      ERDAT: {
+        title: 'ERDAT',
         filter: false
       },
-      NET_VALUE: {
-        title: 'Net Value',
+      ERNAM: {
+        title: 'ERNAM',
         filter: false
       },
-      CURRENCY: {
-        title: 'Currency',
+      KDMAT: {
+        title: 'KDMAT',
         filter: false
       },
-      DIVISION: {
-        title: 'Division',
+      MATKL: {
+        title: 'MATKL',
         filter: false
       },
-      PLANT: {
-        title: 'Plant',
+      NTGEW: {
+        title: 'NTGEW',
         filter: false
       },
-      TARGET_QU: {
-        title: 'Target_QU',
+      VOLUM: {
+        title: 'VOLUM',
         filter: false
       },
-      UNIT_OF_WT: {
-        title: 'Unit of Weight',
+      VRKME: {
+        title: 'VRKME',
         filter: false
       },
-      CREATED_BY: {
-        title: 'Created By',
-        filter: false
-      },
-      CREAT_DATE: {
-        title: 'Created At',
+      WERKS: {
+        title: 'WERKS',
         filter: false
       }
     },
@@ -105,65 +107,58 @@ export class InquiryDataDetailComponent implements OnInit {
   onSearch(query: string = '') {
     this.source.setFilter([
       {
-        field: 'DOC_NUMBER',
+        field: 'BRGEW',
         search: query
       },
       {
-        field: 'SHORT_TEXT',
+        field: 'CHARG',
         search: query
       },
       {
-        field: 'MATERIAL',
+        field: 'ERDAT',
         search: query
       },
       {
-        field: 'ITM_NUMBER',
+        field: 'ERNAM',
         search: query
       },
       {
-        field: 'ITEM_CATEG',
+        field: 'KDMAT',
         search: query
       },
       {
-        field: 'NET_PRICE',
+        field: 'MATKL',
         search: query
       },
       {
-        field: 'NET_VALUE',
+        field: 'MATNR',
         search: query
       },
       {
-        field: 'CURRENCY',
+        field: 'NTGEW',
         search: query
       },
       {
-        field: 'DIVISION',
+        field: 'POSNR',
         search: query
       },
       {
-        field: 'PLANT',
+        field: 'VBELN',
         search: query
       },
       {
-        field: 'TARGET_QU',
+        field: 'VOLUM',
         search: query
       },
       {
-        field: 'UNIT_OF_WT',
+        field: 'VRKME',
         search: query
       },
       {
-        field: 'CREATED_BY',
+        field: 'WERKS',
         search: query
       },
-      {
-        field: 'CREAT_DATE',
-        search: query
-      }
     ], false);
-  }
-
-  ngOnInit(): void {
   }
 
 }
