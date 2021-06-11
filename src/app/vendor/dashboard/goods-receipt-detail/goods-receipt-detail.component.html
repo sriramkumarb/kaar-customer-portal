@@ -1,0 +1,56 @@
+<div class="container-fluid">
+    <div class="ps-3 pt-2">
+        <mat-icon [routerLink]="['../../../../goods-receipt']"
+            style="cursor: pointer; border: 1px solid gray; border-radius: 25px;">
+            keyboard_backspace
+        </mat-icon>
+    </div>
+    <div class="row mt-4">
+        <div class="col ms-3 mb-3">
+            <h2><b>Goods Receipt for document {{ number }}</b></h2>
+        </div>
+        <div class="col me-3 mb-3 d-flex justify-content-end">
+            <form class="">
+                <div class="input-group">
+                    <input #search class="form-control" type="text" placeholder="Search..."
+                        (keyup)="onSearch(search.value)">
+                    <div class="input-group-btn">
+                        <button (click)='onSearch(search.value)' class="menu-item" mat-flat-button
+                            style="border: 1px solid rgb(218, 213, 213);">
+                            <mat-icon>search</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="ms-3 me-3 mb-2">
+        <h3 class="text-center" style="font-weight: bolder;">Header : </h3>
+        <div class="row">
+            <div class="d-flex justify-content-center">
+                <table>
+                    <tbody>
+                        <tr *ngFor="let item of header_data | keyvalue">
+                            <td>
+                                <p>{{ item.key }}</p>
+                            </td>
+                            <td>
+                                <p>:</p>
+                            </td>
+                            <td>
+                                <p>{{ item.value }}</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="main">
+        <h3 class="text-center" style="font-weight: bolder;">Items : </h3>
+        <ng2-smart-table [settings]="settings" [source]="source">
+        </ng2-smart-table>
+    </div>
+</div>

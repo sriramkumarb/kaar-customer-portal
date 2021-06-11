@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { VenAuthGuard } from '../../service/ven-auth.guard'
 import { CreditComponent } from './credit/credit.component';
 import { FinanceSheetComponent } from './finance-sheet/finance-sheet.component';
+import { GoodsReceiptDetailComponent } from './goods-receipt-detail/goods-receipt-detail.component';
 import { GoodsReceiptComponent } from './goods-receipt/goods-receipt.component';
 import { HomeComponent } from './home/home.component';
 import { InvoiceComponent } from './invoice/invoice.component';
@@ -42,6 +43,10 @@ const dashboardRoutes: Routes = [
       {
         path: 'goods-receipt',
         component: GoodsReceiptComponent
+      },
+      {
+        path: 'goods-receipt/detail/:mblnr/:mjahr',
+        component: GoodsReceiptDetailComponent
       },
       {
         path: 'finance-sheet',

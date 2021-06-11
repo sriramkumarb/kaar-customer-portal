@@ -26,6 +26,7 @@ import { QuotationComponent } from './quotation/quotation.component';
 import { PurchaseOrderComponent } from './purchase-order/purchase-order.component';
 import { GoodsReceiptComponent } from './goods-receipt/goods-receipt.component';
 import { QuotationDetailComponent } from './quotation-detail/quotation-detail.component';
+import { GoodsReceiptDetailComponent } from './goods-receipt-detail/goods-receipt-detail.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { QuotationDetailComponent } from './quotation-detail/quotation-detail.co
     QuotationComponent,
     PurchaseOrderComponent,
     GoodsReceiptComponent,
-    QuotationDetailComponent
+    QuotationDetailComponent,
+    GoodsReceiptDetailComponent
   ],
   imports: [
     CommonModule,
