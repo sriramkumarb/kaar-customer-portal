@@ -13,6 +13,7 @@ export class MasterDataComponent implements OnInit {
   data: any;
   error_message: any
   customer_number: any
+  number: any = []
   show: any = false
   json_data: any = [];
 
@@ -56,7 +57,7 @@ export class MasterDataComponent implements OnInit {
 
         console.log(this.json_data);
 
-        this.uploadinsap(this.json_data[0]);
+        this.uploadinsap(this.json_data);
       };
 
       reader.readAsBinaryString(e.target.files[0]);
@@ -69,9 +70,12 @@ export class MasterDataComponent implements OnInit {
   }
 
   uploadinsap(data: any) {
-    this.userService.uploadmasterdata(data).subscribe((res: any) => {
-      this.customer_number = res
-      this.show = true
+    data.map((o: any) => {
+      this.userService.uploadmasterdata(o).subscribe((res: any) => {
+        this.customer_number = res
+        this.number.push(res)
+        this.show = true
+      })
     })
   }
 
