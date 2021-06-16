@@ -514,4 +514,97 @@ router.post('/ven/grdet', function (req, res) {
 
 })
 
+router.post('/ven/invlist', function (req, res) {
+    let user = req.body.data
+
+    var options = {
+        'method': 'POST',
+        'url': 'http://dxktpipo.kaarcloud.com:50000/XISOAPAdapter/MessageServlet?senderParty=&senderService=BC_VEN_SRK&receiverParty=&receiverService=&interface=SI_VEN_INVLIST_SRK&interfaceNamespace=http://srk-vendor-portal.com',
+        'headers': {
+            'Content-Type': 'text/xml',
+            'SOAPAction': '"http://sap.com/xi/WebService/soap1.1"',
+            'Authorization': 'Basic UE9VU0VSOlRlY2hAMjAyMQ==',
+            'Cookie': 'MYSAPSSO2=AjExMDAgAA1wb3J0YWw6UE9VU0VSiAAHZGVmYXVsdAEABlBPVVNFUgIAAzAwMAMAA0tQTwQADDIwMjEwNjE2MTAyMAUABAAAAAgKAAZQT1VTRVL%2FAQUwggEBBgkqhkiG9w0BBwKggfMwgfACAQExCzAJBgUrDgMCGgUAMAsGCSqGSIb3DQEHATGB0DCBzQIBATAiMB0xDDAKBgNVBAMTA0tQTzENMAsGA1UECxMESjJFRQIBADAJBgUrDgMCGgUAoF0wGAYJKoZIhvcNAQkDMQsGCSqGSIb3DQEHATAcBgkqhkiG9w0BCQUxDxcNMjEwNjE2MTAyMDQ1WjAjBgkqhkiG9w0BCQQxFgQUknws%2FNI9aqkTWOwc6fa9VTgLcOUwCQYHKoZIzjgEAwQvMC0CFQDm!Hh!Obn!hfcXxJgnjNlpk6EBtgIUQqUnWTuKM5DM89GR8iO2SoXbLV4%3D; JSESSIONID=TKj2b2csq4tfa6MUEI69ycwZalYUegF-Y2kA_SAPdp6PfG6-AIFLSxDg2u0BqwpG; JSESSIONMARKID=LAkHpQf0N85-1-TpG8DT6WGpcdtC1IDnr5lX5jaQA; saplb_*=(J2EE6906720)6906750'
+        },
+        body: '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:sap-com:document:sap:rfc:functions">\r\n   <soapenv:Header/>\r\n   <soapenv:Body>\r\n      <urn:ZBAPI_VEN_INVLIST_SRK>\r\n         <!--You may enter the following 3 items in any order-->\r\n         <VEND_ID>' + user + '</VEND_ID>\r\n      </urn:ZBAPI_VEN_INVLIST_SRK>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>'
+
+    };
+    request(options, function (error, response) {
+        if (error) {
+            console.log(error);
+            return res.status(500).json({ message: 'Server connect ETIMEDOUT 172.17.12.151:50000' })
+        } else {
+            var xml = response.body;
+            parseString(xml, (err, result) => {
+                try {
+                    len = result['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_VEN_INVLIST_SRK.Response'][0].HEADER[0].length
+                    if (len == undefined && typeof len !== 'number') {
+                        res_data = result['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_VEN_INVLIST_SRK.Response'][0].HEADER[0].item
+
+                        for (i = 0; i < res_data.length; i++) {
+                            Object.keys(res_data[i]).forEach((key) => {
+                                if (res_data[i][key] instanceof Array) {
+                                    res_data[i][key] = res_data[i][key][0]
+                                }
+                            })
+                        }
+
+                        res.status(200).json(res_data)
+                    }
+                    else {
+                        return res.status(501).json({ message: 'Some Error Occured !' });
+                    }
+                } catch (error) {
+                    return res.status(500).json({ message: 'Length of SAP result cannot be identified' })
+                }
+            })
+        }
+        // console.log(response.body);
+    });
+
+})
+
+router.post('/ven/invpdf', function (req, res) {
+    let user = req.body.data[0]
+    let number = req.body.data[1]
+    let year = req.body.data[2]
+
+    var options = {
+        'method': 'POST',
+        'url': 'http://dxktpipo.kaarcloud.com:50000/XISOAPAdapter/MessageServlet?senderParty=&senderService=BC_VEN_SRK&receiverParty=&receiverService=&interface=SI_VEN_INVPDF_SRK&interfaceNamespace=http://srk-vendor-portal.com',
+        'headers': {
+            'Content-Type': 'text/xml',
+            'SOAPAction': '"http://sap.com/xi/WebService/soap1.1"',
+            'Authorization': 'Basic UE9VU0VSOlRlY2hAMjAyMQ==',
+            'Cookie': 'MYSAPSSO2=AjExMDAgAA1wb3J0YWw6UE9VU0VSiAAHZGVmYXVsdAEABlBPVVNFUgIAAzAwMAMAA0tQTwQADDIwMjEwNjE2MTAyMAUABAAAAAgKAAZQT1VTRVL%2FAQUwggEBBgkqhkiG9w0BBwKggfMwgfACAQExCzAJBgUrDgMCGgUAMAsGCSqGSIb3DQEHATGB0DCBzQIBATAiMB0xDDAKBgNVBAMTA0tQTzENMAsGA1UECxMESjJFRQIBADAJBgUrDgMCGgUAoF0wGAYJKoZIhvcNAQkDMQsGCSqGSIb3DQEHATAcBgkqhkiG9w0BCQUxDxcNMjEwNjE2MTAyMDQ1WjAjBgkqhkiG9w0BCQQxFgQUknws%2FNI9aqkTWOwc6fa9VTgLcOUwCQYHKoZIzjgEAwQvMC0CFQDm!Hh!Obn!hfcXxJgnjNlpk6EBtgIUQqUnWTuKM5DM89GR8iO2SoXbLV4%3D; JSESSIONID=J1rfGMthWgZP0xWQMpA3J73Ut24UegF-Y2kA_SAPt6EWKi63cQXgLnJH4PfailzR; JSESSIONMARKID=ILF9nwLDF0XD13xE1Frng_ecBJgvWQFlJsl35jaQA; saplb_*=(J2EE6906720)6906750'
+        },
+        body: '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:sap-com:document:sap:rfc:functions">\r\n   <soapenv:Header/>\r\n   <soapenv:Body>\r\n      <urn:ZBAPI_VEN_INVPDF_SRK>\r\n         <!--You may enter the following 3 items in any order-->\r\n         <!--Optional:-->\r\n         <P_FISC>' + year + '</P_FISC>\r\n         <!--Optional:-->\r\n         <P_INVNO>' + number + '</P_INVNO>\r\n         <!--Optional:-->\r\n         <P_VENDOR>' + user + '</P_VENDOR>\r\n      </urn:ZBAPI_VEN_INVPDF_SRK>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>'
+
+    };
+    request(options, function (error, response) {
+        if (error) {
+            console.log(error);
+            return res.status(500).json({ message: 'Server connect ETIMEDOUT 172.17.12.151:50000' })
+        }
+        else {
+            var xml = response.body;
+            parseString(xml, (err, result) => {
+                try {
+                    len = result['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_VEN_INVPDF_SRK.Response'][0].BASE64_PDF.length
+                    if (typeof len == 'number') {
+                        data = result['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_VEN_INVPDF_SRK.Response'][0].BASE64_PDF[0]
+                        return res.status(200).json({ data })
+                    } else {
+                        return res.status(501).json({ message: 'Some Error Occured !' });
+                    }
+                } catch (error) {
+                    return res.status(500).json({ message: 'Length of SAP result cannot be identified' })
+                }
+            })
+        }
+        // console.log(response.body);
+    });
+
+})
+
 module.exports = router;

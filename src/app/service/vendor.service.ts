@@ -69,4 +69,12 @@ export class VendorService {
     return this.http.post(this.API_URL + '/ven/grdet', { data })
   }
 
+  getinvlist(data: any) {
+    return this.http.post(this.API_URL + '/ven/invlist', { data })
+  }
+
+  getinvpdf(data: any) {
+    return this.http.post(this.API_URL + '/ven/invpdf', { data })
+  }
+
 }

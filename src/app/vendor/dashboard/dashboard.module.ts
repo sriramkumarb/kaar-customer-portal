@@ -27,7 +27,8 @@ import { PurchaseOrderComponent } from './purchase-order/purchase-order.componen
 import { GoodsReceiptComponent } from './goods-receipt/goods-receipt.component';
 import { QuotationDetailComponent } from './quotation-detail/quotation-detail.component';
 import { GoodsReceiptDetailComponent } from './goods-receipt-detail/goods-receipt-detail.component';
-
+import { InvoicePdfComponent } from './invoice-pdf/invoice-pdf.component';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { GoodsReceiptDetailComponent } from './goods-receipt-detail/goods-receip
     PurchaseOrderComponent,
     GoodsReceiptComponent,
     QuotationDetailComponent,
-    GoodsReceiptDetailComponent
+    GoodsReceiptDetailComponent,
+    InvoicePdfComponent
   ],
   imports: [
     CommonModule,
@@ -60,7 +62,8 @@ import { GoodsReceiptDetailComponent } from './goods-receipt-detail/goods-receip
     MatIconModule,
     MatListModule,
     MatCardModule,
-    MatSelectModule
+    MatSelectModule,
+    PdfViewerModule
   ]
 })
 export class DashboardModule { }

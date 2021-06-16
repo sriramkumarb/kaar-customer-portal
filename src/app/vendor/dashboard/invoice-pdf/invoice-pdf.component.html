@@ -1,0 +1,21 @@
+<div class="container-fluid">
+    <div class="ps-3 pt-2">
+        <mat-icon [routerLink]="['../../../../invoice']"
+            style="cursor: pointer; border: 1px solid gray; border-radius: 25px;">
+            keyboard_backspace
+        </mat-icon>
+    </div>
+    <div class="mt-4 mb-2 d-flex justify-content-center">
+        <h2>Invoice Detail</h2>
+    </div>
+
+    <div *ngIf="show" class=" mt-4 mb-4 d-flex justify-content-center">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
+    <div class="pdf-container">
+        <pdf-viewer [src]="src" [zoom]="1.5" [show-borders]="true"></pdf-viewer>
+    </div>
+</div>

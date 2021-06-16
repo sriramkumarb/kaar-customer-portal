@@ -6,6 +6,7 @@ import { FinanceSheetComponent } from './finance-sheet/finance-sheet.component';
 import { GoodsReceiptDetailComponent } from './goods-receipt-detail/goods-receipt-detail.component';
 import { GoodsReceiptComponent } from './goods-receipt/goods-receipt.component';
 import { HomeComponent } from './home/home.component';
+import { InvoicePdfComponent } from './invoice-pdf/invoice-pdf.component';
 import { InvoiceComponent } from './invoice/invoice.component';
 import { LayoutComponent } from './layout/layout.component';
 import { PaymentComponent } from './payment/payment.component';
@@ -55,6 +56,10 @@ const dashboardRoutes: Routes = [
       {
         path: 'invoice',
         component: InvoiceComponent
+      },
+      {
+        path: 'invoice/pdf/:INV_DOC_NO/:FISC_YEAR',
+        component: InvoicePdfComponent
       },
       {
         path: 'payment',
