@@ -15,8 +15,8 @@ export class LayoutComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  isMenuOpen = true;
-  contentMargin = 240;
+  isMenuOpen = false;
+  contentMargin = 70;
 
   onToolbarMenuToggle() {
     this.isMenuOpen = !this.isMenuOpen;

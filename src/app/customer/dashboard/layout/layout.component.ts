@@ -8,8 +8,8 @@ import { UserService } from '../../../service/index'
 })
 export class LayoutComponent implements OnInit {
 
-  isMenuOpen = true;
-  contentMargin = 240;
+  isMenuOpen = false;
+  contentMargin = 70;
 
   onToolbarMenuToggle() {
     this.isMenuOpen = !this.isMenuOpen;
