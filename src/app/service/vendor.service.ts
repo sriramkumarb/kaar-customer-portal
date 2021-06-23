@@ -77,4 +77,16 @@ export class VendorService {
     return this.http.post(this.API_URL + '/ven/invpdf', { data })
   }
 
+  getpolist(data: any) {
+    return this.http.post(this.API_URL + '/ven/polist', { data })
+  }
+
+  getpodetails(data: any) {
+    return this.http.post(this.API_URL + '/ven/podetails', { data })
+  }
+
+  createpo(data: any) {
+    return this.http.post(this.API_URL + '/ven/pocreate', { data })
+  }
+
 }

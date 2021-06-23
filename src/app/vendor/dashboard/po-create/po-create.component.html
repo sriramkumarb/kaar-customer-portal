@@ -1,0 +1,92 @@
+<div class="card m-3">
+    <div class="ps-3 pt-2">
+        <mat-icon [routerLink]="['../../dashboard']"
+            style="cursor: pointer; border: 1px solid gray; border-radius: 25px;">
+            keyboard_backspace
+        </mat-icon>
+    </div>
+    <div class="p-4">
+        <div class="mb-4 d-flex justify-content-center">
+            <h2>Create Purchase Order!</h2>
+        </div>
+        <form #podetails="ngForm">
+            <div class="row mt-4 mb-3 d-flex justify-content-center">
+                <label for="name" class="col-sm-2 col-form-label">MATERIAL : </label>
+                <div class="col-sm-10 col-md-4">
+                    <input type="text" ngDefaultControl class="form-control" name="MATERIAL" [(ngModel)]='MATERIAL'>
+                </div>
+            </div>
+            <div class="row mb-3 d-flex justify-content-center">
+                <label for="name" class="col-sm-2 col-form-label">PLANT : </label>
+                <div class="col-sm-10 col-md-4">
+                    <input type="text" ngDefaultControl class="form-control" name="PLANT" [(ngModel)]='PLANT'>
+                </div>
+            </div>
+            <div class="row mb-3 d-flex justify-content-center">
+                <label for="name" class="col-sm-2 col-form-label">PO ITEM : </label>
+                <div class="col-sm-10 col-md-4">
+                    <input type="text" ngDefaultControl class="form-control" name="PO_ITEM" [(ngModel)]='PO_ITEM'>
+                </div>
+            </div>
+            <div class="row mb-3 d-flex justify-content-center">
+                <label for="name" class="col-sm-2 col-form-label">PURCHASE GROUP : </label>
+                <div class="col-sm-10 col-md-4">
+                    <input type="text" ngDefaultControl class="form-control" name="PURCHASE_GRP"
+                        [(ngModel)]='PURCHASE_GRP'>
+                </div>
+            </div>
+            <div class="row mb-3 d-flex justify-content-center">
+                <label for="name" class="col-sm-2 col-form-label">PURCHASE ORGANIZATION : </label>
+                <div class="col-sm-10 col-md-4">
+                    <input type="text" ngDefaultControl class="form-control" name="PURCHASE_ORG"
+                        [(ngModel)]='PURCHASE_ORG'>
+                </div>
+            </div>
+            <div class="row mb-3 d-flex justify-content-center">
+                <label for="name" class="col-sm-2 col-form-label">COMPANY CODE : </label>
+                <div class="col-sm-10 col-md-4">
+                    <input type="text" ngDefaultControl class="form-control" name="COMPANY_CODE"
+                        [(ngModel)]='COMPANY_CODE'>
+                </div>
+            </div>
+            <div class="row mb-3 d-flex justify-content-center">
+                <label for="name" class="col-sm-2 col-form-label">QUANTITY : </label>
+                <div class="col-sm-10 col-md-4">
+                    <input type="text" ngDefaultControl class="form-control" name="QUANTITY" [(ngModel)]='QUANTITY'>
+                </div>
+            </div>
+            <div class="row mb-3 d-flex justify-content-center">
+                <label for="name" class="col-sm-2 col-form-label">SHORT TEXT : </label>
+                <div class="col-sm-10 col-md-4">
+                    <input type="text" ngDefaultControl class="form-control" name="SHORT_TEXT" [(ngModel)]='SHORT_TEXT'>
+                </div>
+            </div>
+            <div class="row mb-3 d-flex justify-content-center">
+                <label for="name" class="col-sm-2 col-form-label">CREATED BY : </label>
+                <div class="col-sm-10 col-md-4">
+                    <input type="text" ngDefaultControl class="form-control" name="CREATEDBY" [(ngModel)]='CREATEDBY'>
+                </div>
+            </div>
+            <div class="row mb-3 d-flex justify-content-center">
+                <label for="name" class="col-sm-2 col-form-label">DOCUMENT DATE : </label>
+                <div class="col-sm-10 col-md-4">
+                    <input type="text" ngDefaultControl class="form-control" name="DOC_DATE" [(ngModel)]='DOC_DATE'>
+                </div>
+            </div>
+            <div class="row mb-3 d-flex justify-content-center">
+                <label for="name" class="col-sm-2 col-form-label">DELIVERY DATE : </label>
+                <div class="col-sm-10 col-md-4">
+                    <input type="text" ngDefaultControl class="form-control" name="DELIVERY_DATE"
+                        [(ngModel)]='DELIVERY_DATE'>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center m-4">
+                <button type="submit" class="btn btn-outline-success"
+                    (click)="createpo(podetails.value)">Update</button>
+            </div>
+        </form>
+    </div>
+    <div *ngIf="show" class="d-flex justify-content-center" style="color: green; font-weight: bolder;">
+        <h3>A Purchase order {{ result }} was created by using the workflow concept!</h3>
+    </div>
+</div>

@@ -29,6 +29,8 @@ import { QuotationDetailComponent } from './quotation-detail/quotation-detail.co
 import { GoodsReceiptDetailComponent } from './goods-receipt-detail/goods-receipt-detail.component';
 import { InvoicePdfComponent } from './invoice-pdf/invoice-pdf.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { PurchaseOrderDetailsComponent } from './purchase-order-details/purchase-order-details.component';
+import { PoCreateComponent } from './po-create/po-create.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,9 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     GoodsReceiptComponent,
     QuotationDetailComponent,
     GoodsReceiptDetailComponent,
-    InvoicePdfComponent
+    InvoicePdfComponent,
+    PurchaseOrderDetailsComponent,
+    PoCreateComponent
   ],
   imports: [
     CommonModule,

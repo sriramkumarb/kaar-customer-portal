@@ -10,6 +10,8 @@ import { InvoicePdfComponent } from './invoice-pdf/invoice-pdf.component';
 import { InvoiceComponent } from './invoice/invoice.component';
 import { LayoutComponent } from './layout/layout.component';
 import { PaymentComponent } from './payment/payment.component';
+import { PoCreateComponent } from './po-create/po-create.component';
+import { PurchaseOrderDetailsComponent } from './purchase-order-details/purchase-order-details.component';
 import { PurchaseOrderComponent } from './purchase-order/purchase-order.component';
 import { QuotationDetailComponent } from './quotation-detail/quotation-detail.component';
 import { QuotationComponent } from './quotation/quotation.component';
@@ -40,6 +42,14 @@ const dashboardRoutes: Routes = [
       {
         path: 'purchase-order',
         component: PurchaseOrderComponent
+      },
+      {
+        path: 'purchase-order/detail/:ebeln',
+        component: PurchaseOrderDetailsComponent
+      },
+      {
+        path: 'po-create',
+        component: PoCreateComponent
       },
       {
         path: 'goods-receipt',

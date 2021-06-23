@@ -607,4 +607,157 @@ router.post('/ven/invpdf', function (req, res) {
 
 })
 
+router.post('/ven/polist', function (req, res) {
+    let user = req.body.data
+
+    var options = {
+        'method': 'POST',
+        'url': 'http://dxktpipo.kaarcloud.com:50000/XISOAPAdapter/MessageServlet?senderParty=&senderService=BC_VEN_SRK&receiverParty=&receiverService=&interface=SI_VEN_POLIST_SRK&interfaceNamespace=http://srk-vendor-portal.com',
+        'headers': {
+            'Content-Type': 'text/xml',
+            'SOAPAction': '"http://sap.com/xi/WebService/soap1.1"',
+            'Authorization': 'Basic UE9VU0VSOlRlY2hAMjAyMQ==',
+            'Cookie': 'MYSAPSSO2=AjExMDAgAA1wb3J0YWw6UE9VU0VSiAAHZGVmYXVsdAEABlBPVVNFUgIAAzAwMAMAA0tQTwQADDIwMjEwNjIzMDUxNwUABAAAAAgKAAZQT1VTRVL%2FAQUwggEBBgkqhkiG9w0BBwKggfMwgfACAQExCzAJBgUrDgMCGgUAMAsGCSqGSIb3DQEHATGB0DCBzQIBATAiMB0xDDAKBgNVBAMTA0tQTzENMAsGA1UECxMESjJFRQIBADAJBgUrDgMCGgUAoF0wGAYJKoZIhvcNAQkDMQsGCSqGSIb3DQEHATAcBgkqhkiG9w0BCQUxDxcNMjEwNjIzMDUxNzUxWjAjBgkqhkiG9w0BCQQxFgQU7TdTQKH5ljrRCkTFIWTVZekV4rowCQYHKoZIzjgEAwQvMC0CFGVhTb8OX4HcJ7k0T1HJuchGQ114AhUA2xyvKVaw1TXCOsychtGXNvmycXU%3D; JSESSIONID=XbIwyUwtMNijrDXEdLqHlnsAn003egF-Y2kA_SAPK242lApGY-lzdTkzwIpPRBoY; JSESSIONMARKID=SVivUAPOeNDxQdIGL0FscswmH4hREd2rFovX5jaQA; saplb_*=(J2EE6906720)6906750'
+        },
+        body: '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:sap-com:document:sap:rfc:functions">\r\n   <soapenv:Header/>\r\n   <soapenv:Body>\r\n      <urn:ZBAPI_VEN_POLIST_SRK>\r\n         <!--You may enter the following 2 items in any order-->\r\n         <VENDOR_ID>' + user + '</VENDOR_ID>\r\n      </urn:ZBAPI_VEN_POLIST_SRK>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>'
+
+    };
+    request(options, function (error, response) {
+        if (error) {
+            console.log(error);
+            return res.status(500).json({ message: 'Server connect ETIMEDOUT 172.17.12.151:50000' })
+        }
+        else {
+            var xml = response.body;
+            parseString(xml, (err, result) => {
+                try {
+                    len = result['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_VEN_POLIST_SRK.Response'][0].IT_RES[0].length
+                    if (len == undefined && typeof len !== 'number') {
+                        res_data = result['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_VEN_POLIST_SRK.Response'][0].IT_RES[0].item
+                        resultStatus = result['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_VEN_POLIST_SRK.Response'][0].RETURN[0].TYPE[0]
+
+                        for (i = 0; i < res_data.length; i++) {
+                            Object.keys(res_data[i]).forEach((key) => {
+                                if (res_data[i][key] instanceof Array) {
+                                    res_data[i][key] = res_data[i][key][0]
+                                }
+                            })
+                        }
+
+
+                        if (resultStatus === 'S') {
+                            res.status(200).json(res_data)
+                        }
+                    }
+                    else {
+                        return res.status(501).json({ message: 'Some Error Occured !' });
+                    }
+                } catch (error) {
+
+                }
+            })
+        }
+        // console.log(response.body);
+    });
+
+})
+
+router.post('/ven/podetails', function (req, res) {
+    let number = req.body.data
+
+    var options = {
+        'method': 'POST',
+        'url': 'http://dxktpipo.kaarcloud.com:50000/XISOAPAdapter/MessageServlet?senderParty=&senderService=BC_VEN_SRK&receiverParty=&receiverService=&interface=SI_VEN_PODET_SRK&interfaceNamespace=http://srk-vendor-portal.com',
+        'headers': {
+            'Content-Type': 'text/xml',
+            'SOAPAction': '"http://sap.com/xi/WebService/soap1.1"',
+            'Authorization': 'Basic UE9VU0VSOlRlY2hAMjAyMQ==',
+            'Cookie': 'MYSAPSSO2=AjExMDAgAA1wb3J0YWw6UE9VU0VSiAAHZGVmYXVsdAEABlBPVVNFUgIAAzAwMAMAA0tQTwQADDIwMjEwNjIzMDUxNwUABAAAAAgKAAZQT1VTRVL%2FAQUwggEBBgkqhkiG9w0BBwKggfMwgfACAQExCzAJBgUrDgMCGgUAMAsGCSqGSIb3DQEHATGB0DCBzQIBATAiMB0xDDAKBgNVBAMTA0tQTzENMAsGA1UECxMESjJFRQIBADAJBgUrDgMCGgUAoF0wGAYJKoZIhvcNAQkDMQsGCSqGSIb3DQEHATAcBgkqhkiG9w0BCQUxDxcNMjEwNjIzMDUxNzUxWjAjBgkqhkiG9w0BCQQxFgQU7TdTQKH5ljrRCkTFIWTVZekV4rowCQYHKoZIzjgEAwQvMC0CFGVhTb8OX4HcJ7k0T1HJuchGQ114AhUA2xyvKVaw1TXCOsychtGXNvmycXU%3D; JSESSIONID=XbIwyUwtMNijrDXEdLqHlnsAn003egF-Y2kA_SAPK242lApGY-lzdTkzwIpPRBoY; JSESSIONMARKID=SVivUAPOeNDxQdIGL0FscswmH4hREd2rFovX5jaQA; saplb_*=(J2EE6906720)6906750'
+        },
+        body: '\r\n<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:sap-com:document:sap:rfc:functions">\r\n   <soapenv:Header/>\r\n   <soapenv:Body>\r\n      <urn:ZBAPI_VEN_PODET_SRK>\r\n         <!--You may enter the following 3 items in any order-->\r\n         <PURCHASE_DOCUMENT>' + number + '</PURCHASE_DOCUMENT>\r\n      </urn:ZBAPI_VEN_PODET_SRK>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>'
+
+    };
+    request(options, function (error, response) {
+        if (error) {
+            console.log(error)
+            return res.status(500).json({ message: 'Server connect ETIMEDOUT 172.17.12.151:50000' })
+        }
+        else {
+            var xml = response.body;
+            parseString(xml, (err, result) => {
+                try {
+                    len = result['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_VEN_PODET_SRK.Response'][0].ITEMS[0].length
+                    if (len == undefined && typeof len !== 'number') {
+
+                        header = result['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_VEN_PODET_SRK.Response'][0].HEADER[0]
+                        item = result['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_VEN_PODET_SRK.Response'][0].ITEMS[0].item[0]
+                        Object.keys(item).forEach((key) => {
+                            if (item[key] instanceof Array) {
+                                item[key] = item[key][0]
+                            }
+                        })
+                        Object.keys(header).forEach((key) => {
+                            if (header[key] instanceof Array) {
+                                header[key] = header[key][0]
+                            }
+                        })
+                        res.status(200).send({ item, header })
+                    }
+                    else {
+                        return res.status(501).json({ message: 'Some Error Occured !' });
+                    }
+                } catch (error) {
+                    return res.status(500).json({ message: 'Length of SAP result cannot be identified' })
+                }
+            })
+        }
+    });
+
+
+})
+
+router.post('/ven/pocreate', function (req, res) {
+    data = req.body.data
+
+    var options = {
+        'method': 'POST',
+        'url': 'http://dxktpipo.kaarcloud.com:50000/XISOAPAdapter/MessageServlet?senderParty=&senderService=BC_VEN_SRK&receiverParty=&receiverService=&interface=SI_VEN_POCREATE_SRK&interfaceNamespace=http://srk-vendor-portal.com',
+        'headers': {
+            'Content-Type': 'text/xml',
+            'SOAPAction': '"http://sap.com/xi/WebService/soap1.1"',
+            'Authorization': 'Basic UE9VU0VSOlRlY2hAMjAyMQ==',
+            'Cookie': 'MYSAPSSO2=AjExMDAgAA1wb3J0YWw6UE9VU0VSiAAHZGVmYXVsdAEABlBPVVNFUgIAAzAwMAMAA0tQTwQADDIwMjEwNjIzMTQ0NAUABAAAAAgKAAZQT1VTRVL%2FAQQwggEABgkqhkiG9w0BBwKggfIwge8CAQExCzAJBgUrDgMCGgUAMAsGCSqGSIb3DQEHATGBzzCBzAIBATAiMB0xDDAKBgNVBAMTA0tQTzENMAsGA1UECxMESjJFRQIBADAJBgUrDgMCGgUAoF0wGAYJKoZIhvcNAQkDMQsGCSqGSIb3DQEHATAcBgkqhkiG9w0BCQUxDxcNMjEwNjIzMTQ0NDA5WjAjBgkqhkiG9w0BCQQxFgQUQPlfeOSTvp1Zaak0GXj2Rx2hXm0wCQYHKoZIzjgEAwQuMCwCFHPAfjSsXME86NbjuvzNsPn8ldQAAhRBwSV57ZWAZ1XshpQx4PV8lRw%2F8w%3D%3D; JSESSIONID=XbIwyUwtMNijrDXEdLqHlnsAn003egF-Y2kA_SAPK242lApGY-lzdTkzwIpPRBoY; JSESSIONMARKID=LrZeZAoPqwsYp4NWAr2SkSD6YuIFVJ6CZpyn5jaQA; saplb_*=(J2EE6906720)6906750'
+        },
+        body: '<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:sap-com:document:sap:rfc:functions">\r\n   <soapenv:Header/>\r\n   <soapenv:Body>\r\n      <urn:ZBAPI_VEN_POCREATE_SRK>\r\n         <!--You may enter the following 13 items in any order-->\r\n         <COMPANY_CODE>' + data.COMPANY_CODE + '</COMPANY_CODE>\r\n         <CREATEDBY>' + data.CREATEDBY + '</CREATEDBY>\r\n         <DELIVERY_DATE>' + data.DELIVERY_DATE + '</DELIVERY_DATE>\r\n         <DOC_DATE>' + data.DOC_DATE + '</DOC_DATE>\r\n         <MATERIAL>' + data.MATERIAL + '</MATERIAL>\r\n         <PLANT>' + data.PLANT + '</PLANT>\r\n         <PO_ITEM>' + data.PO_ITEM + '</PO_ITEM>\r\n         <PURCHASE_GRP>' + data.PURCHASE_GRP + '</PURCHASE_GRP>\r\n         <PURCHASE_ORG>' + data.PURCHASE_ORG + '</PURCHASE_ORG>\r\n         <QUANTITY>' + data.QUANTITY + '</QUANTITY>\r\n         <SHORT_TEXT>' + data.SHORT_TEXT + '</SHORT_TEXT>\r\n         <VEND_ID>' + data.VEND_ID + '</VEND_ID>\r\n      </urn:ZBAPI_VEN_POCREATE_SRK>\r\n   </soapenv:Body>\r\n</soapenv:Envelope>'
+
+    };
+    request(options, function (error, response) {
+        if (error) {
+            console.log(error);
+            return res.status(500).json({ message: 'Server connect ETIMEDOUT 172.17.12.151:50000' })
+        }
+        else {
+            var xml = response.body;
+            parseString(xml, (err, result) => {
+                try {
+                    PURCHASEORDER = result['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_VEN_POCREATE_SRK.Response'][0].PURCHASEORDER[0]
+                    resultStatus = result['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_VEN_POCREATE_SRK.Response'][0].RETURN[0].item[0].TYPE[0]
+
+                    if (resultStatus === 'S') {
+                        res.status(200).json(PURCHASEORDER)
+                    }
+                    else {
+                        return res.status(501).json({ message: 'Error in Purchase Order Creation!' });
+                    }
+
+                } catch (error) {
+                    return res.status(501).json({ message: 'Some Error Occured !' });
+                }
+            })
+        }
+        // console.log(response.body);
+    });
+
+})
+
 module.exports = router;
