@@ -1,6 +1,6 @@
 <div class="card m-3">
     <div class="ps-3 pt-2">
-        <mat-icon [routerLink]="['../../dashboard']"
+        <mat-icon [routerLink]="['../purchase-order']"
             style="cursor: pointer; border: 1px solid gray; border-radius: 25px;">
             keyboard_backspace
         </mat-icon>
@@ -82,7 +82,7 @@
             </div>
             <div class="d-flex justify-content-center m-4">
                 <button type="submit" class="btn btn-outline-success"
-                    (click)="createpo(podetails.value)">Update</button>
+                    (click)="createpo(podetails.value)">Create</button>
             </div>
         </form>
     </div>

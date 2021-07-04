@@ -1,9 +1,21 @@
 <div class="card">
     <div class="ps-3 pt-2">
-        <mat-icon [routerLink]="['../../dashboard']"
-            style="cursor: pointer; border: 1px solid gray; border-radius: 25px;">
-            keyboard_backspace
-        </mat-icon>
+        <div class="row">
+            <div class="col">
+                <mat-icon [routerLink]="['../../dashboard']"
+                    style="cursor: pointer; border: 1px solid gray; border-radius: 25px;">
+                    keyboard_backspace
+                </mat-icon>
+            </div>
+            <div class="col d-flex justify-content-end me-3">
+                <mat-list-item [routerLink]="['../po-create']">
+                    <button class="menu-item" mat-flat-button>
+                        <mat-icon>library_add</mat-icon>
+                        Create Purchase Order
+                    </button>
+                </mat-list-item>
+            </div>
+        </div>
     </div>
     <div class="row mt-4">
         <div class="col ms-3 mb-3">
