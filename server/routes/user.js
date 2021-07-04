@@ -16,11 +16,11 @@ router.use(cors()) // Use this after the variable declaration
 
 router.use(bodyParser.json());
 
-router.post('/login', function (req, res, next) {
+router.post('/login', function (req, res) {
 
+    // console.log(req.body);
     let user = req.body.data.email.toUpperCase();
     let pass = req.body.data.password
-
     var options = {
         'method': 'POST',
         'url': 'http://dxktpipo.kaarcloud.com:50000/XISOAPAdapter/MessageServlet?senderParty=&senderService=BC_CUS_LOGIN_SRK&receiverParty=&receiverService=&interface=SI_CUS_LOGIN_SRK&interfaceNamespace=http://srk-portal.com',
@@ -72,8 +72,23 @@ router.post('/login', function (req, res, next) {
     });
 })
 
-router.post('/userDetails', function (req, res, next) {
-    // console.log(req.body.data);
+router.use((req, res, next) => {
+    const authHeader = req.headers["authorization"];
+    const token = authHeader && authHeader.split(" ")[1];
+    if (!token) return res.status(401).send({ message: "No access token" });
+
+    jwt.verify(token, 'secret', (err, payload) => {
+        if (err) {
+            console.error(err);
+            return res.status(403).send({ message: "Access token expired" });
+        }
+        req.user = payload;
+        next();
+    });
+});
+
+router.post('/userDetails', function (req, res) {
+    // console.log(req);
     let user = req.body.data
 
     var options = {
@@ -120,7 +135,7 @@ router.post('/userDetails', function (req, res, next) {
     });
 })
 
-router.post('/editUserDetails', function (req, res, next) {
+router.post('/editUserDetails', function (req, res) {
     const result = req.body.data
     Object.keys(result).forEach((key) => {
         if (result[key] instanceof Array) {
@@ -171,7 +186,7 @@ router.post('/editUserDetails', function (req, res, next) {
 
 })
 
-router.post('/getinqlist', function (req, res, next) {
+router.post('/getinqlist', function (req, res) {
     let user = req.body.data
 
     var options = {
@@ -232,7 +247,7 @@ router.post('/getinqlist', function (req, res, next) {
 
 })
 
-router.post('/getinqdetails', function (req, res, next) {
+router.post('/getinqdetails', function (req, res) {
     let sd_no = req.body.data;
     var options = {
         'method': 'POST',
@@ -294,7 +309,7 @@ router.post('/getinqdetails', function (req, res, next) {
 
 })
 
-router.post('/getsolist', function (req, res, next) {
+router.post('/getsolist', function (req, res) {
     let user = req.body.data
 
     var options = {
@@ -355,7 +370,7 @@ router.post('/getsolist', function (req, res, next) {
 
 })
 
-router.post('/getsodetails', function (req, res, next) {
+router.post('/getsodetails', function (req, res) {
     let sd_no = req.body.data;
     // console.log(sd_no);
     var options = {
@@ -416,7 +431,7 @@ router.post('/getsodetails', function (req, res, next) {
 
 })
 
-router.post('/getdellist', function (req, res, next) {
+router.post('/getdellist', function (req, res) {
     // console.log(req.body.data)
     let user = req.body.data
     var options = {
@@ -533,7 +548,7 @@ router.post('/getdeldetails', function (req, res) {
 
 })
 
-router.post('/getcredit', function (req, res, next) {
+router.post('/getcredit', function (req, res) {
     // console.log(req.body.data)
     let user = req.body.data
     var options = {
@@ -590,7 +605,7 @@ router.post('/getcredit', function (req, res, next) {
 
 })
 
-router.post('/getdebit', function (req, res, next) {
+router.post('/getdebit', function (req, res) {
     let user = req.body.data
     // console.log('debit ' + user)
     var options = {
@@ -648,7 +663,7 @@ router.post('/getdebit', function (req, res, next) {
 
 })
 
-router.post('/getpa', function (req, res, next) {
+router.post('/getpa', function (req, res) {
     let user = req.body.data
 
     var options = {
@@ -706,7 +721,7 @@ router.post('/getpa', function (req, res, next) {
 
 })
 
-router.post('/uploadmasterdata', function (req, res, next) {
+router.post('/uploadmasterdata', function (req, res) {
 
     let user = req.body.data
 

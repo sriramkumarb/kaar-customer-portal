@@ -7,11 +7,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CustomerModule } from './customer/customer.module'
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { UserService } from './service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
 import { VendorModule } from './vendor/vendor.module';
 import { DashboardModule } from './vendor/dashboard/dashboard.module';
-
+import { JwtInterceptor } from './service/jwt.interceptor'
 
 @NgModule({
   declarations: [
@@ -26,10 +26,11 @@ import { DashboardModule } from './vendor/dashboard/dashboard.module';
     HttpClientModule,
     MatIconModule,
     VendorModule,
-    DashboardModule
+    DashboardModule,
   ],
   providers: [
-    UserService
+    UserService,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })
