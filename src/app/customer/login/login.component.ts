@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   constructor(private router: Router,
     private activatedRoute: ActivatedRoute,
     private userService: UserService) {
-    console.log(this.userService.currentUserValue);
+    // console.log(this.userService.currentUserValue);
 
 
     this.loginForm = new FormGroup({
@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
   ngAfterViewInit(): void {
     // redirect to home if already logged in
     if (this.userService.currentUserValue) {
-      console.log(this.userService.currentUserValue);
+      // console.log(this.userService.currentUserValue);
 
       this.router.navigate(['/cus-portal/dashboard']);
     }

@@ -12,6 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { VendorModule } from './vendor/vendor.module';
 import { DashboardModule } from './vendor/dashboard/dashboard.module';
 import { JwtInterceptor } from './service/jwt.interceptor'
+import { EmployeeModule } from './employee/employee.module';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { JwtInterceptor } from './service/jwt.interceptor'
     MatIconModule,
     VendorModule,
     DashboardModule,
+    EmployeeModule
   ],
   providers: [
     UserService,
