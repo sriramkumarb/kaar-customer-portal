@@ -1,0 +1,88 @@
+<mat-toolbar id="mainToolbar" color="primary">
+    <mat-icon (click)="onToolbarMenuToggle()" id="toolbarMenu">subject</mat-icon>
+    Employee-Portal
+    <span class="toolbar-spacer"></span>
+    <mat-icon data-bs-toggle="tooltip" data-bs-placement="bottom" title="Profile" (click)="employeeDetails()"
+        class="toolbar-icon" matBadge="8" matBadgePosition="after" matBadgeColor="accent">account_circle
+    </mat-icon>
+    <mat-icon data-bs-toggle="tooltip" data-bs-placement="bottom" title="logout" class="toolbar-icon d-inline-block"
+        matBadge="8" matBadgePosition="after" matBadgeColor="accent" (click)="logout()">logout
+    </mat-icon>
+</mat-toolbar>
+
+<mat-sidenav-container id="sidenavContainer" fullscreen>
+    <mat-sidenav mode="side" #sidenav id="sidenav" [class.menu-open]="isMenuOpen" [class.menu-close]="!isMenuOpen"
+        opened>
+
+        <mat-list id="menus">
+            <mat-card>
+                <mat-card-header [routerLink]="['../dashboard']">
+                    <div mat-card-avatar class="avatar"></div>
+
+                    <mat-card-title>Sriramkumar B</mat-card-title>
+                    <mat-card-subtitle>Intern</mat-card-subtitle>
+                </mat-card-header>
+            </mat-card>
+            <mat-list-item [routerLink]="['./']">
+                <button class="menu-item" mat-flat-button>
+                    <mat-icon>dashboard</mat-icon>
+                    Dashboard
+                </button>
+            </mat-list-item>
+
+            <!-- <mat-list-item [routerLink]="['quotation']">
+                <button class="menu-item" mat-flat-button>
+                    <mat-icon>request_quote</mat-icon>
+                    Request for Quotation
+                </button>
+            </mat-list-item>
+
+            <mat-list-item [routerLink]="['purchase-order']">
+                <button class="menu-item" mat-flat-button>
+                    <mat-icon>inventory</mat-icon>
+                    Purchase Order
+                </button>
+            </mat-list-item>
+
+            <mat-list-item [routerLink]="['goods-receipt']">
+                <button class="menu-item" mat-flat-button>
+                    <mat-icon>local_shipping</mat-icon>
+                    Goods Receipt
+                </button>
+            </mat-list-item>
+
+            <mat-list-item [routerLink]="['finance-sheet']">
+                <button class="menu-item" mat-flat-button>
+                    <mat-icon>account_balance_wallet</mat-icon>
+                    Financial Sheet
+                </button>
+            </mat-list-item>
+
+            <mat-list-item [routerLink]="['invoice']">
+                <button class="menu-item" mat-flat-button>
+                    <mat-icon>description</mat-icon>
+                    Invoice Details
+                </button>
+            </mat-list-item>
+
+            <mat-list-item [routerLink]="['payment']">
+                <button class="menu-item" mat-flat-button>
+                    <mat-icon>payments</mat-icon>
+                    Payment and Ageing
+                </button>
+            </mat-list-item>
+
+            <mat-list-item [routerLink]="['credit']">
+                <button class="menu-item" mat-flat-button>
+                    <mat-icon>credit_card</mat-icon>
+                    Credit/Debit Memo
+                </button>
+            </mat-list-item> -->
+
+        </mat-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content [ngStyle]="{ 'margin-left.px': contentMargin }">
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>

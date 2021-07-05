@@ -12,4 +12,12 @@ export class EmployeeService {
   login(data: any) {
     return this.http.post(this.API_URL + '/emp/login', { data })
   }
+
+  getEmployeeDetails(data: any) {
+    return this.http.post(this.API_URL + '/emp/details', { data })
+  }
+
+  editEmployeeDetails(data: any) {
+    return this.http.post(this.API_URL + '/emp/edit', { data })
+  }
 }

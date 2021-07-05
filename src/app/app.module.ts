@@ -10,7 +10,6 @@ import { UserService } from './service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
 import { VendorModule } from './vendor/vendor.module';
-import { DashboardModule } from './vendor/dashboard/dashboard.module';
 import { JwtInterceptor } from './service/jwt.interceptor'
 import { EmployeeModule } from './employee/employee.module';
 
@@ -27,7 +26,6 @@ import { EmployeeModule } from './employee/employee.module';
     HttpClientModule,
     MatIconModule,
     VendorModule,
-    DashboardModule,
     EmployeeModule
   ],
   providers: [

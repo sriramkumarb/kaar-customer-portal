@@ -16,7 +16,7 @@ router.use(cors()) // Use this after the variable declaration
 
 router.use(bodyParser.json());
 
-router.use('/emp/login', function (req, res) {
+router.post('/emp/login', function (req, res) {
     let username = req.body.data.Username
     let password = req.body.data.password
 
@@ -60,6 +60,92 @@ router.use('/emp/login', function (req, res) {
                 return res.status(500).json({ message: 'SAP Server Error!' })
             }
         }
+    });
+
+})
+
+router.post('/emp/details', function (req, res) {
+
+    let username = req.body.data
+    var options = {
+        'method': 'GET',
+        'url': 'http://dxktpipo.kaarcloud.com:50000/RESTAdapter/srk-emp/detail',
+        'headers': {
+            'Content-Type': 'application/json',
+            'Cookie': 'JSESSIONID=DYHXzmEbB2WCS_BSBTlVPjxD4rJ2egF-Y2kA_SAPm2kaQX88LcvvbJmYGwehRslZ; JSESSIONMARKID=k0OC9gEwLK82JQkSZYCUw1jA4zN3AgmPLYcn5jaQA; saplb_*=(J2EE6906720)6906750'
+        },
+        body: JSON.stringify({
+            "EMPLOYEE_ID": username
+        })
+
+    };
+    request(options, function (error, response) {
+        if (error) {
+            console.log(error);
+            return res.status(500).json({ message: 'Server connect ETIMEDOUT 172.17.12.151:50000' })
+        }
+        else {
+            try {
+                data = JSON.parse(response.body)
+                if (data.RETURN.TYPE === 'S') {
+                    emp_data = data.EMPLOYEE_DETAILS
+                    return res.status(200).json(emp_data);
+                }
+                else {
+                    return res.status(501).json({ message: ' No details Found!' });
+                }
+            } catch (error) {
+                return res.status(500).json({ message: 'SAP Server Error!' })
+            }
+        }
+    });
+
+})
+
+router.post('/emp/edit', function (req, res) {
+    let details = req.body.data
+
+    var options = {
+        'method': 'POST',
+        'url': 'http://dxktpipo.kaarcloud.com:50000/RESTAdapter/srk-emp/edit',
+        'headers': {
+            'Content-Type': 'application/json',
+            'Cookie': 'JSESSIONID=DYHXzmEbB2WCS_BSBTlVPjxD4rJ2egF-Y2kA_SAPm2kaQX88LcvvbJmYGwehRslZ; JSESSIONMARKID=k0OC9gEwLK82JQkSZYCUw1jA4zN3AgmPLYcn5jaQA; saplb_*=(J2EE6906720)6906750'
+        },
+        body: JSON.stringify({
+            "EMPLOYEE_ID": details.EMPLOYEE_ID,
+            "F_NAME": details.F_NAME,
+            "L_NAME": details.L_NAME,
+            "TITLE": details.TITLE,
+            "NATIONALITY": details.NATIONALITY,
+            "STREET": details.STREET,
+            "CITY": details.CITY,
+            "COUNTRY": details.COUNTRY,
+            "POSTAL_CODE": details.POSTAL_CODE,
+            "TELEPHONE": details.TELEPHONE,
+        })
+
+    };
+    request(options, function (error, response) {
+        if (error) {
+            console.log(error);
+            return res.status(500).json({ message: 'Server connect ETIMEDOUT 172.17.12.151:50000' })
+        }
+        else {
+            try {
+                data = JSON.parse(response.body)
+                if (data.RETURN.TYPE === 'S') {
+                    emp_res = data.RETURN
+                    return res.status(200).json(emp_res);
+                }
+                else {
+                    return res.status(501).json({ message: 'Update Failed!' });
+                }
+            } catch (error) {
+                return res.status(500).json({ message: 'SAP Server Error!' })
+            }
+        }
+
     });
 
 })

@@ -11,6 +11,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatButtonModule } from '@angular/material/button';
+import { DashboardModule } from './dashboard/dashboard.module';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatIconModule,
     MatSnackBarModule,
     MatButtonModule,
+    DashboardModule
   ]
 })
 export class EmployeeModule { }
