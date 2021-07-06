@@ -43,7 +43,7 @@ router.post('/ven/login', function (req, res) {
 
                 if (res_status === 'S') {
                     // generate token
-                    let token = jwt.sign({ username: user }, 'secret', { expiresIn: '3h' });
+                    let token = jwt.sign({ username: user }, 'secret', { expiresIn: '48h' });
 
                     let ven_token = {
                         username: user,
@@ -64,6 +64,21 @@ router.post('/ven/login', function (req, res) {
 
 
 })
+
+router.use((req, res, next) => {
+    const authHeader = req.headers["authorization"];
+    const token = authHeader && authHeader.split(" ")[1];
+    if (!token) return res.status(401).send({ message: "No access token" });
+
+    jwt.verify(token, 'secret', (err, payload) => {
+        if (err) {
+            console.error(err);
+            return res.status(403).send({ message: "Access token expired" });
+        }
+        req.user = payload;
+        next();
+    });
+});
 
 router.post('/ven/details', function (req, res) {
 

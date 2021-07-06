@@ -44,7 +44,7 @@ router.post('/emp/login', function (req, res) {
                 data = JSON.parse(response.body)
                 if (data.RETURN.TYPE === 'S') {
                     // generate token
-                    let token = jwt.sign({ username: username }, 'secret', { expiresIn: '3h' });
+                    let token = jwt.sign({ username: username }, 'secret', { expiresIn: '48h' });
 
                     let emp_token = {
                         username: username,
@@ -64,15 +64,30 @@ router.post('/emp/login', function (req, res) {
 
 })
 
-router.post('/emp/details', function (req, res) {
+router.use((req, res, next) => {
+    const authHeader = req.headers["authorization"];
+    const token = authHeader && authHeader.split(" ")[1];
+    if (!token) return res.status(401).send({ message: "No access token" });
 
+    jwt.verify(token, 'secret', (err, payload) => {
+        if (err) {
+            console.error(err);
+            return res.status(403).send({ message: "Access token expired" });
+        }
+        req.user = payload;
+        next();
+    });
+});
+
+router.post('/emp/details', function (req, res) {
     let username = req.body.data
     var options = {
         'method': 'GET',
         'url': 'http://dxktpipo.kaarcloud.com:50000/RESTAdapter/srk-emp/detail',
         'headers': {
+            'Authorization': 'Basic UE9VU0VSOlRlY2hAMjAyMQ==',
             'Content-Type': 'application/json',
-            'Cookie': 'JSESSIONID=DYHXzmEbB2WCS_BSBTlVPjxD4rJ2egF-Y2kA_SAPm2kaQX88LcvvbJmYGwehRslZ; JSESSIONMARKID=k0OC9gEwLK82JQkSZYCUw1jA4zN3AgmPLYcn5jaQA; saplb_*=(J2EE6906720)6906750'
+            'Cookie': 'JSESSIONID=9cQh1ydQjkSRsmeAswL56QdoNnF6egF-Y2kA_SAPTuJ11zhIqpPXm0OJ22UDz4fv; JSESSIONMARKID=jHKTVAkG-48-xJPl0BXkIkaafE5HRqC-L3q35jaQA; saplb_*=(J2EE6906720)6906750'
         },
         body: JSON.stringify({
             "EMPLOYEE_ID": username
@@ -87,6 +102,7 @@ router.post('/emp/details', function (req, res) {
         else {
             try {
                 data = JSON.parse(response.body)
+                console.log(data);
                 if (data.RETURN.TYPE === 'S') {
                     emp_data = data.EMPLOYEE_DETAILS
                     return res.status(200).json(emp_data);
@@ -109,8 +125,9 @@ router.post('/emp/edit', function (req, res) {
         'method': 'POST',
         'url': 'http://dxktpipo.kaarcloud.com:50000/RESTAdapter/srk-emp/edit',
         'headers': {
+            'Authorization': 'Basic UE9VU0VSOlRlY2hAMjAyMQ==',
             'Content-Type': 'application/json',
-            'Cookie': 'JSESSIONID=DYHXzmEbB2WCS_BSBTlVPjxD4rJ2egF-Y2kA_SAPm2kaQX88LcvvbJmYGwehRslZ; JSESSIONMARKID=k0OC9gEwLK82JQkSZYCUw1jA4zN3AgmPLYcn5jaQA; saplb_*=(J2EE6906720)6906750'
+            'Cookie': 'JSESSIONID=9cQh1ydQjkSRsmeAswL56QdoNnF6egF-Y2kA_SAPTuJ11zhIqpPXm0OJ22UDz4fv; JSESSIONMARKID=jHKTVAkG-48-xJPl0BXkIkaafE5HRqC-L3q35jaQA; saplb_*=(J2EE6906720)6906750'
         },
         body: JSON.stringify({
             "EMPLOYEE_ID": details.EMPLOYEE_ID,
