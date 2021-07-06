@@ -33,7 +33,9 @@ export class LayoutComponent implements OnInit {
   }
 
   logout() {
-    console.log('logout clicked');
+    this.employeeservice.logout()
+    this.router.navigate(['/emp-portal/login'])
+    location.reload()
 
   }
 

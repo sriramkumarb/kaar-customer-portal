@@ -23,6 +23,15 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  ngAfterViewInit(): void {
+    // redirect to home if already logged in
+    if (this.employeeservice.currentUserValue) {
+      console.log(this.employeeservice.currentUserValue);
+
+      this.router.navigate(['/emp-portal/dashboard']);
+    }
+  }
+
   isValid(controlName: any) {
     return this.loginForm.get(controlName)?.invalid && this.loginForm.get(controlName)?.touched;
 
@@ -33,8 +42,13 @@ export class LoginComponent implements OnInit {
       this.employeeservice.login(this.loginForm.value).subscribe(data => {
         localStorage.setItem('employee', JSON.stringify(data));
         this.router.navigate(['/emp-portal/dashboard'], { relativeTo: this.activatedRoute });
+        location.reload()
       })
     }
   }
 
+}
+
+function ngAfterViewInit() {
+  throw new Error('Function not implemented.');
 }
