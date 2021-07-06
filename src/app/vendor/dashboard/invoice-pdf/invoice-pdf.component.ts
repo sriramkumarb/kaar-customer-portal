@@ -38,6 +38,19 @@ export class InvoicePdfComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onClickDownloadPdf() {
+    let base64String = this.base64_data;
+    this.downloadPdf(base64String, "sample");
+  }
+
+  downloadPdf(base64String: any, fileName: any) {
+    const source = `data:application/pdf;base64,${base64String}`;
+    const link = document.createElement("a");
+    link.href = source;
+    link.download = `${fileName}.pdf`
+    link.click();
+  }
+
   _base64ToArrayBuffer(base64: any) {
     var binary_string = base64.replace(/\\n/g, '');
     binary_string = window.atob(base64);

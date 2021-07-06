@@ -15,6 +15,14 @@
         </div>
     </div>
 
+    <div *ngIf="!show" class="mb-4 d-flex justify-content-end me-3">
+        <mat-list-item>
+            <button class="menu-item" mat-flat-button (click)="onClickDownloadPdf()">
+                <mat-icon>file_download</mat-icon>
+            </button>
+        </mat-list-item>
+    </div>
+
     <div class="pdf-container">
         <pdf-viewer [src]="src" [zoom]="1.5" [show-borders]="true"></pdf-viewer>
     </div>
