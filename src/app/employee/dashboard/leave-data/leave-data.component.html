@@ -1,0 +1,45 @@
+<div class="card">
+    <div class="row">
+        <div class="col">
+            <div class="ps-3 mt-3">
+                <mat-icon [routerLink]="['../']" style="cursor: pointer; border: 1px solid gray; border-radius: 25px;">
+                    keyboard_backspace
+                </mat-icon>
+            </div>
+        </div>
+        <div class="col d-flex justify-content-end me-3 mt-3">
+            <mat-list-item [routerLink]="['../leave-request']">
+                <button class="menu-item" mat-flat-button>
+                    <mat-icon>library_add</mat-icon>
+                    Create Leave Request
+                </button>
+            </mat-list-item>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row mt-4 mb-4">
+            <div class="col ms-3 mb-3">
+                <h2><b>Leave Data for {{ employee }}</b></h2>
+            </div>
+            <div class="col me-3 mb-3 d-flex justify-content-end">
+                <form class="">
+                    <div class="input-group">
+                        <input #search class="form-control" type="text" placeholder="Search..."
+                            (keyup)="onSearch(search.value)">
+                        <div class="input-group-btn">
+                            <button class="menu-item" (click)='onSearch(search.value)' mat-flat-button
+                                style="border: 1px solid rgb(218, 213, 213);">
+                                <mat-icon>search</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <ng2-smart-table [settings]="settings" [source]="source">
+            </ng2-smart-table>
+        </div>
+    </div>
+</div>

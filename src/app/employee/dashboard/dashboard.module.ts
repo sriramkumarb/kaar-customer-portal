@@ -18,13 +18,17 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
+import { LeaveDataComponent } from './leave-data/leave-data.component';
+import { LeaveRequestComponent } from './leave-request/leave-request.component';
 
 
 @NgModule({
   declarations: [
     HomeComponent,
     LayoutComponent,
-    EmpDetailsComponent
+    EmpDetailsComponent,
+    LeaveDataComponent,
+    LeaveRequestComponent
   ],
   imports: [
     CommonModule,

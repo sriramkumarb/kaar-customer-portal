@@ -37,4 +37,16 @@ export class EmployeeService {
   editEmployeeDetails(data: any) {
     return this.http.post(this.API_URL + '/emp/edit', { data })
   }
+
+  getEmployeeLeaveDetails(data: any) {
+    return this.http.post(this.API_URL + '/emp/leave-details', { data })
+  }
+
+  createEmployeeLeaveRequest(data: any) {
+    return this.http.post(this.API_URL + '/emp/leave-request', { data })
+  }
+
+  getEmployeeLeaveTypes(data: any) {
+    return this.http.post(this.API_URL + '/emp/leave-types', { data })
+  }
 }

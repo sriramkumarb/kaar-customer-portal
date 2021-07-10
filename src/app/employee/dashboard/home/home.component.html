@@ -1,1 +1,58 @@
-<p>home works!</p>
+<section id="get-started" class="padd-section text-center">
+
+    <div class="container" data-aos="fade-up">
+        <div class="section-title text-center">
+
+            <h2>Employee Dashboard</h2>
+            <p class="separator">Employee Dashboard and it's Features!</p>
+
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="100">
+                <div class="feature-block">
+
+                    <mat-icon>exit_to_app</mat-icon>
+                    <h4>Leave Data</h4>
+                    <p>This Section Contains all the Leave details of the Employee!</p>
+                    <a [routerLink]="['leave-data']">
+                        <mat-icon style="border: 1px solid black; width: 2ch; border-radius: 100px;">east</mat-icon>
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="200">
+                <div class="feature-block">
+
+                    <mat-icon>paid</mat-icon>
+                    <h4>Salary Pay Slip</h4>
+                    <p>This Section Contains all the Salary Pay Slip records of the Employee!</p>
+                    <a [routerLink]="['purchase-order']">
+                        <mat-icon style="border: 1px solid black; width: 2ch; border-radius: 100px;">east</mat-icon>
+                    </a>
+
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4" data-aos="zoom-in" data-aos-delay="300">
+                <div class="feature-block">
+
+                    <mat-icon>account_balance_wallet</mat-icon>
+                    <h4>Final Settlement</h4>
+                    <p>This Section gives the details of the Employee Final Settlement!
+                    </p>
+                    <a [routerLink]="['goods-receipt']">
+                        <mat-icon style="border: 1px solid black; width: 2ch; border-radius: 100px;">east</mat-icon>
+                    </a>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</section>

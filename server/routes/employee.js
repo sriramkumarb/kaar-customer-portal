@@ -102,7 +102,6 @@ router.post('/emp/details', function (req, res) {
         else {
             try {
                 data = JSON.parse(response.body)
-                console.log(data);
                 if (data.RETURN.TYPE === 'S') {
                     emp_data = data.EMPLOYEE_DETAILS
                     return res.status(200).json(emp_data);
@@ -163,6 +162,127 @@ router.post('/emp/edit', function (req, res) {
             }
         }
 
+    });
+
+})
+
+router.post('/emp/leave-details', function (req, res) {
+    let user = req.body.data
+    var options = {
+        'method': 'GET',
+        'url': 'http://dxktpipo.kaarcloud.com:50000/RESTAdapter/srk-emp/leave-detail',
+        'headers': {
+            'Authorization': 'Basic UE9VU0VSOlRlY2hAMjAyMQ==',
+            'Content-Type': 'application/json',
+            'Cookie': 'JSESSIONID=PuFq05NQw0qDIZu7f1VrTIRgtP9_egF-Y2kA_SAPShCUqE8-drXV-BPNCv2hUS9T; JSESSIONMARKID=UP6U4QdtPLEhE5dV4vKJEUzV0akl83q2PBAH5jaQA; saplb_*=(J2EE6906720)6906750'
+        },
+        body: JSON.stringify({
+            "EMPLOYEE_ID": user
+        })
+
+    };
+
+    request(options, function (error, response) {
+        if (error) {
+            console.log(error);
+            return res.status(500).json({ message: 'Server connect ETIMEDOUT 172.17.12.151:50000' })
+        }
+        else {
+            try {
+                data = JSON.parse(response.body)
+                if (data.RETURN.TYPE === 'S') {
+                    leave_data = data.RESULT.item
+                    return res.status(200).json(leave_data);
+                }
+                else {
+                    return res.status(501).json({ message: ' No details Found!' });
+                }
+            } catch (error) {
+                return res.status(500).json({ message: 'SAP Server Error!' })
+            }
+        }
+    });
+
+})
+
+router.post('/emp/leave-request', function (req, res) {
+    var options = {
+        'method': 'POST',
+        'url': 'http://dxktpipo.kaarcloud.com:50000/RESTAdapter/srk-emp/leave-request',
+        'headers': {
+            'Authorization': 'Basic UE9VU0VSOlRlY2hAMjAyMQ==',
+            'Content-Type': 'application/json',
+            'Cookie': 'JSESSIONID=1hmhUhLac0PTegfh9KWXieI6poqRegF-Y2kA_SAPYgNS_4muhx8K1I5r_a64ajMU; JSESSIONMARKID=JRviEwb_d60GVlQcWNfEgeDAtB3-WhicRvDH5jaQA; saplb_*=(J2EE6906720)6906750'
+        },
+        body: JSON.stringify({
+            "EMPLOYEE_ID": req.body.data.EmployeeNumber,
+            "ENDING_DATE": req.body.data.EndDate,
+            "LEAVE_TYPE": req.body.data.LeaveType,
+            "STARTING_DATE": req.body.data.StartDate
+        })
+
+    };
+    request(options, function (error, response) {
+        if (error) {
+            console.log(error);
+            return res.status(500).json({ message: 'Server connect ETIMEDOUT 172.17.12.151:50000' })
+        }
+        else {
+            try {
+                data = JSON.parse(response.body)
+                if (data.RETURN.TYPE === 'S') {
+                    leave_data = data.RETURN.MESSAGE
+                    return res.status(200).json(leave_data);
+                }
+                else {
+                    return res.status(501).json({ message: ' Leave Request Not Created!' });
+                }
+            } catch (error) {
+                return res.status(500).json({ message: 'SAP Server Error!' })
+            }
+        }
+    });
+
+})
+
+router.post('/emp/leave-types', function (req, res) {
+    let username = req.body.data
+    var options = {
+        'method': 'GET',
+        'url': 'http://dxktpipo.kaarcloud.com:50000/RESTAdapter/srk-emp/leave-type',
+        'headers': {
+            'Authorization': 'Basic UE9VU0VSOlRlY2hAMjAyMQ==',
+            'Content-Type': 'application/json',
+            'Cookie': 'JSESSIONID=LjU_8yI5oUE8s5Ri6l3wkNHFxuiPegF-Y2kA_SAPR5CKuKP4P-kxG0xDAG5cWVp7; JSESSIONMARKID=QMnmDwBTgpiE-ETLkaHe7Zjuj7QLua52gt_n5jaQA; saplb_*=(J2EE6906720)6906750'
+        },
+        body: JSON.stringify({
+            "EMPLOYEE_ID": username
+        })
+
+    };
+    request(options, function (error, response) {
+        if (error) {
+            console.log(error);
+            return res.status(500).json({ message: 'Server connect ETIMEDOUT 172.17.12.151:50000' })
+        }
+        else {
+            try {
+                data = JSON.parse(response.body)
+                leave_types = data.LEAVE_TYPES.item
+                leave_quota = data.LEAVE_QUOTA.item
+                leave_data = {
+                    leave_types,
+                    leave_quota
+                }
+                if (data.RETURN.TYPE === 'S') {
+                    return res.status(200).json(leave_data);
+                } else {
+                    return res.status(501).json({ message: ' No details Found!' });
+                }
+            } catch (error) {
+                return res.status(500).json({ message: 'SAP Server Error!' })
+            }
+        }
     });
 
 })

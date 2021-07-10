@@ -26,8 +26,6 @@ export class LoginComponent implements OnInit {
   ngAfterViewInit(): void {
     // redirect to home if already logged in
     if (this.employeeservice.currentUserValue) {
-      console.log(this.employeeservice.currentUserValue);
-
       this.router.navigate(['/emp-portal/dashboard']);
     }
   }
