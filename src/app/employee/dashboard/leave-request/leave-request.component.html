@@ -1,89 +1,114 @@
 <div class="m-3">
-    <div class="ps-3 pt-2">
-        <mat-icon [routerLink]="['../leave-data']"
-            style="cursor: pointer; border: 1px solid gray; border-radius: 25px;">
-            keyboard_backspace
-        </mat-icon>
+    <div class="row">
+        <div class="col">
+            <div class="ps-3 mt-3">
+                <mat-icon [routerLink]="['../leave-data']"
+                    style="cursor: pointer; border: 1px solid gray; border-radius: 25px;">
+                    keyboard_backspace
+                </mat-icon>
+            </div>
+        </div>
+        <div class="col d-flex justify-content-end me-3 mt-3">
+            <mat-list-item>
+                <button (click)="openModal()" class="menu-item" mat-flat-button>
+                    <mat-icon (click)="openModal()">info</mat-icon>
+                    Leave Quota
+                </button>
+            </mat-list-item>
+        </div>
     </div>
     <div class="p-4">
         <div class="mb-4 d-flex justify-content-center">
             <h2>Create Leave Request!</h2>
         </div>
-        <div class="row">
-            <!-- <div class="col m-4 d-flex justify-content-center">
-                <table>
-                    <tbody>
-                        <tr *ngFor="let item of leave_quota | keyvalue">
-                            <td>
-                                <p>{{ item.key }}</p>
-                            </td>
-                            <td>
-                                <p>:</p>
-                            </td>
-                            <td>
-                                <p>{{ item.value }}</p>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div> -->
-            <div class="m-4 d-flex justify-content-center">
-                <div class="card" style="border: 1px solid green;">
-                    <div class="card-body">
-                        <form #formRef="ngForm" (ngSubmit)="onSubmit(formRef.value)">
-                            <div class="form-group row m-3">
-                                <label for="EmployeeNumber" class="col-sm-2 col-form-label"
-                                    style="font-weight: bold;">Employee
-                                    Number</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" name="EmployeeNumber"
-                                        #EmployeeNumber="ngModel" [(ngModel)]="employee">
-                                </div>
+        <div class="m-4 d-flex justify-content-center">
+            <div class="card" style="border: 1px solid green;">
+                <div class="card-body">
+                    <form #formRef="ngForm" (ngSubmit)="onSubmit(formRef.value)">
+                        <div class="form-group row m-3">
+                            <label for="EmployeeNumber" class="col-sm-2 col-form-label"
+                                style="font-weight: bold;">Employee
+                                Number</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" name="EmployeeNumber" #EmployeeNumber="ngModel"
+                                    [(ngModel)]="employee">
                             </div>
-                            <div class="form-group row m-3">
-                                <label for="LeaveType" class="col-sm-2 col-form-label" style="font-weight: bold;">Leave
-                                    Type</label>
-                                <div class="col-sm-10">
-                                    <select class="form-control" name="LeaveType" ngModel="" #LeaveType="ngModel">
-                                        <option *ngFor="let item of leave_types" value="{{item.AWART}}">{{
-                                            item.AWART }} -
-                                            {{ item.ATEXT }}</option>
-                                    </select>
-                                </div>
+                        </div>
+                        <div class="form-group row m-3">
+                            <label for="LeaveType" class="col-sm-2 col-form-label" style="font-weight: bold;">Leave
+                                Type</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" name="LeaveType" ngModel="" #LeaveType="ngModel">
+                                    <option *ngFor="let item of leave_types" value="{{item.AWART}}">{{
+                                        item.AWART }} -
+                                        {{ item.ATEXT }}</option>
+                                </select>
                             </div>
-                            <div class="row m-3">
-                                <div class="col">
-                                    <div class="form-group row">
-                                        <label for="StartDate" class="col-sm col-form-label"
-                                            style="font-weight: bold;">Start
-                                            Date</label>
-                                        <div class="col-sm">
-                                            <input type="date" class="form-control" name="StartDate"
-                                                #StartDate="ngModel" ngModel>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="form-group row">
-                                        <label for="EndDate" class="col-sm col-form-label"
-                                            style="font-weight: bold;">End
-                                            Date</label>
-                                        <div class="col-sm">
-                                            <input type="date" class="form-control" name="EndDate" #EndDate="ngModel"
-                                                ngModel>
-                                        </div>
+                        </div>
+                        <div class="row m-3">
+                            <div class="col">
+                                <div class="form-group row">
+                                    <label for="StartDate" class="col-sm col-form-label"
+                                        style="font-weight: bold;">Start
+                                        Date</label>
+                                    <div class="col-sm">
+                                        <input type="date" class="form-control" name="StartDate" #StartDate="ngModel"
+                                            ngModel>
                                     </div>
                                 </div>
                             </div>
-                            <div class="text-center">
-                                <button [disabled]="show" type="submit" class="m-3 btn btn-success">Create</button>
+                            <div class="col">
+                                <div class="form-group row">
+                                    <label for="EndDate" class="col-sm col-form-label" style="font-weight: bold;">End
+                                        Date</label>
+                                    <div class="col-sm">
+                                        <input type="date" class="form-control" name="EndDate" #EndDate="ngModel"
+                                            ngModel>
+                                    </div>
+                                </div>
                             </div>
-                        </form>
-                    </div>
-                    <div class="m-2 d-flex justify-content-center">
-                        <h3 style="font-weight: bold;">{{ result }}</h3>
-                    </div>
+                        </div>
+                        <div class="text-center">
+                            <button [disabled]="show" type="submit" class="m-3 btn btn-success">Create</button>
+                        </div>
+                    </form>
                 </div>
+                <div class="m-2 d-flex justify-content-center">
+                    <h3 style="font-weight: bold;">{{ result }}</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Leave Quota for {{ employee }}</h4>
+                <mat-icon style="cursor: pointer;" (click)="onCloseHandled()">close</mat-icon>
+            </div>
+            <div class="modal-body">
+                <div class="col m-4 d-flex justify-content-center">
+                    <table>
+                        <tbody>
+                            <tr *ngFor="let item of leave_quota | keyvalue">
+                                <td>
+                                    <p>{{ item.key }}</p>
+                                </td>
+                                <td>
+                                    <p>:</p>
+                                </td>
+                                <td>
+                                    <p>{{ item.value }}</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" (click)="onCloseHandled()">Close</button>
             </div>
         </div>
     </div>

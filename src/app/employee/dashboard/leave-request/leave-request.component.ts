@@ -13,7 +13,7 @@ export class LeaveRequestComponent implements OnInit {
   leave_quota: any
   show: any = true
   result: any = ''
-
+  display = "none";
   constructor(private router: Router,
     private activatedRoute: ActivatedRoute,
     private employeeservice: EmployeeService) {
@@ -32,6 +32,13 @@ export class LeaveRequestComponent implements OnInit {
     this.employeeservice.createEmployeeLeaveRequest(formValue).subscribe((res: any) => {
       this.result = res
     })
+  }
+
+  openModal() {
+    this.display = "block";
+  }
+  onCloseHandled() {
+    this.display = "none";
   }
 
 }
