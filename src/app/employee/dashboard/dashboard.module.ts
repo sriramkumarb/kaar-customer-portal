@@ -20,6 +20,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
 import { LeaveDataComponent } from './leave-data/leave-data.component';
 import { LeaveRequestComponent } from './leave-request/leave-request.component';
+import { PaySlipComponent } from './pay-slip/pay-slip.component';
+import { PaySlipDetailsComponent } from './pay-slip-details/pay-slip-details.component';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 
 @NgModule({
@@ -28,7 +31,9 @@ import { LeaveRequestComponent } from './leave-request/leave-request.component';
     LayoutComponent,
     EmpDetailsComponent,
     LeaveDataComponent,
-    LeaveRequestComponent
+    LeaveRequestComponent,
+    PaySlipComponent,
+    PaySlipDetailsComponent
   ],
   imports: [
     CommonModule,
@@ -47,6 +52,7 @@ import { LeaveRequestComponent } from './leave-request/leave-request.component';
     MatListModule,
     MatCardModule,
     MatSelectModule,
+    PdfViewerModule,
   ]
 })
 export class DashboardModule { }

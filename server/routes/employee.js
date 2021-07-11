@@ -287,4 +287,83 @@ router.post('/emp/leave-types', function (req, res) {
 
 })
 
+router.post('/emp/pay-slip', function (req, res) {
+    let user = req.body.data
+    var options = {
+        'method': 'GET',
+        'url': 'http://dxktpipo.kaarcloud.com:50000/RESTAdapter/srk-emp/pslist',
+        'headers': {
+            'Authorization': 'Basic UE9VU0VSOlRlY2hAMjAyMQ==',
+            'Content-Type': 'application/json',
+            'Cookie': 'JSESSIONID=WukiqvjbFM96b6cyD1Vgf1XI1kmVegF-Y2kA_SAP6wxOZlzItEMs-AGJe5aDY7_I; JSESSIONMARKID=OeR_7gr15-aQ1a3de07FRm9Vy1M47tINebRX5jaQA; saplb_*=(J2EE6906720)6906750'
+        },
+        body: JSON.stringify({
+            "EMPLOYEE_ID": user
+        })
+
+    };
+    request(options, function (error, response) {
+        if (error) {
+            console.log(error);
+            return res.status(500).json({ message: 'Server connect ETIMEDOUT 172.17.12.151:50000' })
+        }
+        else {
+            try {
+                data = JSON.parse(response.body)
+                len = data.RESULT.length
+                if (len == undefined && typeof len !== 'number') {
+                    ps_data = data.RESULT.item
+                    return res.status(200).json(ps_data);
+                }
+                else {
+                    return res.status(501).json({ message: ' No details Found!' });
+                }
+            } catch (error) {
+                return res.status(500).json({ message: 'SAP Server Error!' })
+            }
+        }
+    });
+
+})
+
+router.post('/emp/pay-slip/details', function (req, res) {
+    let user = req.body.data[0]
+    let seq_no = req.body.data[1]
+    var options = {
+        'method': 'GET',
+        'url': 'http://dxktpipo.kaarcloud.com:50000/RESTAdapter/srk-emp/psdet',
+        'headers': {
+            'Authorization': 'Basic UE9VU0VSOlRlY2hAMjAyMQ==',
+            'Content-Type': 'application/json',
+            'Cookie': 'JSESSIONID=WukiqvjbFM96b6cyD1Vgf1XI1kmVegF-Y2kA_SAP6wxOZlzItEMs-AGJe5aDY7_I; JSESSIONMARKID=OeR_7gr15-aQ1a3de07FRm9Vy1M47tINebRX5jaQA; saplb_*=(J2EE6906720)6906750'
+        },
+        body: JSON.stringify({
+            "EMPLOYEE_ID": user,
+            "SEQUENCE_NO": seq_no
+        })
+
+    };
+    request(options, function (error, response) {
+        if (error) {
+            console.log(error);
+            return res.status(500).json({ message: 'Server connect ETIMEDOUT 172.17.12.151:50000' })
+        }
+        else {
+            try {
+                data = JSON.parse(response.body)
+                if (data.RETURN_PDF.TYPE === 'S') {
+                    base64_url = data.BASE64_URL
+                    return res.status(200).json(base64_url);
+                }
+                else {
+                    return res.status(501).json({ message: ' No details Found!' });
+                }
+            } catch (error) {
+                return res.status(500).json({ message: 'SAP Server Error!' })
+            }
+        }
+    });
+
+})
+
 module.exports = router;

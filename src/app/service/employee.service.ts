@@ -49,4 +49,12 @@ export class EmployeeService {
   getEmployeeLeaveTypes(data: any) {
     return this.http.post(this.API_URL + '/emp/leave-types', { data })
   }
+
+  getSalaryPaySlip(data: any) {
+    return this.http.post(this.API_URL + '/emp/pay-slip', { data })
+  }
+
+  getSalaryPaySlipDetails(data: any) {
+    return this.http.post(this.API_URL + '/emp/pay-slip/details', { data })
+  }
 }

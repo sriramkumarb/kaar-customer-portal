@@ -6,6 +6,8 @@ import { HomeComponent } from './home/home.component';
 import { LayoutComponent } from './layout/layout.component';
 import { LeaveDataComponent } from './leave-data/leave-data.component';
 import { LeaveRequestComponent } from './leave-request/leave-request.component';
+import { PaySlipDetailsComponent } from './pay-slip-details/pay-slip-details.component';
+import { PaySlipComponent } from './pay-slip/pay-slip.component';
 
 const dashboardRoutes: Routes = [
   {
@@ -28,6 +30,14 @@ const dashboardRoutes: Routes = [
       {
         path: 'leave-request',
         component: LeaveRequestComponent
+      },
+      {
+        path: 'pay-slip',
+        component: PaySlipComponent
+      },
+      {
+        path: 'pay-slip/detail/:SEQUENCENUMBER',
+        component: PaySlipDetailsComponent
       }
     ]
   }
