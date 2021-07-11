@@ -40,7 +40,8 @@ export class InvoicePdfComponent implements OnInit {
 
   onClickDownloadPdf() {
     let base64String = this.base64_data;
-    this.downloadPdf(base64String, "sample");
+    let name = this.user + '-' + this.number + '-' + this.year
+    this.downloadPdf(base64String, name);
   }
 
   downloadPdf(base64String: any, fileName: any) {
