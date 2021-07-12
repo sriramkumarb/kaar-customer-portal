@@ -13,6 +13,14 @@ export class LayoutComponent implements OnInit {
     private employeeservice: EmployeeService) { }
 
   ngOnInit(): void {
+
+    let s = document.createElement('script');
+    s.setAttribute('src', "https://cdn.cai.tools.sap/webchat/webchat.js");
+    s.setAttribute('channelId', '32c162bb-2ed5-4e92-a03b-f61ad77b49ca');
+    s.setAttribute('token', '854c865957abacc72165588790e97448');
+    s.setAttribute('id', 'cai-webchat');
+    document.body.appendChild(s);
+
   }
 
   isMenuOpen = false;

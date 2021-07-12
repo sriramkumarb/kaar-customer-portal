@@ -91,4 +91,7 @@ mat-toolbar{
     font-weight: bolder;
     text-shadow: none;
 }
-
+mat-sidenav-container{
+    position: relative!important;
+    margin: 0!important;
+}
