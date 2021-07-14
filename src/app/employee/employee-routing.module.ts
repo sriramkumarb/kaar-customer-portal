@@ -25,7 +25,7 @@ const employeeRoutes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(employeeRoutes)],
+  imports: [RouterModule.forRoot(employeeRoutes)],
   exports: [RouterModule]
 })
 export class EmployeeRoutingModule { }

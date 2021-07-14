@@ -23,6 +23,7 @@ import { LeaveRequestComponent } from './leave-request/leave-request.component';
 import { PaySlipComponent } from './pay-slip/pay-slip.component';
 import { PaySlipDetailsComponent } from './pay-slip-details/pay-slip-details.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { FinalSettlementComponent } from './final-settlement/final-settlement.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     LeaveDataComponent,
     LeaveRequestComponent,
     PaySlipComponent,
-    PaySlipDetailsComponent
+    PaySlipDetailsComponent,
+    FinalSettlementComponent
   ],
   imports: [
     CommonModule,

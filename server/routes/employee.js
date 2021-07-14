@@ -366,4 +366,78 @@ router.post('/emp/pay-slip/details', function (req, res) {
 
 })
 
+router.post('/emp/ffs', function (req, res) {
+    let user = req.body.data;
+    var options = {
+        'method': 'GET',
+        'url': 'http://dxktpipo.kaarcloud.com:50000/RESTAdapter/srk-emp/ffs',
+        'headers': {
+            'Authorization': 'Basic UE9VU0VSOlRlY2hAMjAyMQ==',
+            'Content-Type': 'application/json',
+            'Cookie': 'JSESSIONID=4tAIAgrvu2b-Q8Q_HOISMfZsbZeeegF-Y2kA_SAPmxNmRSZ2pZ0fLueFfC9OId_B; JSESSIONMARKID=5WNcsgirNtC6pwoLo9-6QO4uFONwQ08yXH335jaQA; saplb_*=(J2EE6906720)6906750'
+        },
+        body: JSON.stringify({
+            "EMPLOYEE_ID": user
+        })
+
+    };
+    request(options, function (error, response) {
+        if (error) {
+            console.log(error);
+            return res.status(500).json({ message: 'Server connect ETIMEDOUT 172.17.12.151:50000' })
+        }
+        else {
+            try {
+                data = JSON.parse(response.body)
+                detail_1 = {
+                    "FNAME": data.FNAME,
+                    "LNAME": data.LNAME,
+                    "COMPANYCODE": data.COMPANYCODE,
+                    "COMPANY": data.COMPANY,
+                    "JOB": data.JOB,
+                    "DEPARTMENT": data.DEPARTMENT,
+                    "APPROVER": data.APPROVER,
+                    "COSTCENTER": data.COSTCENTER,
+                    "COSTCENTRE_DESC": data.COSTCENTRE_DESC,
+                }
+                detail_2 = {
+                    "DIVISION": data.DIVISION,
+                    "JOINING_DATE": data.JOINING_DATE,
+                    "LEAVING_DATE": data.LEAVING_DATE,
+                    "GROSS_SAL": data.GROSS_SAL,
+                    "NET_SAL": data.NET_SAL,
+                    "NUM_OF_LEAVES": data.NUM_OF_LEAVES,
+                    "TENURE_PERIOD": data.TENURE_PERIOD,
+                    "ADDITIONAL_PAY": data.ADDITIONAL_PAY,
+                    "DEDUCT_AMT": data.DEDUCT_AMT,
+                }
+
+                RETURN = data.RETURN
+                WAGETYPES = data.WAGETYPES
+                BASICPAYEMPKEY = data.BASICPAYEMPKEY
+                PPBWLA = data.PPBWLA
+                if (RETURN.TYPE === 'S') {
+                    ffs_data = {
+                        RETURN,
+                        WAGETYPES,
+                        PPBWLA,
+                        BASICPAYEMPKEY,
+                        detail_1,
+                        detail_2
+                    }
+                    return res.status(200).json(ffs_data);
+                }
+                else {
+                    return res.status(501).json({ message: ' No details Found!' });
+                }
+
+            } catch (error) {
+                return res.status(500).json({ message: 'SAP Server Error!' })
+            }
+        }
+
+    });
+
+})
+
 module.exports = router;

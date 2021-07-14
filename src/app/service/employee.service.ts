@@ -57,4 +57,8 @@ export class EmployeeService {
   getSalaryPaySlipDetails(data: any) {
     return this.http.post(this.API_URL + '/emp/pay-slip/details', { data })
   }
+
+  getFinalSettlementDetails(data: any) {
+    return this.http.post(this.API_URL + '/emp/ffs', { data })
+  }
 }

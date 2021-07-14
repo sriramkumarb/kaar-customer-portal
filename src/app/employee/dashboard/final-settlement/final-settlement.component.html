@@ -1,0 +1,155 @@
+<div class="card m-3">
+    <div class="ps-3 mt-3">
+        <mat-icon [routerLink]="['../']" style="cursor: pointer; border: 1px solid gray; border-radius: 25px;">
+            keyboard_backspace
+        </mat-icon>
+    </div>
+
+    <div class="card-body">
+        <h2 class="text-center m-4" style="font-weight: bolder;">{{employee}} Details</h2>
+        <div class="container">
+            <div class="row m-4">
+                <div class="col-sm d-flex justify-content-center">
+                    <table>
+                        <tbody>
+                            <tr *ngFor="let item of detail_1 | keyvalue">
+                                <td>
+                                    <p style="font-weight: bolder;">{{ item.key }}</p>
+                                </td>
+                                <td>
+                                    <p>:</p>
+                                </td>
+                                <td>
+                                    <p>{{ item.value }}</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-sm d-flex justify-content-center">
+                    <table>
+                        <tbody>
+                            <tr *ngFor="let item of detail_2 | keyvalue">
+                                <td>
+                                    <p style="font-weight: bolder;">{{ item.key }}</p>
+                                </td>
+                                <td>
+                                    <p>:</p>
+                                </td>
+                                <td>
+                                    <p>{{ item.value }}</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row m-4">
+                <div class="col-sm justify-content-center">
+                    <div class="p-2 m-2 text-center">
+                        <h2 style="font-weight: bolder;">Wage Types</h2>
+                    </div>
+                    <table>
+                        <th *ngFor="let column of wage_headers" style="border: 1px solid gainsboro;">
+                            {{column}}
+                        </th>
+                        <tbody>
+                            <tr *ngFor="let row of wage_types">
+                                <td *ngFor="let column of wage_headers" style="    border-right: solid 1px gainsboro; 
+                                    border-left: solid 1px gainsboro;" class="py-2">
+                                    {{row[column]}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-sm justify-content-center">
+                    <div class="p-2 m-2 text-center">
+                        <h2 style="font-weight: bolder;">Pay & Currency Details</h2>
+                    </div>
+                    <table>
+                        <th *ngFor="let column of PPBWLA_headers" style="border: 1px solid gainsboro;">
+                            {{column}}
+                        </th>
+                        <tbody>
+                            <tr *ngFor="let row of PPBWLA_types">
+                                <td *ngFor="let column of PPBWLA_headers" style="    border-right: solid 1px gainsboro; 
+                                    border-left: solid 1px gainsboro;" class="py-2">
+                                    {{row[column]}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="card-body">
+        <h2 class="text-center" style="font-weight: bolder;">{{employee}} Details</h2>
+        <div class="d-flex justify-content-center">
+            <div class="row">
+                <div class="col-sm-3 m-3 d-flex justify-content-center">
+                    <table>
+                        <tbody>
+                            <tr *ngFor="let item of details | keyvalue">
+                                <td>
+                                    <p style="font-weight: bolder;">{{ item.key }}</p>
+                                </td>
+                                <td>
+                                    <p>:</p>
+                                </td>
+                                <td>
+                                    <p>{{ item.value }}</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-sm m-3 d-flex justify-content-center">
+                    <div class="container">
+                        <div class="row">
+                            <h2 style="font-style: italic;" class="m-4">Wage Types and Details</h2>
+                            <div>
+                                <table>
+                                    <th *ngFor="let column of wage_headers" style="border: 1px solid gainsboro;">
+                                        {{column}}
+                                    </th>
+                                    <tbody>
+                                        <tr *ngFor="let row of wage_types">
+                                            <td *ngFor="let column of wage_headers" style="    border-right: solid 1px gainsboro; 
+                                            border-left: solid 1px gainsboro;">
+                                                {{row[column]}}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <h2 style="font-style: italic;" class="m-4">Evaluated Wage Types and Details</h2>
+                            <div>
+                                <table>
+                                    <th *ngFor="let column of PPBWLA_headers" style="border: 1px solid gainsboro;">
+                                        {{column}}
+                                    </th>
+                                    <tbody>
+                                        <tr *ngFor="let row of PPBWLA_types">
+                                            <td *ngFor="let column of PPBWLA_headers" style="    border-right: solid 1px gainsboro; 
+                                            border-left: solid 1px gainsboro;">
+                                                {{row[column]}}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div> -->
+</div>
