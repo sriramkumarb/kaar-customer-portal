@@ -87,69 +87,29 @@
         </div>
     </div>
 
-    <!-- <div class="card-body">
-        <h2 class="text-center" style="font-weight: bolder;">{{employee}} Details</h2>
-        <div class="d-flex justify-content-center">
-            <div class="row">
-                <div class="col-sm-3 m-3 d-flex justify-content-center">
-                    <table>
-                        <tbody>
-                            <tr *ngFor="let item of details | keyvalue">
-                                <td>
-                                    <p style="font-weight: bolder;">{{ item.key }}</p>
-                                </td>
-                                <td>
-                                    <p>:</p>
-                                </td>
-                                <td>
-                                    <p>{{ item.value }}</p>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="col-sm m-3 d-flex justify-content-center">
-                    <div class="container">
-                        <div class="row">
-                            <h2 style="font-style: italic;" class="m-4">Wage Types and Details</h2>
-                            <div>
-                                <table>
-                                    <th *ngFor="let column of wage_headers" style="border: 1px solid gainsboro;">
-                                        {{column}}
-                                    </th>
-                                    <tbody>
-                                        <tr *ngFor="let row of wage_types">
-                                            <td *ngFor="let column of wage_headers" style="    border-right: solid 1px gainsboro; 
-                                            border-left: solid 1px gainsboro;">
-                                                {{row[column]}}
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <h2 style="font-style: italic;" class="m-4">Evaluated Wage Types and Details</h2>
-                            <div>
-                                <table>
-                                    <th *ngFor="let column of PPBWLA_headers" style="border: 1px solid gainsboro;">
-                                        {{column}}
-                                    </th>
-                                    <tbody>
-                                        <tr *ngFor="let row of PPBWLA_types">
-                                            <td *ngFor="let column of PPBWLA_headers" style="    border-right: solid 1px gainsboro; 
-                                            border-left: solid 1px gainsboro;">
-                                                {{row[column]}}
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <mat-list-item>
+                    <h4 class="modal-title">
+                        <mat-icon>announcement</mat-icon>
+                    </h4>
+                </mat-list-item>
+                <mat-icon style="cursor: pointer;" (click)="onCloseHandled()">close</mat-icon>
+            </div>
+            <div class="modal-body">
+                <div class="col m-4 d-flex justify-content-center">
+                    <p>Employee {{employee}} is not in his Notice Period!</p>
                 </div>
             </div>
-
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" (click)="onCloseHandled()">Close</button>
+            </div>
         </div>
-    </div> -->
+    </div>
 </div>
+
+<div class="modal-background"></div>

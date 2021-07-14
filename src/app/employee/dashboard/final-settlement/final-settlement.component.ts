@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EmployeeService } from '../../../service/index'
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-final-settlement',
@@ -14,9 +15,11 @@ export class FinalSettlementComponent implements OnInit {
   PPBWLA_types: any
   detail_1: any
   detail_2: any
+  display = "none";
   wage_headers = ["WAGETYPE", "AMOUNT", "NAMEOFWAGETYPE"]
   PPBWLA_headers = ["LGART", "WAERS", "INFTY", "BEGDA", "ENDDA", "BETRG"]
-  constructor(private employeeservice: EmployeeService) {
+  constructor(private employeeservice: EmployeeService, private router: Router,
+    private activatedRoute: ActivatedRoute) {
     this.employee = JSON.parse(localStorage.employee).username
     this.employeeservice.getEmployeeDetails(this.employee).subscribe((res: any) => {
       let Status = res.STATUS;
@@ -27,18 +30,25 @@ export class FinalSettlementComponent implements OnInit {
           this.PPBWLA_types = res.PPBWLA.item
           this.detail_1 = res.detail_1
           this.detail_2 = res.detail_2
-          console.log(res)
 
         })
       }
       else {
         console.log('Not a Current Employee');
-
+        this.openModal();
       }
     })
   }
 
   ngOnInit(): void {
+  }
+
+  openModal() {
+    this.display = "block";
+  }
+  onCloseHandled() {
+    this.display = "none";
+    this.router.navigate(['../'], { relativeTo: this.activatedRoute })
   }
 
 }
