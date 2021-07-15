@@ -16,7 +16,7 @@ router.use(cors()) // Use this after the variable declaration
 
 router.use(bodyParser.json());
 
-router.post('/emp/login', function (req, res) {
+router.post('/login', function (req, res) {
     let username = req.body.data.Username
     let password = req.body.data.password
 
@@ -79,7 +79,7 @@ router.use((req, res, next) => {
     });
 });
 
-router.post('/emp/details', function (req, res) {
+router.post('/details', function (req, res) {
     let username = req.body.data
     var options = {
         'method': 'GET',
@@ -117,7 +117,7 @@ router.post('/emp/details', function (req, res) {
 
 })
 
-router.post('/emp/edit', function (req, res) {
+router.post('/edit', function (req, res) {
     let details = req.body.data
 
     var options = {
@@ -166,7 +166,7 @@ router.post('/emp/edit', function (req, res) {
 
 })
 
-router.post('/emp/leave-details', function (req, res) {
+router.post('/leave-details', function (req, res) {
     let user = req.body.data
     var options = {
         'method': 'GET',
@@ -205,7 +205,7 @@ router.post('/emp/leave-details', function (req, res) {
 
 })
 
-router.post('/emp/leave-request', function (req, res) {
+router.post('/leave-request', function (req, res) {
     var options = {
         'method': 'POST',
         'url': 'http://dxktpipo.kaarcloud.com:50000/RESTAdapter/srk-emp/leave-request',
@@ -245,7 +245,7 @@ router.post('/emp/leave-request', function (req, res) {
 
 })
 
-router.post('/emp/leave-types', function (req, res) {
+router.post('/leave-types', function (req, res) {
     let username = req.body.data
     var options = {
         'method': 'GET',
@@ -287,7 +287,7 @@ router.post('/emp/leave-types', function (req, res) {
 
 })
 
-router.post('/emp/pay-slip', function (req, res) {
+router.post('/pay-slip', function (req, res) {
     let user = req.body.data
     var options = {
         'method': 'GET',
@@ -326,7 +326,7 @@ router.post('/emp/pay-slip', function (req, res) {
 
 })
 
-router.post('/emp/pay-slip/details', function (req, res) {
+router.post('/pay-slip/details', function (req, res) {
     let user = req.body.data[0]
     let seq_no = req.body.data[1]
     var options = {
@@ -366,7 +366,7 @@ router.post('/emp/pay-slip/details', function (req, res) {
 
 })
 
-router.post('/emp/ffs', function (req, res) {
+router.post('/ffs', function (req, res) {
     let user = req.body.data;
     var options = {
         'method': 'GET',

@@ -24,11 +24,11 @@ export class UserService {
   }
 
   submitRegister(data: any) {
-    return this.http.post(this.API_URL + '/register', { data })
+    return this.http.post(this.API_URL + '/cus/register', { data })
   }
 
   login(data: any) {
-    return this.http.post(this.API_URL + '/login', { data })
+    return this.http.post(this.API_URL + '/cus/login', { data })
   }
 
   logout() {
@@ -37,51 +37,51 @@ export class UserService {
   }
 
   getCustomerDetails(data: any) {
-    return this.http.post(this.API_URL + '/userDetails', { data })
+    return this.http.post(this.API_URL + '/cus/userDetails', { data })
   }
 
   editCustomerDetails(data: any) {
-    return this.http.post(this.API_URL + '/editUserDetails', { data })
+    return this.http.post(this.API_URL + '/cus/editUserDetails', { data })
   }
 
   getinquirylist(data: any) {
-    return this.http.post(this.API_URL + '/getinqlist', { data })
+    return this.http.post(this.API_URL + '/cus/getinqlist', { data })
   }
 
   getinquirydetails(data: any) {
-    return this.http.post(this.API_URL + '/getinqdetails', { data })
+    return this.http.post(this.API_URL + '/cus/getinqdetails', { data })
   }
 
   getsaleorderlist(data: any) {
-    return this.http.post(this.API_URL + '/getsolist', { data })
+    return this.http.post(this.API_URL + '/cus/getsolist', { data })
   }
 
   getsaleorderdetails(data: any) {
-    return this.http.post(this.API_URL + '/getsodetails', { data })
+    return this.http.post(this.API_URL + '/cus/getsodetails', { data })
   }
 
   getdeliverylist(data: any) {
-    return this.http.post(this.API_URL + '/getdellist', { data })
+    return this.http.post(this.API_URL + '/cus/getdellist', { data })
   }
 
   getdeliverydetails(data: any) {
-    return this.http.post(this.API_URL + '/getdeldetails', { data })
+    return this.http.post(this.API_URL + '/cus/getdeldetails', { data })
   }
 
   getcreditmemo(data: any) {
-    return this.http.post(this.API_URL + '/getcredit', { data })
+    return this.http.post(this.API_URL + '/cus/getcredit', { data })
   }
 
   getdebitmemo(data: any) {
-    return this.http.post(this.API_URL + '/getdebit', { data })
+    return this.http.post(this.API_URL + '/cus/getdebit', { data })
   }
 
   getpaymentaging(data: any) {
-    return this.http.post(this.API_URL + '/getpa', { data })
+    return this.http.post(this.API_URL + '/cus/getpa', { data })
   }
 
   uploadmasterdata(data: any) {
-    return this.http.post(this.API_URL + '/uploadmasterdata', { data })
+    return this.http.post(this.API_URL + '/cus/uploadmasterdata', { data })
   }
 
 }

@@ -16,7 +16,7 @@ router.use(cors()) // Use this after the variable declaration
 
 router.use(bodyParser.json());
 
-router.post('/ven/login', function (req, res) {
+router.post('/login', function (req, res) {
 
     let user = req.body.data.email.toUpperCase();
     let pass = req.body.data.password
@@ -80,7 +80,7 @@ router.use((req, res, next) => {
     });
 });
 
-router.post('/ven/details', function (req, res) {
+router.post('/details', function (req, res) {
 
     let user = req.body.data
 
@@ -119,7 +119,7 @@ router.post('/ven/details', function (req, res) {
 
 })
 
-router.post('/ven/edit-details', function (req, res) {
+router.post('/edit-details', function (req, res) {
     const user = req.body.data
     Object.keys(user).forEach((key) => {
         if (user[key] instanceof Array) {
@@ -160,7 +160,7 @@ router.post('/ven/edit-details', function (req, res) {
 
 })
 
-router.post('/ven/payment', function (req, res) {
+router.post('/payment', function (req, res) {
     let user = req.body.data
 
     var options = {
@@ -210,7 +210,7 @@ router.post('/ven/payment', function (req, res) {
 
 })
 
-router.post('/ven/credit', function (req, res) {
+router.post('/credit', function (req, res) {
     let user = req.body.data
 
     var options = {
@@ -258,7 +258,7 @@ router.post('/ven/credit', function (req, res) {
 
 })
 
-router.post('/ven/debit', function (req, res) {
+router.post('/debit', function (req, res) {
     let user = req.body.data
 
     var options = {
@@ -306,7 +306,7 @@ router.post('/ven/debit', function (req, res) {
 
 })
 
-router.post('/ven/rqlist', function (req, res) {
+router.post('/rqlist', function (req, res) {
     let user = req.body.data;
 
     var request = require('request');
@@ -363,7 +363,7 @@ router.post('/ven/rqlist', function (req, res) {
 
 })
 
-router.post('/ven/rqdet', function (req, res) {
+router.post('/rqdet', function (req, res) {
     let ebeln = req.body.data
 
     var request = require('request');
@@ -418,7 +418,7 @@ router.post('/ven/rqdet', function (req, res) {
 
 })
 
-router.post('/ven/grlist', function (req, res) {
+router.post('/grlist', function (req, res) {
     let user = req.body.data
 
     var options = {
@@ -472,7 +472,7 @@ router.post('/ven/grlist', function (req, res) {
     })
 });
 
-router.post('/ven/grdet', function (req, res) {
+router.post('/grdet', function (req, res) {
     let number = req.body.data[1]
     let year = req.body.data[0]
 
@@ -529,7 +529,7 @@ router.post('/ven/grdet', function (req, res) {
 
 })
 
-router.post('/ven/invlist', function (req, res) {
+router.post('/invlist', function (req, res) {
     let user = req.body.data
 
     var options = {
@@ -579,7 +579,7 @@ router.post('/ven/invlist', function (req, res) {
 
 })
 
-router.post('/ven/invpdf', function (req, res) {
+router.post('/invpdf', function (req, res) {
     let user = req.body.data[0]
     let number = req.body.data[1]
     let year = req.body.data[2]
@@ -622,7 +622,7 @@ router.post('/ven/invpdf', function (req, res) {
 
 })
 
-router.post('/ven/polist', function (req, res) {
+router.post('/polist', function (req, res) {
     let user = req.body.data
 
     var options = {
@@ -677,7 +677,7 @@ router.post('/ven/polist', function (req, res) {
 
 })
 
-router.post('/ven/podetails', function (req, res) {
+router.post('/podetails', function (req, res) {
     let number = req.body.data
 
     var options = {
@@ -731,7 +731,7 @@ router.post('/ven/podetails', function (req, res) {
 
 })
 
-router.post('/ven/pocreate', function (req, res) {
+router.post('/pocreate', function (req, res) {
     data = req.body.data
 
     var options = {
