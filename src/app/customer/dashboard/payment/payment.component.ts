@@ -12,6 +12,7 @@ export class PaymentComponent implements OnInit {
   user: string = '';
   payment_data: any = []
   source: LocalDataSource;
+  show: any = true;
 
   constructor(private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -32,6 +33,7 @@ export class PaymentComponent implements OnInit {
       this.payment_data = res;
 
       this.source = new LocalDataSource(this.payment_data);
+      this.show = false;
     })
 
   }

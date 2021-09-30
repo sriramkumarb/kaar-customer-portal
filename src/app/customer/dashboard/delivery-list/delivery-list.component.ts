@@ -12,6 +12,7 @@ export class DeliveryListComponent implements OnInit {
   user: string = '';
   delivery_data: any = []
   source: LocalDataSource;
+  show: any = true;
 
   constructor(private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -24,6 +25,7 @@ export class DeliveryListComponent implements OnInit {
     this.userService.getdeliverylist(this.user).subscribe((res: any) => {
       this.delivery_data = res
       this.source = new LocalDataSource(this.delivery_data);
+      this.show = false;
     })
 
   }

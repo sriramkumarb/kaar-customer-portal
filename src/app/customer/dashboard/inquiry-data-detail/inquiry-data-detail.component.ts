@@ -14,6 +14,7 @@ export class InquiryDataDetailComponent implements OnInit {
   salesDataNumber: any = '';
   data: any = [];
   header_data: any = ''
+  show: any = true;
   constructor(private router: Router,
     private activatedRoute: ActivatedRoute,
     private userService: UserService) {
@@ -29,6 +30,8 @@ export class InquiryDataDetailComponent implements OnInit {
       this.data.push(res.item);
 
       this.source = new LocalDataSource(this.data);
+
+      this.show = false;
     })
   }
 

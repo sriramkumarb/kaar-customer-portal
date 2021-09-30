@@ -15,6 +15,7 @@ export class CustomerDetailsComponent implements OnInit {
   disable = true;
   name = ''
   res_status: any = '';
+  show: any = true;
 
   constructor(private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -27,7 +28,7 @@ export class CustomerDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.userService.getCustomerDetails(this.user).subscribe((res: any) => {
       this.customerDetails = res
-
+      this.show = false;
     })
   }
 

@@ -14,6 +14,7 @@ export class CreditComponent implements OnInit {
   credit_data: any = [];
   debit_data: any = [];
   source: LocalDataSource;
+  show: any = true;
 
   constructor(private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -26,6 +27,7 @@ export class CreditComponent implements OnInit {
       // console.log(res)
       this.credit_data = res
       this.source = new LocalDataSource(this.credit_data)
+      this.show = false;
     })
   }
 
@@ -35,23 +37,26 @@ export class CreditComponent implements OnInit {
   enablecredit() {
     console.log('credit');
     this.credit = true;
+    this.show = true;
     this.userService.getcreditmemo(this.user).subscribe((res: any) => {
       // console.log(res)
       this.credit_data = res
       this.source = new LocalDataSource(this.credit_data)
+      this.show = false;
     })
   }
 
   enabledebit() {
     console.log('debit');
     this.credit = false;
+    this.show = true;
     this.userService.getdebitmemo(this.user).subscribe((res: any) => {
       // console.log(res)
       this.debit_data = res
       console.log('debit', this.debit_data);
 
       this.source = new LocalDataSource(this.debit_data)
-
+      this.show = false;
     })
   }
 

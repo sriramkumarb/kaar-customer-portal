@@ -15,6 +15,7 @@ export class MasterDataComponent implements OnInit {
   customer_number: any
   number: any = []
   show: any = false
+  show1: any = false;
   json_data: any = [];
 
   constructor(private router: Router,
@@ -58,6 +59,7 @@ export class MasterDataComponent implements OnInit {
         console.log(this.json_data);
 
         this.uploadinsap(this.json_data);
+        this.show1 = true;
       };
 
       reader.readAsBinaryString(e.target.files[0]);
@@ -75,6 +77,7 @@ export class MasterDataComponent implements OnInit {
         this.customer_number = res
         this.number.push(res)
         this.show = true
+        this.show1 = false;
       })
     })
   }

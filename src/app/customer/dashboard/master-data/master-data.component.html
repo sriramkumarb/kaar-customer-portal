@@ -31,6 +31,13 @@
         <!-- <div class="d-flex justify-content-center mt-4" *ngIf="show" style="color:green; font-weight: bold;">
             <h3>The Customer Master Data Uploaded with the Customer ID : {{ customer_number }}</h3>
         </div> -->
+
+        <div *ngIf="show1" class=" mt-4 mb-4 d-flex justify-content-center">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+
         <div class="container">
 
             <div class="row" *ngFor="let item of number">

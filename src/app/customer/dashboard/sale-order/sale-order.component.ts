@@ -14,7 +14,7 @@ export class SaleOrderComponent implements OnInit {
   user: string = '';
   saleorder_data: any = []
   source: LocalDataSource;
-
+  show: any = true;
 
   constructor(private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -26,6 +26,7 @@ export class SaleOrderComponent implements OnInit {
     this.userService.getsaleorderlist(this.user).subscribe((res: any) => {
       this.saleorder_data = res
       this.source = new LocalDataSource(this.saleorder_data);
+      this.show = false;
     })
 
   }
