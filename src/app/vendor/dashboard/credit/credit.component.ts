@@ -14,6 +14,7 @@ export class CreditComponent implements OnInit {
   credit_data: any = [];
   debit_data: any = [];
   source: LocalDataSource;
+  show: any = true;
 
   constructor(private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -31,6 +32,7 @@ export class CreditComponent implements OnInit {
       // console.log(res)
       this.credit_data = res
       this.source = new LocalDataSource(this.credit_data)
+      this.show = false;
     })
   }
 
@@ -40,6 +42,7 @@ export class CreditComponent implements OnInit {
   enablecredit() {
     // console.log('credit');
     this.credit = true;
+    this.show = true;
     this.vendorService.getcreditdetails(this.user).subscribe((res: any) => {
 
       res.map((o: any) => {
@@ -48,12 +51,14 @@ export class CreditComponent implements OnInit {
       // console.log(res)
       this.credit_data = res
       this.source = new LocalDataSource(this.credit_data)
+      this.show = false;
     })
   }
 
   enabledebit() {
     // console.log('debit');
     this.credit = false;
+    this.show = true;
     this.vendorService.getdebitdetails(this.user).subscribe((res: any) => {
       res.map((o: any) => {
         o.VENDOR = this.user
@@ -61,7 +66,7 @@ export class CreditComponent implements OnInit {
       // console.log(res)
       this.debit_data = res
       this.source = new LocalDataSource(this.debit_data)
-
+      this.show = false;
     })
 
   }

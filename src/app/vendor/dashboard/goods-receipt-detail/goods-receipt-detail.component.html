@@ -25,7 +25,13 @@
         </div>
     </div>
 
-    <div class="ms-3 me-3 mb-2">
+    <div *ngIf="show" class=" mt-4 mb-4 d-flex justify-content-center">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
+    <div *ngIf="!show" class="ms-3 me-3 mb-2">
         <h3 class="text-center" style="font-weight: bolder;">Header : </h3>
         <div class="row">
             <div class="d-flex justify-content-center">
@@ -48,7 +54,7 @@
         </div>
     </div>
 
-    <div class="main">
+    <div *ngIf="!show" class="main">
         <h3 class="text-center" style="font-weight: bolder;">Items : </h3>
         <ng2-smart-table [settings]="settings" [source]="source">
         </ng2-smart-table>

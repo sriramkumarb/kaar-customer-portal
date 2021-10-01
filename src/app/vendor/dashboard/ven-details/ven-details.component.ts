@@ -14,6 +14,7 @@ export class VenDetailsComponent implements OnInit {
   disable = true;
   res_status: any = '';
   error_msg: any = '';
+  show: any = true;
 
   constructor(private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -27,7 +28,7 @@ export class VenDetailsComponent implements OnInit {
     this.vendorservice.getVendorDetails(this.vendor).subscribe((res: any) => {
       console.log(res);
       this.vendorDetails = res
-
+      this.show = false;
     })
 
   }

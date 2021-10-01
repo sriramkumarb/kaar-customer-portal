@@ -12,6 +12,7 @@ export class PurchaseOrderComponent implements OnInit {
   user: string = '';
   data: any = []
   source: LocalDataSource;
+  show: any = true;
 
   constructor(private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -24,7 +25,7 @@ export class PurchaseOrderComponent implements OnInit {
       this.data = res
 
       this.source = new LocalDataSource(this.data);
-
+      this.show = false;
     })
   }
 

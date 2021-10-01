@@ -14,6 +14,7 @@ export class GoodsReceiptDetailComponent implements OnInit {
   number: any = ''
   header_data: any = []
   data: any = []
+  show: any = true;
 
   constructor(private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -30,6 +31,7 @@ export class GoodsReceiptDetailComponent implements OnInit {
       this.data.push(res.item);
 
       this.source = new LocalDataSource(this.data);
+      this.show = false;
     })
   }
 
