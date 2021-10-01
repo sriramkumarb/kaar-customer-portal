@@ -18,6 +18,7 @@ export class FinalSettlementComponent implements OnInit {
   display = "none";
   wage_headers = ["WAGETYPE", "AMOUNT", "NAMEOFWAGETYPE"]
   PPBWLA_headers = ["LGART", "WAERS", "INFTY", "BEGDA", "ENDDA", "BETRG"]
+  show: any = true;
   constructor(private employeeservice: EmployeeService, private router: Router,
     private activatedRoute: ActivatedRoute) {
     this.employee = JSON.parse(localStorage.employee).username
@@ -30,11 +31,12 @@ export class FinalSettlementComponent implements OnInit {
           this.PPBWLA_types = res.PPBWLA.item
           this.detail_1 = res.detail_1
           this.detail_2 = res.detail_2
-
+          this.show = false;
         })
       }
       else {
         console.log('Not a Current Employee');
+        this.show = true;
         this.openModal();
       }
     })

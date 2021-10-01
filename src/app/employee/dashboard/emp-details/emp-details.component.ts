@@ -13,6 +13,7 @@ export class EmpDetailsComponent implements OnInit {
   disable = true;
   error_msg: any = ''
   res_status: any = ''
+  show: any = true;
 
   constructor(private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -23,6 +24,7 @@ export class EmpDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.employeeservice.getEmployeeDetails(this.employee).subscribe((res: any) => {
       this.empDetails = res
+      this.show = false;
     })
   }
 

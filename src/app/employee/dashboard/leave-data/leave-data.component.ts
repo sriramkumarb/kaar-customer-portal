@@ -12,6 +12,8 @@ export class LeaveDataComponent implements OnInit {
   employee: any;
   source: LocalDataSource
   data: any;
+  show: any = true;
+
   constructor(private router: Router,
     private activatedRoute: ActivatedRoute,
     private employeeservice: EmployeeService) {
@@ -20,6 +22,7 @@ export class LeaveDataComponent implements OnInit {
     this.employeeservice.getEmployeeLeaveDetails(this.employee).subscribe((res: any) => {
       this.data = res
       this.source = new LocalDataSource(this.data);
+      this.show = false;
     })
   }
 

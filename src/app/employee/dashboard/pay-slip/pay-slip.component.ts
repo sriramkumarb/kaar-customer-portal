@@ -11,15 +11,24 @@ export class PaySlipComponent implements OnInit {
 
   employee: any
   source: LocalDataSource
-  data: any;
+  data: any = [];
+  show: any = true;
+
   constructor(private router: Router,
     private activatedRoute: ActivatedRoute,
     private employeeservice: EmployeeService) {
     this.employee = JSON.parse(localStorage.employee).username
     this.source = new LocalDataSource(this.data);
     this.employeeservice.getSalaryPaySlip(this.employee).subscribe((res: any) => {
-      this.data = res
+      if (typeof (res.length) === 'number') {
+        for (var i in res) {
+          this.data.push(res[i]);
+        }
+      } else {
+        this.data.push(res);
+      }
       this.source = new LocalDataSource(this.data);
+      this.show = false;
     })
   }
 
