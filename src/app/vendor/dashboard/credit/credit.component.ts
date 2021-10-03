@@ -74,39 +74,39 @@ export class CreditComponent implements OnInit {
   settings = {
     columns: {
       VENDOR: {
-        title: 'VENDOR',
+        title: 'Vendor id',
         filter: false
       },
-      AUGBL: {
-        title: 'AUGBL',
-        filter: false
-      },
-      AUGDT: {
-        title: 'AUGDT',
-        filter: false
-      },
+      // AUGBL: {
+      //   title: 'AUGBL',
+      //   filter: false
+      // },
+      // AUGDT: {
+      //   title: 'AUGDT',
+      //   filter: false
+      // },
       BELNR: {
-        title: 'BELNR',
+        title: 'Document No',
         filter: false
       },
       BUZEI: {
-        title: 'BUZEI',
+        title: 'Line item',
         filter: false
       },
       GJAHR: {
-        title: 'GJAHR',
+        title: 'Fiscal Year',
         filter: false
       },
       PSWBT: {
-        title: 'PSWBT',
+        title: 'Amount',
         filter: false
       },
       PSWSL: {
-        title: 'PSWSL',
+        title: 'Currency',
         filter: false
       },
       ZFBDT: {
-        title: 'ZFBDT',
+        title: 'Payment Date',
         filter: false
       },
     },

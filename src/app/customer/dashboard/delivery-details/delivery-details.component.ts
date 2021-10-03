@@ -42,55 +42,55 @@ export class DeliveryDetailsComponent implements OnInit {
   settings = {
     columns: {
       VBELN: {
-        title: 'VBELN',
+        title: 'Document No',
         filter: false
       },
       POSNR: {
-        title: 'POSNR',
+        title: 'Delivery Item',
         filter: false
       },
       MATNR: {
-        title: 'MATNR',
+        title: 'Material No',
         filter: false
       },
       BRGEW: {
-        title: 'BRGEW',
+        title: 'Gross weight',
         filter: false
       },
       CHARG: {
-        title: 'CHARG',
+        title: 'Batch Number',
         filter: false
       },
       ERDAT: {
-        title: 'ERDAT',
+        title: 'Created at',
         filter: false
       },
       ERNAM: {
-        title: 'ERNAM',
+        title: 'Created by',
         filter: false
       },
       KDMAT: {
-        title: 'KDMAT',
+        title: 'Material Owner',
         filter: false
       },
       MATKL: {
-        title: 'MATKL',
+        title: 'Material Group',
         filter: false
       },
       NTGEW: {
-        title: 'NTGEW',
+        title: 'Net weight',
         filter: false
       },
       VOLUM: {
-        title: 'VOLUM',
+        title: 'Volume',
         filter: false
       },
       VRKME: {
-        title: 'VRKME',
+        title: 'Sales unit',
         filter: false
       },
       WERKS: {
-        title: 'WERKS',
+        title: 'Plant',
         filter: false
       }
     },

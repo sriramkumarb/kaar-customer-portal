@@ -79,10 +79,10 @@ export class PaymentComponent implements OnInit {
         title: 'CURRENCY',
         filter: false,
       },
-      REF_DOC_NO: {
-        title: 'REF_DOC_NO',
-        filter: false,
-      },
+      // REF_DOC_NO: {
+      //   title: 'REF_DOC_NO',
+      //   filter: false,
+      // },
       DOC_TYPE: {
         title: 'DOC_TYPE',
         filter: false,

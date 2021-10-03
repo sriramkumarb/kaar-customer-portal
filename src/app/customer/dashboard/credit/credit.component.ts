@@ -63,75 +63,75 @@ export class CreditComponent implements OnInit {
   settings = {
     columns: {
       KUNNR: {
-        title: 'KUNNR',
+        title: 'Customer No',
         filter: false
       },
       BELNR: {
-        title: 'BELNR',
+        title: 'Accounting Document No',
         filter: false
       },
-      VBELN: {
-        title: 'VBELN',
-        filter: false
-      },
-      VBEL2: {
-        title: 'VBEL2',
-        filter: false
-      },
+      // VBELN: {
+      //   title: 'VBELN',
+      //   filter: false
+      // },
+      // VBEL2: {
+      //   title: 'VBEL2',
+      //   filter: false
+      // },
       AUGBL: {
-        title: 'AUGBL',
+        title: 'Clearing Document No',
         filter: false
       },
-      BSCHL: {
-        title: 'BSCHL',
-        filter: false
-      },
+      // BSCHL: {
+      //   title: 'BSCHL',
+      //   filter: false
+      // },
       BUKRS: {
-        title: 'BUKRS',
+        title: 'Company Code',
         filter: false
       },
       BUZEI: {
-        title: 'BUZEI',
+        title: 'Line Item No',
         filter: false
       },
-      FDTAG: {
-        title: 'FDTAG',
-        filter: false
-      },
+      // FDTAG: {
+      //   title: 'FDTAG',
+      //   filter: false
+      // },
       GJAHR: {
-        title: 'GJAHR',
+        title: 'Fiscal Year',
         filter: false
       },
-      KOART: {
-        title: 'KOART',
-        filter: false
-      },
+      // KOART: {
+      //   title: 'KOART',
+      //   filter: false
+      // },
       KOKRS: {
-        title: 'KOKRS',
+        title: 'Controlling Area',
         filter: false
       },
-      POSN2: {
-        title: 'POSN2',
-        filter: false
-      },
-      PSWBT: {
-        title: 'PSWBT',
-        filter: false
-      },
+      // POSN2: {
+      //   title: 'POSN2',
+      //   filter: false
+      // },
+      // PSWBT: {
+      //   title: 'PSWBT',
+      //   filter: false
+      // },
       PSWSL: {
-        title: 'PSWSL',
+        title: 'Currency Type',
         filter: false
       },
       SHKZG: {
-        title: 'SHKZG',
+        title: 'Debit/Credit Indicator',
         filter: false
       },
-      WMWST: {
-        title: 'WMWST',
-        filter: false
-      },
+      // WMWST: {
+      //   title: 'WMWST',
+      //   filter: false
+      // },
       WRBTR: {
-        title: 'WRBTR',
+        title: 'Amount',
         filter: false
       }
     },

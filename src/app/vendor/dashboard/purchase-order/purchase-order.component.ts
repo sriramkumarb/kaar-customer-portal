@@ -39,59 +39,59 @@ export class PurchaseOrderComponent implements OnInit {
   settings = {
     columns: {
       LIFNR: {
-        title: 'LIFNR',
+        title: 'Vendor id',
         filter: false,
       },
       EBELN: {
-        title: 'EBELN',
+        title: 'Document No',
         filter: false,
       },
       BSTYP: {
-        title: 'BSTYP',
-        filter: false,
-      },
-      BUKRS: {
-        title: 'BUKRS',
-        filter: false,
-      },
-      EKGRP: {
-        title: 'EKGRP',
-        filter: false,
-      },
-      EKORG: {
-        title: 'EKORG',
-        filter: false,
-      },
-      ERNAM: {
-        title: 'ERNAM',
+        title: 'Document Category',
         filter: false,
       },
       BSART: {
-        title: 'BSART',
+        title: 'Document Type',
+        filter: false,
+      },
+      BUKRS: {
+        title: 'Company Code',
+        filter: false,
+      },
+      EKGRP: {
+        title: 'Purchasing Group',
+        filter: false,
+      },
+      EKORG: {
+        title: 'Purchasing Organization',
+        filter: false,
+      },
+      ERNAM: {
+        title: 'Created by',
         filter: false,
       },
       PINCR: {
-        title: 'PINCR',
+        title: 'Item Number',
         filter: false,
       },
-      SPRAS: {
-        title: 'SPRAS',
-        filter: false,
-      },
+      // SPRAS: {
+      //   title: 'Language',
+      //   filter: false,
+      // },
       WAERS: {
-        title: 'WAERS',
+        title: 'Currency',
         filter: false,
       },
-      BSAKZ: {
-        title: 'BSAKZ',
-        filter: false,
-      },
+      // BSAKZ: {
+      //   title: 'BSAKZ',
+      //   filter: false,
+      // },
       AEDAT: {
-        title: 'AEDAT',
+        title: 'Created at',
         filter: false,
       },
       STATU: {
-        title: 'STATU',
+        title: 'Status',
         filter: false,
       },
     },

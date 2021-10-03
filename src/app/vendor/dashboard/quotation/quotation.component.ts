@@ -42,55 +42,55 @@ export class QuotationComponent implements OnInit {
   settings = {
     columns: {
       LIFNR: {
-        title: 'LIFNR',
+        title: 'Vendor Id',
         filter: false,
       },
       EBELN: {
-        title: 'EBELN',
+        title: 'Document No',
         filter: false,
       },
       BSTYP: {
-        title: 'BSTYP',
+        title: 'Document Category',
         filter: false,
       },
       BUKRS: {
-        title: 'BUKRS',
+        title: 'Company Code',
         filter: false,
       },
       EKGRP: {
-        title: 'EKGRP',
+        title: 'Purchasing Group',
         filter: false,
       },
       EKORG: {
-        title: 'EKORG',
+        title: 'Purchasing Organization',
         filter: false,
       },
       ERNAM: {
-        title: 'ERNAM',
+        title: 'Created by',
         filter: false,
       },
       LPONR: {
-        title: 'LPONR',
+        title: 'Last Item Number',
         filter: false,
       },
       SPRAS: {
-        title: 'SPRAS',
+        title: 'Language',
         filter: false,
       },
       WAERS: {
-        title: 'WAERS',
+        title: 'Currency',
         filter: false,
       },
       WKURS: {
-        title: 'WKURS',
+        title: 'Exchange Rate',
         filter: false,
       },
       AEDAT: {
-        title: 'AEDAT',
+        title: 'Created at',
         filter: false,
       },
       BEDAT: {
-        title: 'BEDAT',
+        title: 'Purchasing Date',
         filter: false,
       },
     },

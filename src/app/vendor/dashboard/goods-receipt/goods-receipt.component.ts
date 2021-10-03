@@ -42,39 +42,39 @@ export class GoodsReceiptComponent implements OnInit {
   settings = {
     columns: {
       LIFNR: {
-        title: 'LIFNR',
+        title: 'Vendor id',
         filter: false,
       },
       MBLNR: {
-        title: 'MBLNR',
+        title: 'Material Document No',
         filter: false,
       },
       MJAHR: {
-        title: 'MJAHR',
+        title: 'Mat Doc Year',
         filter: false,
       },
       WERKS: {
-        title: 'WERKS',
+        title: 'Plant',
         filter: false,
       },
       CHARG: {
-        title: 'CHARG',
+        title: 'Batch',
         filter: false,
       },
       DMBTR: {
-        title: 'DMBTR',
+        title: 'Amount',
         filter: false,
       },
       EBELN: {
-        title: 'EBELN',
+        title: 'Document No',
         filter: false,
       },
       LGORT: {
-        title: 'LGORT',
+        title: 'Location',
         filter: false,
       },
       MATNR: {
-        title: 'MATNR',
+        title: 'Material No',
         filter: false,
       },
     },
