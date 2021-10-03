@@ -49,7 +49,7 @@ router.post('/login', function (req, res) {
                     result = result['SOAP:Envelope']['SOAP:Body'][0]['ns0:ZBAPI_CUS_LOGIN_SRK.Response'][0]['RESULT'][0];
                     if (result == 'SUCCESS') {
                         // generate token
-                        let token = jwt.sign({ username: user }, 'secret', { expiresIn: '48h' });
+                        let token = jwt.sign({ username: user }, 'secret', { expiresIn: '360h' });
 
                         let user_token = {
                             username: user,

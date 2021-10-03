@@ -44,7 +44,7 @@ router.post('/login', function (req, res) {
                 data = JSON.parse(response.body)
                 if (data.RETURN.TYPE === 'S') {
                     // generate token
-                    let token = jwt.sign({ username: username }, 'secret', { expiresIn: '48h' });
+                    let token = jwt.sign({ username: username }, 'secret', { expiresIn: '360h' });
 
                     let emp_token = {
                         username: username,

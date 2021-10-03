@@ -43,7 +43,7 @@ router.post('/login', function (req, res) {
 
                 if (res_status === 'S') {
                     // generate token
-                    let token = jwt.sign({ username: user }, 'secret', { expiresIn: '48h' });
+                    let token = jwt.sign({ username: user }, 'secret', { expiresIn: '360h' });
 
                     let ven_token = {
                         username: user,
